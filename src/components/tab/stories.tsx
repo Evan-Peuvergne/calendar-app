@@ -5,6 +5,9 @@ import { Tab } from "."
 const meta = {
   title: "Tab",
   component: Tab,
+  args: {
+    children: "My tab",
+  },
 } satisfies Meta<typeof Tab>
 
 export default meta
