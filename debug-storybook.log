@@ -1,0 +1,36 @@
+[17:59:37.810] [INFO] storybook v10.2.10
+[17:59:38.906] [DEBUG] Getting package.json info for /Volumes/Calendar/calendar-app/package.json...
+[17:59:39.745] [INFO] Storybook collects completely anonymous usage telemetry. We use it to shape Storybook's roadmap and prioritize features. You can learn more, including how to opt out, at https://storybook.js.org/telemetry
+[17:59:40.020] [DEBUG] Serving static files from [36mnode_modules/.pnpm/@chromatic-com+storybook@5.0.1_storybook@10.2.10_@testing-library+dom@10.4.1_prettier@3.8.1_r_xd6nws4f3c3myenkxuaxgsemsm/node_modules/@chromatic-com/storybook/assets[39m at [36m/addon-visual-tests-assets[39m
+[17:59:40.020] [INFO] Starting...
+[17:59:40.044] [WARN] No story files found for the specified pattern: [34msrc/**/*.stories.tsx[39m
+[17:59:40.144] [DEBUG] Starting preview..
+[17:59:40.199] [WARN] 🚨 Unable to index ./src/components/tab/stories.tsx:
+  NoMetaError: CSF: missing default export /Volumes/Calendar/calendar-app/src/components/tab/stories.tsx (line 1, col 0)
+
+More info: https://storybook.js.org/docs/writing-stories?ref=error#default-export
+    at CsfFile.parse (file:///Volumes/Calendar/calendar-app/node_modules/.pnpm/storybook@10.2.10_@testing-library+dom@10.4.1_prettier@3.8.1_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/storybook/dist/_node-chunks/chunk-3GE4RMQP.js:456:13)
+    at Object.createIndex (file:///Volumes/Calendar/calendar-app/node_modules/.pnpm/storybook@10.2.10_@testing-library+dom@10.4.1_prettier@3.8.1_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/storybook/dist/core-server/presets/common-preset.js:1802:81)
+    at async _StoryIndexGenerator.extractStories (file:///Volumes/Calendar/calendar-app/node_modules/.pnpm/storybook@10.2.10_@testing-library+dom@10.4.1_prettier@3.8.1_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/storybook/dist/core-server/index.js:5912:23)
+    at async file:///Volumes/Calendar/calendar-app/node_modules/.pnpm/storybook@10.2.10_@testing-library+dom@10.4.1_prettier@3.8.1_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/storybook/dist/core-server/index.js:5833:39
+    at async Promise.all (index 0)
+    at async Promise.all (index 0)
+    at async _StoryIndexGenerator.updateExtracted (file:///Volumes/Calendar/calendar-app/node_modules/.pnpm/storybook@10.2.10_@testing-library+dom@10.4.1_prettier@3.8.1_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/storybook/dist/core-server/index.js:5821:5)
+    at async _StoryIndexGenerator.ensureExtracted (file:///Volumes/Calendar/calendar-app/node_modules/.pnpm/storybook@10.2.10_@testing-library+dom@10.4.1_prettier@3.8.1_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/storybook/dist/core-server/index.js:5856:5)
+    at async _StoryIndexGenerator.initialize (file:///Volumes/Calendar/calendar-app/node_modules/.pnpm/storybook@10.2.10_@testing-library+dom@10.4.1_prettier@3.8.1_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/storybook/dist/core-server/index.js:5817:5)
+    at async file:///Volumes/Calendar/calendar-app/node_modules/.pnpm/storybook@10.2.10_@testing-library+dom@10.4.1_prettier@3.8.1_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/storybook/dist/core-server/presets/common-preset.js:1842:10
+[17:59:40.203] [ERROR] Failed to build the preview
+[17:59:40.203] [ERROR] Error: Unable to index ./src/components/tab/stories.tsx
+    at _StoryIndexGenerator.getIndexAndStats (file://./node_modules/.pnpm/storybook@10.2.10_@testing-library+dom@10.4.1_prettier@3.8.1_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/storybook/dist/core-server/index.js:6085:15)
+    at async _StoryIndexGenerator.getIndex (file://./node_modules/.pnpm/storybook@10.2.10_@testing-library+dom@10.4.1_prettier@3.8.1_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/storybook/dist/core-server/index.js:6074:13)
+    at async getOptimizeDeps (file://./node_modules/.pnpm/@storybook+builder-vite@10.2.10_esbuild@0.27.3_rollup@4.58.0_storybook@10.2.10_@testing-libra_sizczs7lsrqhdubgha3zkn2blm/node_modules/@storybook/builder-vite/dist/index.js:1862:15)
+    at async createViteServer (file://./node_modules/.pnpm/@storybook+builder-vite@10.2.10_esbuild@0.27.3_rollup@4.58.0_storybook@10.2.10_@testing-libra_sizczs7lsrqhdubgha3zkn2blm/node_modules/@storybook/builder-vite/dist/index.js:1888:19)
+    at async Module.start (file://./node_modules/.pnpm/@storybook+builder-vite@10.2.10_esbuild@0.27.3_rollup@4.58.0_storybook@10.2.10_@testing-libra_sizczs7lsrqhdubgha3zkn2blm/node_modules/@storybook/builder-vite/dist/index.js:1923:17)
+    at async storybookDevServer (file://./node_modules/.pnpm/storybook@10.2.10_@testing-library+dom@10.4.1_prettier@3.8.1_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/storybook/dist/core-server/index.js:7241:83)
+    at async buildOrThrow (file://./node_modules/.pnpm/storybook@10.2.10_@testing-library+dom@10.4.1_prettier@3.8.1_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/storybook/dist/core-server/index.js:4504:12)
+    at async buildDevStandalone (file://./node_modules/.pnpm/storybook@10.2.10_@testing-library+dom@10.4.1_prettier@3.8.1_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/storybook/dist/core-server/index.js:7611:66)
+    at async withTelemetry (file://./node_modules/.pnpm/storybook@10.2.10_@testing-library+dom@10.4.1_prettier@3.8.1_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/storybook/dist/_node-chunks/chunk-S3MWHNYJ.js:218:12)
+    at async dev (file://./node_modules/.pnpm/storybook@10.2.10_@testing-library+dom@10.4.1_prettier@3.8.1_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/storybook/dist/bin/core.js:2734:3)
+[17:59:40.205] [WARN] Broken build, fix the error above.
+You may need to refresh the browser.
+[17:59:45.529] [PROMPT] Would you like to send anonymous crash reports to improve Storybook and fix bugs faster? {"choice":false}
