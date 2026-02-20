@@ -1,3 +1,9 @@
+import { Navigation } from "@shared/navigation"
+
 export const Home = () => {
-  return <>{"This is the homepage :)"}</>
+  return (
+    <>
+      <Navigation />
+    </>
+  )
 }
