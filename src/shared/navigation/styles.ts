@@ -16,4 +16,10 @@ export const Container = styled.nav`
   gap: 32px;
   position: sticky;
   top: 0;
+
+  > * {
+    position: relative;
+    z-index: 1;
+  }
+
 `

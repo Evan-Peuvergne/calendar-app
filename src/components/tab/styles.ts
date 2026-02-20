@@ -1,6 +1,6 @@
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 
-export const Container = styled.a`
+export const Container = styled.a<{ active: boolean }>`
   display: inline-flex;
   align-items: center;
   height: 40px;
@@ -16,4 +16,10 @@ export const Container = styled.a`
     color: var(--c-text-neutral);
     background: var(--c-opacify-hover);
   }
+
+  ${(p) =>
+    p.active &&
+    css`
+    color: var(--c-text-neutral) !important;
+    background: var(--c-opacify-active) !important;}`}
 `
