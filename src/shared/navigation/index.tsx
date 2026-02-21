@@ -6,8 +6,10 @@ export const Navigation = () => {
   return (
     <Styles.Container>
       <BlurOverlay />
-      <Tab active>Overview</Tab>
-      <Tab>Planning</Tab>
+      <Tab icon={["home", "home-fill"]}>Overview</Tab>
+      <Tab icon={["calendar", "calendar-fill"]} active>
+        Planning
+      </Tab>
       <Tab>Priorize</Tab>
       <Tab>Roadmap</Tab>
       <Styles.Divider />

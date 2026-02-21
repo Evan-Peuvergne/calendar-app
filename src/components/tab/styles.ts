@@ -4,7 +4,8 @@ export const Container = styled.a<{ active: boolean }>`
   display: inline-flex;
   align-items: center;
   height: 40px;
-  padding: 0 8px;
+  gap: 8px;
+  padding: 0 12px;
   font: var(--f-label);
   font-weight: 600;
   color: var(--c-text-light);
