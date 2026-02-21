@@ -2,7 +2,7 @@ const blurLayers = Array.from({ length: 10 }, (_, i) => {
   const t = Math.pow((i + 1) / 10, 2)
   return {
     blur: t * 20,
-    height: `calc(100% + ${(10 - i) * 11}px)`,
+    height: `calc(100% + ${(10 - i) * 5}px)`,
   }
 })
 
@@ -11,7 +11,7 @@ const colorLayers = Array.from({ length: 10 }, (_, i) => {
   return {
     saturate: Math.max(0, 1 - t),
     brightness: 1 + t * 0.55,
-    height: `calc(100% + ${(10 - i) * 14}px)`,
+    height: `calc(100% + ${(10 - i) * 7}px)`,
   }
 })
 
@@ -54,7 +54,7 @@ export const BlurOverlay = () => (
     <div
       style={{
         ...layerStyle,
-        height: "calc(100% + 80px)",
+        height: "calc(100% + 40px)",
         background:
           "linear-gradient(180deg, rgba(248,248,248,0.88), rgba(248,248,248,0.5) 50%, transparent)",
       }}
