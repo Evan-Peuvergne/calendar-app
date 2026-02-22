@@ -7,6 +7,7 @@ export const IconsList = [
  'flag',
  'home-fill',
  'home',
+ 'plus',
  'search', 
 ] as const
 

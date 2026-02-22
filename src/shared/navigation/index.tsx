@@ -1,5 +1,7 @@
 import * as Styles from "./styles"
 import { Tab } from "@components/tab"
+import { PrimaryIcon, SecondaryIcon } from "@components/button"
+
 import { BlurOverlay } from "./blur-overlay"
 
 export const Navigation = () => {
@@ -19,7 +21,10 @@ export const Navigation = () => {
         Notes
       </Tab>
       <Styles.Divider />
-      <Tab icon="search">Find</Tab>
+      <div style={{ display: "flex", gap: 12 }}>
+        <SecondaryIcon icon="search" />
+        <PrimaryIcon icon="plus" />
+      </div>
     </Styles.Container>
   )
 }
