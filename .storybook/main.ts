@@ -1,4 +1,5 @@
 import type { StorybookConfig } from "@storybook/react-vite"
+import svgr from "vite-plugin-svgr"
 
 const config: StorybookConfig = {
   stories: ["../src/**/stories.tsx", "../src/**/*.stories.tsx"],
@@ -18,6 +19,19 @@ const config: StorybookConfig = {
 
   typescript: {
     reactDocgen: "react-docgen-typescript",
+  },
+
+  async viteFinal(config) {
+    config.plugins = config.plugins ?? []
+    config.plugins.push(
+      svgr({
+        svgrOptions: {
+          replaceAttrValues: { "#383838": "currentColor" },
+          dimensions: false,
+        },
+      })
+    )
+    return config
   },
 }
 export default config
