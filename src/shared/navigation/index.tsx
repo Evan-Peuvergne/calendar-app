@@ -6,14 +6,20 @@ export const Navigation = () => {
   return (
     <Styles.Container>
       <BlurOverlay />
-      <Tab icon={["home", "home-fill"]}>Overview</Tab>
-      <Tab icon={["calendar", "calendar-fill"]} active>
+      <Tab to="/" icon={["home", "home-fill"]}>
+        Overview
+      </Tab>
+      <Tab to="/calendar" icon={["calendar", "calendar-fill"]}>
         Calendar
       </Tab>
-      <Tab>Priorize</Tab>
-      <Tab>Notes</Tab>
+      <Tab to="/priorize" icon={["flag", "flag-fill"]}>
+        Priorize
+      </Tab>
+      <Tab to="/notes" icon={["document", "document-fill"]}>
+        Notes
+      </Tab>
       <Styles.Divider />
-      <Tab>Find</Tab>
+      <Tab icon="search">Find</Tab>
     </Styles.Container>
   )
 }

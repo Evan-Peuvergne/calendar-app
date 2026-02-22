@@ -22,12 +22,12 @@ export const Global = createGlobalStyle`
     font-size: 16px;
 
     --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+    scrollbar-gutter: stable;
   }
 
   body{
     background: var(--c-fill-background);
-    overflow: overlay;
-    scrollbar-gutter: stable;
   }
 
   button{

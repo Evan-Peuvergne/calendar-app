@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components"
+import { Link } from "react-router"
 
-export const Container = styled.a<{ active: boolean }>`
+const base = css<{ $active: boolean }>`
   display: inline-flex;
   align-items: center;
   height: 40px;
@@ -19,8 +20,20 @@ export const Container = styled.a<{ active: boolean }>`
   }
 
   ${(p) =>
-    p.active &&
+    p.$active &&
     css`
-    color: var(--c-text-neutral) !important;
-    background: var(--c-opacify-active) !important;}`}
+      color: var(--c-text-neutral) !important;
+      background: var(--c-opacify-active) !important;
+    `}
+`
+
+export const Container = styled.button<{ $active: boolean }>`
+  ${base}
+`
+
+export const LinkContainer = styled(Link)<{ $active: boolean }>`
+  ${base}
+
+  appearance: none;
+  text-decoration: none;
 `
