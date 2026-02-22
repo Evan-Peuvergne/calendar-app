@@ -1,5 +1,3 @@
-import { Navigation } from "@shared/navigation"
-
 const fakeContent = (
   <div
     style={{
@@ -294,10 +292,5 @@ const fakeContent = (
 )
 
 export const Home = () => {
-  return (
-    <>
-      <Navigation />
-      {fakeContent}
-    </>
-  )
+  return <>{fakeContent}</>
 }

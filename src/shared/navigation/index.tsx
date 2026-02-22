@@ -8,10 +8,10 @@ export const Navigation = () => {
       <BlurOverlay />
       <Tab icon={["home", "home-fill"]}>Overview</Tab>
       <Tab icon={["calendar", "calendar-fill"]} active>
-        Planning
+        Calendar
       </Tab>
       <Tab>Priorize</Tab>
-      <Tab>Roadmap</Tab>
+      <Tab>Notes</Tab>
       <Styles.Divider />
       <Tab>Find</Tab>
     </Styles.Container>
