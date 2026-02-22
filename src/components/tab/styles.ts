@@ -10,7 +10,7 @@ const base = css<{ $active: boolean }>`
   font: var(--f-label);
   font-weight: 600;
   color: var(--c-text-light);
-  border-radius: 8px;
+  border-radius: 12px;
   cursor: pointer;
   user-select: none;
 
