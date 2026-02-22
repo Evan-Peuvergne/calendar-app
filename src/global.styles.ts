@@ -116,9 +116,9 @@ export const Global = createGlobalStyle`
     --c-stroke-action: hsla(205, 90%, 35%, 1);
     --c-stroke-danger: hsla(5, 85%, 34%, 1);
 
-    --c-opacify-base: hsla(0, 0%, 6%, 0.06);
+    --c-opacify-base: hsla(0, 0%, 6%, 0.04);
     --c-opacify-hover: hsla(0, 0%, 6%, 0.08);
-    --c-opacify-active: hsla(0, 0%, 6%, 0.12);
+    --c-opacify-active: hsla(0, 0%, 6%, 0.16);
     --c-opacify-contrast-hover: hsla(0, 0%, 6%, 0.22);
     --c-opacify-contrast-active: hsla(0, 0%, 6%, 0.38);
 
