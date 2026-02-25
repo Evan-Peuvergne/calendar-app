@@ -12,14 +12,14 @@ export const Container = styled.nav`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 32px;
+  height: 112px;
   gap: 32px;
   position: sticky;
   top: 0;
+  z-index: 10;
 
   > * {
     position: relative;
     z-index: 1;
   }
-
 `
