@@ -17,7 +17,7 @@ export const Container = styled(ButtonContainer)`
   --button-inline-background-hover: var(--c-opacify-hover);
   --button-inline-background-active: var(--c-opacify-active);
 
-  color: var(--button-inline-color);
+  color: ${(p) => INTENTS[p.intent]};
   transition:
     color 0.2s ease-in-out,
     background-color 0.2s ease-in-out;
