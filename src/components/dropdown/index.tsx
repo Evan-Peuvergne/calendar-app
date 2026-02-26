@@ -1,5 +1,10 @@
 import React, { useState } from "react"
-import { useFloating, FloatingPortal, useDismiss, offset, flip, shift } from "@floating-ui/react"
+import { useFloating, useDismiss } from "@floating-ui/react"
+import { offset, flip, shift } from "@floating-ui/react"
+import { FloatingPortal } from "@floating-ui/react"
+
+import * as Styles from "./styles"
+import { Option } from "./option"
 
 import type { AbstractButtonProps } from "@components/button/types"
 
@@ -22,16 +27,28 @@ type OverlayElement = React.ReactElement<{ style?: React.CSSProperties }>
 export interface DropdownProps {
   button: ButtonRenderProp | ButtonElement
   children: OverlayRenderProp | OverlayElement
+  defaultOpen?: boolean
 }
 
-export const Dropdown = (props: DropdownProps) => {
-  const [open, setOpen] = useState(false)
+const DropdownComponent = (props: DropdownProps) => {
+  const [open, setOpen] = useState(props.defaultOpen ?? false)
 
   const { refs, floatingStyles, context } = useFloating({
     open,
     onOpenChange: setOpen,
     placement: "bottom-start",
-    middleware: [offset(8), flip(), shift({ padding: 8 })],
+    middleware: [
+      offset(({ placement }) => ({
+        mainAxis: 8,
+        crossAxis: placement.endsWith("-start")
+          ? -8
+          : placement.endsWith("-end")
+            ? 8
+            : 0,
+      })),
+      flip(),
+      shift({ padding: 8 }),
+    ],
   })
 
   useDismiss(context)
@@ -63,3 +80,5 @@ export const Dropdown = (props: DropdownProps) => {
     </>
   )
 }
+
+export const Dropdown = Object.assign(DropdownComponent, { ...Styles, Option })
