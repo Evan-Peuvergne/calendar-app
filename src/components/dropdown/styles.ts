@@ -17,6 +17,12 @@ export const Option = styled(ButtonContainer)`
   }
 `
 
+export const Divider = styled.hr`
+  width: 100%;
+  border-bottom: 1px solid var(--c-stroke-base);
+  margin: 4px 2px;
+`
+
 export const Overlay = styled.div`
   display: flex;
   flex-direction: column;
@@ -26,4 +32,5 @@ export const Overlay = styled.div`
   outline: 1px solid var(--c-stroke-base);
   border-radius: 12px;
   box-shadow: var(--s-overlay);
+  backdrop-filter: blur(4px);
 `
