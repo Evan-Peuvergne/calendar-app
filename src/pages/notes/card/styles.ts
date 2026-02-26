@@ -23,6 +23,8 @@ export const More = styled(SecondaryIcon).attrs({ icon: "more" })`
   margin-top: -8px;
   opacity: 0;
   transition: opacity 0.2s ease;
+
+  ${(p) => p.active && `opacity: 1;`}
 `
 
 export const Head = styled.div`
