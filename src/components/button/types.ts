@@ -3,6 +3,7 @@ import type { Icons } from "@components/icon"
 export type ButtonIntent = "neutral" | "action" | "danger"
 
 export interface AbstractButtonProps {
+  ref?: React.Ref<HTMLButtonElement>
   onClick?: React.MouseEventHandler<HTMLButtonElement>
   onMouseDown?: React.MouseEventHandler<HTMLButtonElement>
   intent?: ButtonIntent
