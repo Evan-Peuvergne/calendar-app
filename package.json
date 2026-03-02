@@ -20,7 +20,6 @@
     "framer-motion": "^12.23.12",
     "immutable": "5.0.0-rc.1",
     "motion": "^12.23.12",
-    "normalize.css": "^8.0.1",
     "react": "^19.1.0",
     "react-contenteditable": "^3.3.7",
     "react-dom": "^19.1.0",

@@ -1,17 +1,33 @@
 import { createGlobalStyle } from "styled-components"
 
-import "normalize.css"
-
 export const Global = createGlobalStyle`
 
   // Global
 
-  *{
+  *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
     border: none;
     appearance: none;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+
+  img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+  }
+
+  input, button, textarea, select {
+    font: inherit;
+  }
+
+  p, h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
   }
 
 

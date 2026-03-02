@@ -47,9 +47,6 @@ importers:
       motion:
         specifier: ^12.23.12
         version: 12.34.3(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
-      normalize.css:
-        specifier: ^8.0.1
-        version: 8.0.1
       react:
         specifier: ^19.1.0
         version: 19.2.4
@@ -2042,9 +2039,6 @@ packages:
 
   node-releases@2.0.27:
     resolution: {integrity: sha512-nmh3lCkYZ3grZvqcCH+fjmQ7X+H0OeZgP40OierEaAptX4XofMh5kwNbWh7lBduUzCcV/8kZ+NDLCwm2iorIlA==}
-
-  normalize.css@8.0.1:
-    resolution: {integrity: sha512-qizSNPO93t1YUuUhP22btGOo3chcvDFqFaj2TRybP0DMxkHOCTYwp3n34fel4a31ORXy4m1Xq0Gyqpb5m33qIg==}
 
   object-assign@4.1.1:
     resolution: {integrity: sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==}
@@ -4434,8 +4428,6 @@ snapshots:
     optional: true
 
   node-releases@2.0.27: {}
-
-  normalize.css@8.0.1: {}
 
   object-assign@4.1.1: {}
 
