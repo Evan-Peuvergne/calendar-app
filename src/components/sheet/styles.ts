@@ -40,10 +40,15 @@ export const Header = styled.header`
   }
 `
 
+export const Body = styled.div`
+  padding: 48px 40px;
+`
+
 export const Container = styled.div`
-  position: fixed;
+  position: sticky;
   top: 104px;
-  left: calc((100% - 1080px) / 2);
+  margin-top: 104px;
+  margin-left: calc((100vw - 1080px) / 2);
   bottom: 0;
   display: flex;
   flex-direction: column;

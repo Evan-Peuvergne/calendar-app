@@ -1,7 +1,7 @@
 import * as Styles from "./styles"
 import { SecondaryIcon } from "@components/button"
 import { Dropdown } from "@components/dropdown"
-import { useSheet, Sheet } from "@components/sheet"
+import { useSheetStack, Sheet } from "@components/sheet"
 
 const Test = () => (
   <Sheet>
@@ -14,10 +14,10 @@ const Test = () => (
 )
 
 export const Card = () => {
-  const { open } = useSheet()
+  const { open } = useSheetStack()
 
   return (
-    <Styles.Container onClick={() => open(<Test />, "test")}>
+    <Styles.Container onClick={() => open(<Test />)}>
       <Styles.Head>
         <Dropdown button={<Styles.More />}>
           <Dropdown.Overlay>
