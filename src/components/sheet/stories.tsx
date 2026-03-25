@@ -1,10 +1,12 @@
-import { createPortal } from "react-dom"
+import { useEffect } from "react"
 import type { Meta } from "@storybook/react-vite"
 import { Sheet } from "./sheet"
 import { useSheet, useSheetStack } from "./hook"
 import { Button } from "@components/button"
 
-const SheetComponent = () => {
+type SheetVariant = "page" | "banner"
+
+const SheetComponent = ({ variant = "page" }: { variant?: SheetVariant }) => {
   const { push, close } = useSheet()
 
   return (
@@ -15,9 +17,16 @@ const SheetComponent = () => {
         <Sheet.Subtitle>Last update 2 days ago</Sheet.Subtitle>
       </Sheet.Header>
       <Sheet.Body>
-        <Button.Primary onClick={() => push(<SheetComponent />)}>
-          Open sub sheet
-        </Button.Primary>
+        <>
+          <Button.Primary onClick={() => push(<SheetComponent />)}>
+            Open sub sheet
+          </Button.Primary>
+          {variant === "page" && (
+            <>
+              <div style={{ height: 2000 }} />
+            </>
+          )}
+        </>
       </Sheet.Body>
     </Sheet>
   )
@@ -40,17 +49,26 @@ export const Default = {
   },
 }
 
-export const Design = {
-  render: () =>
-    createPortal(
-      <Sheet>
-        <Sheet.Header>
-          <Sheet.Close />
-          <Sheet.Title>Career Path Senior Brand designer</Sheet.Title>
-          <Sheet.Subtitle>Last update 2 days ago</Sheet.Subtitle>
-        </Sheet.Header>
-        <Sheet.Body style={{ height: 2000 }}>Hello world</Sheet.Body>
-      </Sheet>,
-      document.getElementById("portal")!
-    ),
+export const Page = {
+  render: () => {
+    const { open } = useSheetStack()
+
+    useEffect(() => {
+      open(<SheetComponent variant="page" />)
+    }, [])
+
+    return null
+  },
+}
+
+export const Banner = {
+  render: () => {
+    const { open } = useSheetStack()
+
+    useEffect(() => {
+      open(<SheetComponent variant="banner" />)
+    }, [])
+
+    return null
+  },
 }
