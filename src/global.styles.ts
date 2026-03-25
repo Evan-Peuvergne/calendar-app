@@ -46,6 +46,16 @@ export const Global = createGlobalStyle`
     background: var(--c-fill-background);
   }
 
+  #portal {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+  }
+
+
+  // Styles
+
   button{
     background: none;
   }

@@ -13,7 +13,9 @@ export const Subtitle = styled.p`
   color: var(--c-text-light);
 `
 
-export const Close = styled(SecondaryIcon).attrs({ icon: "close" })``
+export const Close = styled(SecondaryIcon).attrs({ icon: "close" })`
+  position: sticky;
+`
 
 export const Header = styled.header`
   position: relative;
@@ -44,18 +46,36 @@ export const Body = styled.div`
   padding: 48px 40px;
 `
 
-export const Container = styled.div`
-  position: sticky;
-  top: 104px;
-  margin-top: 104px;
-  margin-left: calc((100vw - 1080px) / 2);
-  bottom: 0;
+export const SheetContent = styled.div`
   display: flex;
   flex-direction: column;
-  width: 1080px;
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(12px);
+`
+
+export const Sheet = styled.div`
+  position: sticky;
+  top: 104px;
+  max-height: calc(100vh - 104px);
+  display: block;
+  width: 980px;
+  margin-left: calc(50vw - 490px);
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.88);
   outline: 1px solid var(--c-stroke-base);
-  box-shadow: var(--s-overlay);
+  backdrop-filter: blur(8px);
   border-radius: 16px 16px 0 0;
+  box-shadow: var(--s-overlay);
+`
+
+export const Scroll = styled.div`
+  min-height: 100vh;
+  position: relative;
+`
+
+export const Container = styled.div<{ $inactive?: boolean }>`
+  position: fixed;
+  width: 100vw;
+  inset: 0;
+  overflow-y: ${(p) => (p.$inactive ? "hidden" : "auto")};
+  z-index: 1000;
+  ${({ $inactive }) => $inactive && `pointer-events: none;`}
 `

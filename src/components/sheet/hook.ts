@@ -1,6 +1,6 @@
 import { useContext } from "react"
 
-import { SheetStackContext, SheetContext } from "./stack"
+import { SheetStackContext, SheetContext } from "./context"
 
 export const useSheetStack = () => {
   const stack = useContext(SheetStackContext)
