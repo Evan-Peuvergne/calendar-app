@@ -6,6 +6,14 @@ import { Button } from "@components/button"
 
 type SheetVariant = "page" | "banner"
 
+const bg = { background: "#f0f0f0", borderRadius: 6 }
+const row = {
+  display: "flex",
+  gap: 12,
+  padding: "16px 0",
+  borderBottom: "1px solid #eee",
+}
+
 const SheetComponent = ({ variant = "page" }: { variant?: SheetVariant }) => {
   const { push, close } = useSheet()
 
@@ -22,9 +30,34 @@ const SheetComponent = ({ variant = "page" }: { variant?: SheetVariant }) => {
             Open sub sheet
           </Button.Primary>
           {variant === "page" && (
-            <>
-              <div style={{ height: 2000 }} />
-            </>
+            <div
+              style={{
+                marginTop: 24,
+                display: "flex",
+                flexDirection: "column",
+                gap: 4,
+              }}
+            >
+              {Array.from({ length: 12 }).map((_, i) => (
+                <div key={i} style={row}>
+                  <div
+                    style={{ ...bg, width: 40, height: 40, flexShrink: 0 }}
+                  />
+                  <div
+                    style={{
+                      flex: 1,
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: 8,
+                      justifyContent: "center",
+                    }}
+                  >
+                    <div style={{ ...bg, height: 12, width: "60%" }} />
+                    <div style={{ ...bg, height: 10, width: "40%" }} />
+                  </div>
+                </div>
+              ))}
+            </div>
           )}
         </>
       </Sheet.Body>
