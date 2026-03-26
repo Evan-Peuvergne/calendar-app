@@ -10,7 +10,7 @@ export interface SheetProps {
 
 const NAV_HEIGHT = 104
 const PEEK_PX = 12
-const spring = { type: "spring", damping: 25, stiffness: 300 } as const
+const spring = { type: "spring", damping: 28, stiffness: 300 } as const
 
 const SheetComponent = (props: SheetProps) => {
   const ctx = useContext(SheetContext)
