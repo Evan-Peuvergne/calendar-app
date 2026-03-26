@@ -90,7 +90,7 @@ const SheetComponent = (props: SheetProps) => {
           $depth={depth}
           animate={{
             y: yOffset,
-            scaleX: 1 - 0.05 * depth,
+            scaleX: 1 - 0.032 * depth,
           }}
           transition={spring}
         >
