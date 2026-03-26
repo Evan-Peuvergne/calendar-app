@@ -71,7 +71,6 @@ const SheetComponent = (props: SheetProps) => {
     }
   }, [reportHeight])
 
-  const darkValue = Math.max(215 - depth * 20, 155)
   const yOffset = depth === 0 ? 0 : ownHeight - activeHeight - depth * PEEK_PX
 
   return (
@@ -88,13 +87,10 @@ const SheetComponent = (props: SheetProps) => {
       <Styles.Scroll ref={$scroll}>
         <Styles.Sheet
           ref={$sheet}
+          $depth={depth}
           animate={{
             y: yOffset,
             scaleX: 1 - 0.05 * depth,
-            background:
-              depth === 0
-                ? "rgba(255,255,255,0.88)"
-                : `rgba(${darkValue},${darkValue},${darkValue},0.88)`,
           }}
           transition={spring}
         >

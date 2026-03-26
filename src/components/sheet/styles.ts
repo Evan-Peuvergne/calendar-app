@@ -52,7 +52,7 @@ export const SheetContent = styled(motion.div)`
   flex-direction: column;
 `
 
-export const Sheet = styled(motion.div)`
+export const Sheet = styled(motion.div)<{ $depth: number }>`
   position: sticky;
   top: 104px;
   max-height: calc(100vh - 104px);
@@ -64,6 +64,14 @@ export const Sheet = styled(motion.div)`
   backdrop-filter: blur(8px);
   border-radius: 16px 16px 0 0;
   box-shadow: var(--s-overlay);
+  /* background: ${({ $depth }) => {
+    if ($depth === 0) return "rgba(255,255,255,0.88)"
+    const v = Math.max(215 - $depth * 20, 155)
+    return `rgba(${v},${v},${v},0.88)`
+  }}; */
+  background: ${(p) =>
+    p.$depth > 0 ? "rgba(248, 248, 248, 0.88)" : "rgba(255, 255, 255, 0.88)"};
+  transition: background 300ms ease;
 `
 
 export const Scroll = styled.div`
@@ -71,7 +79,10 @@ export const Scroll = styled.div`
   position: relative;
 `
 
-export const Container = styled(motion.div)<{ $inactive?: boolean; $ready?: boolean }>`
+export const Container = styled(motion.div)<{
+  $inactive?: boolean
+  $ready?: boolean
+}>`
   position: fixed;
   width: 100vw;
   inset: 0;
