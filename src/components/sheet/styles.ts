@@ -71,11 +71,11 @@ export const Scroll = styled.div`
   position: relative;
 `
 
-export const Container = styled(motion.div)<{ $inactive?: boolean }>`
+export const Container = styled(motion.div)<{ $inactive?: boolean; $ready?: boolean }>`
   position: fixed;
   width: 100vw;
   inset: 0;
-  overflow-y: ${(p) => (p.$inactive ? "hidden" : "auto")};
+  overflow-y: ${(p) => (p.$inactive || !p.$ready ? "hidden" : "auto")};
   z-index: 1000;
   ${({ $inactive }) => $inactive && `pointer-events: none;`}
 `

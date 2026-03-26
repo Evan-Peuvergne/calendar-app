@@ -18,6 +18,7 @@ const SheetComponent = (props: SheetProps) => {
   const activeHeight = ctx?.activeHeight ?? 0
   const reportHeight = ctx?.reportHeight
   const [ownHeight, setOwnHeight] = useState(0)
+  const [ready, setReady] = useState(false)
   const $container = useRef<HTMLDivElement>(null)
   const $scroll = useRef<HTMLDivElement>(null)
   const $sheet = useRef<HTMLDivElement>(null)
@@ -77,10 +78,12 @@ const SheetComponent = (props: SheetProps) => {
     <Styles.Container
       ref={$container}
       $inactive={depth > 0}
+      $ready={ready}
       initial={{ y: "100%" }}
       animate={{ y: 0 }}
       exit={{ y: "100%" }}
       transition={spring}
+      onAnimationComplete={() => setReady(true)}
     >
       <Styles.Scroll ref={$scroll}>
         <Styles.Sheet
