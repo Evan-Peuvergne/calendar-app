@@ -1,10 +1,10 @@
 {
-  "typescript.tsdk": "node_modules/typescript/lib",
-  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "js/ts.tsdk.path": "node_modules/typescript/lib",
+  "js/ts.tsdk.promptToUseWorkspaceVersion": true,
   "typescript.tsserver.trace": "verbose",
-  "typescript.tsserver.log": "verbose",
-  "typescript.validate.enable": true,
-  "typescript.tsserver.maxTsServerMemory": 4096,
+  "js/ts.tsserver.log": "verbose",
+  "js/ts.validate.enabled": true,
+  "js/ts.tsserver.maxMemory": 4096,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "prettier.prettierPath": "node_modules/prettier",
@@ -21,9 +21,6 @@
   },
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
-}
-{
-  "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "git.repositoryScanIgnoredFolders": [".claude/worktrees"]
 }
