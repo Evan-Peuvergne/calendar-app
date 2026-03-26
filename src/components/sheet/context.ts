@@ -9,6 +9,8 @@ export interface SheetContextValue {
   push: (element: React.ReactElement) => void
   close: () => void
   depth: number
+  activeHeight: number
+  reportHeight: (height: number) => void
 }
 
 export const SheetStackContext = createContext<SheetStackContextValue | null>(null)

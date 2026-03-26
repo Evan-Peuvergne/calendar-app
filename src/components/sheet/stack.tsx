@@ -1,5 +1,6 @@
 import { useState, useCallback, useEffect } from "react"
 import { createPortal } from "react-dom"
+import { AnimatePresence } from "motion/react"
 
 import { SheetStackContext, SheetContext } from "./context"
 
@@ -16,17 +17,31 @@ const SheetItem = ({
   depth,
   remove,
   push,
+  activeHeight,
+  reportHeight,
 }: SheetStackItem & {
   depth: number
   remove: (id: string) => void
   push: (element: React.ReactElement) => void
+  activeHeight: number
+  reportHeight: (id: string, height: number) => void
 }) => {
   const close = useCallback(() => remove(id), [id, remove])
-  return <SheetContext value={{ close, push, depth }}>{element}</SheetContext>
+  const report = useCallback((h: number) => reportHeight(id, h), [id, reportHeight])
+  return (
+    <SheetContext value={{ close, push, depth, activeHeight, reportHeight: report }}>
+      {element}
+    </SheetContext>
+  )
 }
 
 export const SheetProvider = ({ children }: React.PropsWithChildren) => {
   const [stack, setStack] = useState<SheetStackItem[]>([])
+  const [heights, setHeights] = useState<Record<string, number>>({})
+
+  const reportHeight = useCallback((id: string, height: number) => {
+    setHeights((prev) => (prev[id] === height ? prev : { ...prev, [id]: height }))
+  }, [])
 
   const open = useCallback(
     (element: React.ReactElement | React.ReactElement[]) =>
@@ -80,15 +95,19 @@ export const SheetProvider = ({ children }: React.PropsWithChildren) => {
   return (
     <SheetStackContext.Provider value={{ open, close }}>
       {createPortal(
-        stack.map((s, index) => (
-          <SheetItem
-            key={s.id}
-            {...s}
-            depth={stack.length - 1 - index}
-            remove={remove}
-            push={push}
-          />
-        )),
+        <AnimatePresence>
+          {stack.map((s, index) => (
+            <SheetItem
+              key={s.id}
+              {...s}
+              depth={stack.length - 1 - index}
+              remove={remove}
+              push={push}
+              activeHeight={heights[stack[stack.length - 1].id] ?? 0}
+              reportHeight={reportHeight}
+            />
+          ))}
+        </AnimatePresence>,
         document.getElementById("portal")!
       )}
       {children}

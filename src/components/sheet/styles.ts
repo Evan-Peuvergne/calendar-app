@@ -1,3 +1,4 @@
+import { motion } from "motion/react"
 import styled from "styled-components"
 
 import { SecondaryIcon } from "@components/button"
@@ -46,12 +47,12 @@ export const Body = styled.div`
   padding: 48px 40px;
 `
 
-export const SheetContent = styled.div`
+export const SheetContent = styled(motion.div)`
   display: flex;
   flex-direction: column;
 `
 
-export const Sheet = styled.div`
+export const Sheet = styled(motion.div)`
   position: sticky;
   top: 104px;
   max-height: calc(100vh - 104px);
@@ -59,7 +60,6 @@ export const Sheet = styled.div`
   width: 980px;
   margin-left: calc(50vw - 490px);
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.88);
   outline: 1px solid var(--c-stroke-base);
   backdrop-filter: blur(8px);
   border-radius: 16px 16px 0 0;
@@ -71,7 +71,7 @@ export const Scroll = styled.div`
   position: relative;
 `
 
-export const Container = styled.div<{ $inactive?: boolean }>`
+export const Container = styled(motion.div)<{ $inactive?: boolean }>`
   position: fixed;
   width: 100vw;
   inset: 0;
