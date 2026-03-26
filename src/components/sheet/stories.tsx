@@ -14,11 +14,11 @@ const row = {
   borderBottom: "1px solid #eee",
 }
 
-const SheetComponent = ({ variant = "page" }: { variant?: SheetVariant }) => {
+const SheetComponent = ({ variant = "page", rootScroll }: { variant?: SheetVariant; rootScroll?: boolean }) => {
   const { push, close } = useSheet()
 
   return (
-    <Sheet>
+    <Sheet rootScroll={rootScroll}>
       <Sheet.Header>
         <Sheet.Close onClick={close} />
         <Sheet.Title>Career Path Senior Brand designer</Sheet.Title>
@@ -103,5 +103,28 @@ export const Banner = {
     }, [])
 
     return null
+  },
+}
+
+export const Anchored = {
+  render: () => {
+    const { open } = useSheetStack()
+
+    useEffect(() => {
+      open(<SheetComponent variant="banner" rootScroll />)
+    }, [])
+
+    return (
+      <div style={{ padding: "40px 60px", maxWidth: 800, lineHeight: 1.7, color: "#333" }}>
+        {Array.from({ length: 8 }).map((_, i) => (
+          <p key={i} style={{ marginBottom: 24 }}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+            dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+          </p>
+        ))}
+      </div>
+    )
   },
 }

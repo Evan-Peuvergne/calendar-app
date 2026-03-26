@@ -52,10 +52,10 @@ export const SheetContent = styled(motion.div)`
   flex-direction: column;
 `
 
-export const Sheet = styled(motion.div)<{ $depth: number }>`
-  position: sticky;
-  top: 104px;
-  max-height: calc(100vh - 104px);
+export const Sheet = styled(motion.div)<{ $depth: number; $rootScroll?: boolean }>`
+  position: ${(p) => (p.$rootScroll ? "relative" : "sticky")};
+  top: ${(p) => (p.$rootScroll ? "auto" : "104px")};
+  max-height: ${(p) => (p.$rootScroll ? "none" : "calc(100vh - 104px)")};
   display: block;
   width: 980px;
   margin-left: calc(50vw - 490px);
@@ -77,11 +77,13 @@ export const Scroll = styled.div`
 export const Container = styled(motion.div)<{
   $inactive?: boolean
   $ready?: boolean
+  $rootScroll?: boolean
 }>`
   position: fixed;
   width: 100vw;
   inset: 0;
-  overflow-y: ${(p) => (p.$inactive || !p.$ready ? "hidden" : "auto")};
+  overflow-y: ${(p) => (p.$inactive || !p.$ready || p.$rootScroll ? "hidden" : "auto")};
   z-index: 1000;
   ${({ $inactive }) => $inactive && `pointer-events: none;`}
+  ${({ $rootScroll }) => $rootScroll && `display: flex; align-items: flex-end;`}
 `

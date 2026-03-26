@@ -6,6 +6,7 @@ import * as Styles from "./styles"
 export interface SheetProps {
   children: React.ReactNode
   full?: boolean
+  rootScroll?: boolean
 }
 
 const NAV_HEIGHT = 104
@@ -13,6 +14,7 @@ const PEEK_PX = 12
 const spring = { type: "spring", damping: 28, stiffness: 300 } as const
 
 const SheetComponent = (props: SheetProps) => {
+  const { rootScroll } = props
   const ctx = useContext(SheetContext)
   const depth = ctx?.depth ?? 0
   const activeHeight = ctx?.activeHeight ?? 0
@@ -33,76 +35,83 @@ const SheetComponent = (props: SheetProps) => {
   useEffect(() => {
     const container = $container.current
     const scroll = $scroll.current
-    const sheet = $sheet.current
     const content = $content.current
-    if (!container || !scroll || !sheet || !content) return
+    if (!container || !content) return
+    if (!rootScroll && !scroll) return
 
     const observer = new ResizeObserver(() => {
       const contentHeight = content.scrollHeight
-      const sheetHeight = Math.min(
-        content.scrollHeight,
-        window.innerHeight - NAV_HEIGHT
-      )
-      const overflow = contentHeight - sheetHeight
+      const visibleHeight = rootScroll
+        ? contentHeight
+        : Math.min(contentHeight, window.innerHeight - NAV_HEIGHT)
 
-      const visibleHeight = Math.min(contentHeight, sheetHeight)
-      scroll.style.paddingTop = `${window.innerHeight - visibleHeight}px`
-
-      scroll.style.minHeight =
-        overflow > 0
-          ? `${parseFloat(scroll.style.paddingTop) + contentHeight}px`
-          : ""
+      if (!rootScroll && scroll) {
+        const overflow = contentHeight - visibleHeight
+        scroll.style.paddingTop = `${window.innerHeight - visibleHeight}px`
+        scroll.style.minHeight =
+          overflow > 0
+            ? `${parseFloat(scroll.style.paddingTop) + contentHeight}px`
+            : ""
+      }
 
       setOwnHeight(visibleHeight)
       reportHeight?.(visibleHeight)
     })
     observer.observe(content)
 
-    const _onScroll = () => {
-      const stickyOffset = scroll.offsetTop
-      const overflow = container.scrollTop - stickyOffset
-      content.style.transform = overflow > 0 ? `translateY(-${overflow}px)` : ""
+    if (!rootScroll && scroll) {
+      const _onScroll = () => {
+        const stickyOffset = scroll.offsetTop
+        const overflow = container.scrollTop - stickyOffset
+        content.style.transform = overflow > 0 ? `translateY(-${overflow}px)` : ""
+      }
+      container.addEventListener("scroll", _onScroll, { passive: true })
+      return () => {
+        observer.disconnect()
+        container.removeEventListener("scroll", _onScroll)
+      }
     }
-    container.addEventListener("scroll", _onScroll, { passive: true })
 
-    return () => {
-      observer.disconnect()
-      container.removeEventListener("scroll", _onScroll)
-    }
-  }, [reportHeight])
+    return () => observer.disconnect()
+  }, [rootScroll, reportHeight])
 
   const yOffset = depth === 0 ? 0 : ownHeight - activeHeight - depth * PEEK_PX
+
+  const sheet = (
+    <Styles.Sheet
+      ref={$sheet}
+      $depth={depth}
+      $rootScroll={rootScroll}
+      animate={{ y: yOffset, scaleX: 1 - 0.032 * depth }}
+      transition={spring}
+    >
+      <Styles.SheetContent
+        ref={$content}
+        animate={{ opacity: depth === 0 ? 1 : 0 }}
+        transition={spring}
+      >
+        {props.children}
+      </Styles.SheetContent>
+    </Styles.Sheet>
+  )
 
   return (
     <Styles.Container
       ref={$container}
       $inactive={depth > 0}
       $ready={ready}
+      $rootScroll={rootScroll}
       initial={{ y: "100%" }}
       animate={{ y: 0 }}
       exit={{ y: "100%" }}
       transition={spring}
       onAnimationComplete={() => setReady(true)}
     >
-      <Styles.Scroll ref={$scroll}>
-        <Styles.Sheet
-          ref={$sheet}
-          $depth={depth}
-          animate={{
-            y: yOffset,
-            scaleX: 1 - 0.032 * depth,
-          }}
-          transition={spring}
-        >
-          <Styles.SheetContent
-            ref={$content}
-            animate={{ opacity: depth === 0 ? 1 : 0 }}
-            transition={spring}
-          >
-            {props.children}
-          </Styles.SheetContent>
-        </Styles.Sheet>
-      </Styles.Scroll>
+      {rootScroll ? sheet : (
+        <Styles.Scroll ref={$scroll}>
+          {sheet}
+        </Styles.Scroll>
+      )}
     </Styles.Container>
   )
 }

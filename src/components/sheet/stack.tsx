@@ -66,10 +66,10 @@ export const SheetProvider = ({ children }: React.PropsWithChildren) => {
     []
   )
 
-  const hasSheets = stack.length > 0
+  const shouldLockScroll = stack.some((s) => !(s.element.props as any).rootScroll)
 
   useEffect(() => {
-    if (!hasSheets) return
+    if (!shouldLockScroll) return
 
     const scrollY = window.scrollY
     const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth
@@ -90,7 +90,7 @@ export const SheetProvider = ({ children }: React.PropsWithChildren) => {
       document.body.style.width = ""
       window.scrollTo(0, scrollY)
     }
-  }, [hasSheets])
+  }, [shouldLockScroll])
 
   return (
     <SheetStackContext.Provider value={{ open, close }}>
