@@ -4,7 +4,7 @@ import { Sheet } from "./sheet"
 import { useSheetStack } from "./hook"
 import { Button } from "@components/button"
 
-type SheetVariant = "page" | "banner"
+type SheetSize = "full" | "small"
 
 const bg = { background: "#f0f0f0", borderRadius: 6 }
 const row = {
@@ -14,35 +14,41 @@ const row = {
   borderBottom: "1px solid #eee",
 }
 
-const SheetComponent = ({ variant = "page", rootScroll }: { variant?: SheetVariant; rootScroll?: boolean }) => {
+const SheetComponent = ({
+  id,
+  size,
+  rootScroll,
+}: {
+  id?: string
+  size?: SheetSize
+  rootScroll?: boolean
+}) => {
   const { push, closeLast } = useSheetStack()
+
+  const pushSub = () => {
+    const newId = crypto.randomUUID()
+    push(<SheetComponent id={newId} size={size === "full" ? "small" : "full"} />, newId)
+  }
 
   return (
     <Sheet rootScroll={rootScroll}>
       <Sheet.Header>
         <Sheet.Close onClick={closeLast} />
-        <Sheet.Title>Career Path Senior Brand designer</Sheet.Title>
-        <Sheet.Subtitle>Last update 2 days ago</Sheet.Subtitle>
+        <Sheet.Title>Sheet</Sheet.Title>
+        {id && (
+          <Sheet.Subtitle style={{ fontFamily: "monospace", fontSize: 11, letterSpacing: 0 }}>
+            {id}
+          </Sheet.Subtitle>
+        )}
       </Sheet.Header>
       <Sheet.Body>
         <>
-          <Button.Primary onClick={() => push(<SheetComponent />)}>
-            Open sub sheet
-          </Button.Primary>
-          {variant === "page" && (
-            <div
-              style={{
-                marginTop: 24,
-                display: "flex",
-                flexDirection: "column",
-                gap: 4,
-              }}
-            >
-              {Array.from({ length: 12 }).map((_, i) => (
+          <Button.Primary onClick={pushSub}>Open sub sheet</Button.Primary>
+          {size && (
+            <div style={{ marginTop: 24, display: "flex", flexDirection: "column", gap: 4 }}>
+              {Array.from({ length: size === "full" ? 12 : 3 }).map((_, i) => (
                 <div key={i} style={row}>
-                  <div
-                    style={{ ...bg, width: 40, height: 40, flexShrink: 0 }}
-                  />
+                  <div style={{ ...bg, width: 40, height: 40, flexShrink: 0 }} />
                   <div
                     style={{
                       flex: 1,
@@ -73,11 +79,30 @@ export default {
 
 export const Default = {
   render: () => {
-    const { push } = useSheetStack()
+    const { push, closeLast, closeAll } = useSheetStack()
+
+    const pushSheet = (size: SheetSize) => {
+      const id = crypto.randomUUID()
+      push(<SheetComponent id={id} size={size} />, id)
+    }
+
     return (
-      <Button.Primary onClick={() => push(<SheetComponent />)}>
-        Open sheet
-      </Button.Primary>
+      <div
+        style={{
+          position: "fixed",
+          top: 32,
+          left: "50%",
+          transform: "translateX(-50%)",
+          display: "flex",
+          gap: 12,
+          zIndex: 1001,
+        }}
+      >
+        <Button.Primary onClick={() => pushSheet("full")}>Push tall</Button.Primary>
+        <Button.Primary onClick={() => pushSheet("small")}>Push short</Button.Primary>
+        <Button.Primary onClick={closeLast}>Close last</Button.Primary>
+        <Button.Primary onClick={closeAll}>Close all</Button.Primary>
+      </div>
     )
   },
 }
@@ -87,7 +112,7 @@ export const Page = {
     const { push } = useSheetStack()
 
     useEffect(() => {
-      push(<SheetComponent variant="page" />)
+      push(<SheetComponent size="full" />)
     }, [])
 
     return null
@@ -99,7 +124,7 @@ export const Banner = {
     const { push } = useSheetStack()
 
     useEffect(() => {
-      push(<SheetComponent variant="banner" />)
+      push(<SheetComponent />)
     }, [])
 
     return null
@@ -111,7 +136,7 @@ export const Anchored = {
     const { push } = useSheetStack()
 
     useEffect(() => {
-      push(<SheetComponent variant="banner" rootScroll />)
+      push(<SheetComponent rootScroll />)
     }, [])
 
     return (
