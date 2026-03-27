@@ -56,6 +56,21 @@ export const SheetProvider = ({ children }: React.PropsWithChildren) => {
     []
   )
 
+  const topItem = stack[stack.length - 1]
+  const allowClickOutside = (topItem?.element.props as any)?.allowClickOutside ?? false
+
+  useEffect(() => {
+    if (stack.length === 0 || allowClickOutside) return
+    const handler = (e: MouseEvent) => {
+      const target = e.target as Node
+      const panels = document.querySelectorAll("[data-sheet-panel]")
+      const isInside = Array.from(panels).some((p) => p.contains(target))
+      if (!isInside) closeAll()
+    }
+    window.addEventListener("click", handler, true)
+    return () => window.removeEventListener("click", handler, true)
+  }, [stack.length, allowClickOutside, closeAll])
+
   const shouldLockScroll = stack.some((s) => !(s.element.props as any).rootScroll)
 
   useEffect(() => {

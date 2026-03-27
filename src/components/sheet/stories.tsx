@@ -18,20 +18,22 @@ const SheetComponent = ({
   id,
   size,
   rootScroll,
+  allowClickOutside,
 }: {
   id?: string
   size?: SheetSize
   rootScroll?: boolean
+  allowClickOutside?: boolean
 }) => {
   const { push, closeLast } = useSheetStack()
 
   const pushSub = () => {
     const newId = crypto.randomUUID()
-    push(<SheetComponent id={newId} size={size === "full" ? "small" : "full"} />, newId)
+    push(<SheetComponent id={newId} size={size === "full" ? "small" : "full"} allowClickOutside={allowClickOutside} />, newId)
   }
 
   return (
-    <Sheet rootScroll={rootScroll}>
+    <Sheet rootScroll={rootScroll} allowClickOutside={allowClickOutside}>
       <Sheet.Header>
         <Sheet.Close onClick={closeLast} />
         <Sheet.Title>Sheet</Sheet.Title>
@@ -83,7 +85,7 @@ export const Default = {
 
     const pushSheet = (size: SheetSize) => {
       const id = crypto.randomUUID()
-      push(<SheetComponent id={id} size={size} />, id)
+      push(<SheetComponent id={id} size={size} allowClickOutside />, id)
     }
 
     return (
@@ -109,10 +111,12 @@ export const Default = {
 
 export const Page = {
   render: () => {
-    const { push } = useSheetStack()
+    const { push, closeAll } = useSheetStack()
 
     useEffect(() => {
+      closeAll()
       push(<SheetComponent size="full" />)
+      return () => closeAll()
     }, [])
 
     return null
@@ -121,10 +125,12 @@ export const Page = {
 
 export const Banner = {
   render: () => {
-    const { push } = useSheetStack()
+    const { push, closeAll } = useSheetStack()
 
     useEffect(() => {
+      closeAll()
       push(<SheetComponent />)
+      return () => closeAll()
     }, [])
 
     return null
@@ -133,10 +139,12 @@ export const Banner = {
 
 export const Anchored = {
   render: () => {
-    const { push } = useSheetStack()
+    const { push, closeAll } = useSheetStack()
 
     useEffect(() => {
+      closeAll()
       push(<SheetComponent rootScroll />)
+      return () => closeAll()
     }, [])
 
     return (

@@ -7,6 +7,7 @@ export interface SheetProps {
   children: React.ReactNode
   full?: boolean
   rootScroll?: boolean
+  allowClickOutside?: boolean
 }
 
 const NAV_HEIGHT = 104
@@ -80,6 +81,7 @@ const SheetComponent = (props: SheetProps) => {
   const sheet = (
     <Styles.Sheet
       ref={$sheet}
+      data-sheet-panel
       $depth={depth}
       $rootScroll={rootScroll}
       animate={{ y: yOffset, scaleX: 1 - 0.032 * depth }}
