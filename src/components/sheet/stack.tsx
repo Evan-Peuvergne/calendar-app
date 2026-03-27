@@ -15,16 +15,18 @@ const SheetItem = ({
   id,
   element,
   depth,
+  stackSize,
   activeHeight,
   reportHeight,
 }: SheetStackItem & {
   depth: number
+  stackSize: number
   activeHeight: number
   reportHeight: (id: string, height: number) => void
 }) => {
   const report = useCallback((h: number) => reportHeight(id, h), [id, reportHeight])
   return (
-    <SheetContext value={{ depth, activeHeight, reportHeight: report }}>
+    <SheetContext value={{ depth, stackSize, activeHeight, reportHeight: report }}>
       {element}
     </SheetContext>
   )
@@ -106,6 +108,7 @@ export const SheetProvider = ({ children }: React.PropsWithChildren) => {
               key={s.id}
               {...s}
               depth={stack.length - 1 - index}
+              stackSize={stack.length}
               activeHeight={heights[stack[stack.length - 1].id] ?? 0}
               reportHeight={reportHeight}
             />

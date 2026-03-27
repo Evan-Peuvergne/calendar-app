@@ -9,6 +9,7 @@ export interface SheetStackContextValue {
 
 export interface SheetContextValue {
   depth: number
+  stackSize: number
   activeHeight: number
   reportHeight: (height: number) => void
 }
