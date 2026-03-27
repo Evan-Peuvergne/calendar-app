@@ -6,8 +6,8 @@ import { SheetStackContext, SheetContext } from "./context"
 
 import type { SheetStackItem, SheetElement } from "./types"
 
-const makeItem = (element: SheetElement): SheetStackItem => ({
-  id: crypto.randomUUID(),
+const makeItem = (element: SheetElement, id?: string): SheetStackItem => ({
+  id: id ?? crypto.randomUUID(),
   element,
 })
 
@@ -15,21 +15,16 @@ const SheetItem = ({
   id,
   element,
   depth,
-  remove,
-  push,
   activeHeight,
   reportHeight,
 }: SheetStackItem & {
   depth: number
-  remove: (id: string) => void
-  push: (element: React.ReactElement) => void
   activeHeight: number
   reportHeight: (id: string, height: number) => void
 }) => {
-  const close = useCallback(() => remove(id), [id, remove])
   const report = useCallback((h: number) => reportHeight(id, h), [id, reportHeight])
   return (
-    <SheetContext value={{ close, push, depth, activeHeight, reportHeight: report }}>
+    <SheetContext value={{ depth, activeHeight, reportHeight: report }}>
       {element}
     </SheetContext>
   )
@@ -43,26 +38,21 @@ export const SheetProvider = ({ children }: React.PropsWithChildren) => {
     setHeights((prev) => (prev[id] === height ? prev : { ...prev, [id]: height }))
   }, [])
 
-  const open = useCallback(
-    (element: React.ReactElement | React.ReactElement[]) =>
-      setStack(
-        Array.isArray(element)
-          ? element.map((e) => makeItem(e as SheetElement))
-          : [makeItem(element as SheetElement)]
-      ),
-    []
-  )
-
-  const close = useCallback(() => setStack([]), [])
-
   const push = useCallback(
-    (element: React.ReactElement) =>
-      setStack((prev) => [...prev, makeItem(element as SheetElement)]),
+    (element: React.ReactElement, id?: string) =>
+      setStack((prev) => [...prev, makeItem(element as SheetElement, id)]),
     []
   )
 
-  const remove = useCallback(
+  const close = useCallback(
     (id: string) => setStack((prev) => prev.filter((s) => s.id !== id)),
+    []
+  )
+
+  const closeAll = useCallback(() => setStack([]), [])
+
+  const closeLast = useCallback(
+    () => setStack((prev) => prev.slice(0, -1)),
     []
   )
 
@@ -93,7 +83,7 @@ export const SheetProvider = ({ children }: React.PropsWithChildren) => {
   }, [shouldLockScroll])
 
   return (
-    <SheetStackContext.Provider value={{ open, close }}>
+    <SheetStackContext.Provider value={{ push, close, closeAll, closeLast }}>
       {createPortal(
         <AnimatePresence>
           {stack.map((s, index) => (
@@ -101,8 +91,6 @@ export const SheetProvider = ({ children }: React.PropsWithChildren) => {
               key={s.id}
               {...s}
               depth={stack.length - 1 - index}
-              remove={remove}
-              push={push}
               activeHeight={heights[stack[stack.length - 1].id] ?? 0}
               reportHeight={reportHeight}
             />

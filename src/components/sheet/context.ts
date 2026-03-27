@@ -1,13 +1,13 @@
 import { createContext } from "react"
 
 export interface SheetStackContextValue {
-  open: (element: React.ReactElement | React.ReactElement[]) => void
-  close: () => void
+  push: (element: React.ReactElement, id?: string) => void
+  close: (id: string) => void
+  closeAll: () => void
+  closeLast: () => void
 }
 
 export interface SheetContextValue {
-  push: (element: React.ReactElement) => void
-  close: () => void
   depth: number
   activeHeight: number
   reportHeight: (height: number) => void

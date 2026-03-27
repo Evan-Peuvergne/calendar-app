@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import type { Meta } from "@storybook/react-vite"
 import { Sheet } from "./sheet"
-import { useSheet, useSheetStack } from "./hook"
+import { useSheetStack } from "./hook"
 import { Button } from "@components/button"
 
 type SheetVariant = "page" | "banner"
@@ -15,12 +15,12 @@ const row = {
 }
 
 const SheetComponent = ({ variant = "page", rootScroll }: { variant?: SheetVariant; rootScroll?: boolean }) => {
-  const { push, close } = useSheet()
+  const { push, closeLast } = useSheetStack()
 
   return (
     <Sheet rootScroll={rootScroll}>
       <Sheet.Header>
-        <Sheet.Close onClick={close} />
+        <Sheet.Close onClick={closeLast} />
         <Sheet.Title>Career Path Senior Brand designer</Sheet.Title>
         <Sheet.Subtitle>Last update 2 days ago</Sheet.Subtitle>
       </Sheet.Header>
@@ -73,9 +73,9 @@ export default {
 
 export const Default = {
   render: () => {
-    const { open } = useSheetStack()
+    const { push } = useSheetStack()
     return (
-      <Button.Primary onClick={() => open(<SheetComponent />)}>
+      <Button.Primary onClick={() => push(<SheetComponent />)}>
         Open sheet
       </Button.Primary>
     )
@@ -84,10 +84,10 @@ export const Default = {
 
 export const Page = {
   render: () => {
-    const { open } = useSheetStack()
+    const { push } = useSheetStack()
 
     useEffect(() => {
-      open(<SheetComponent variant="page" />)
+      push(<SheetComponent variant="page" />)
     }, [])
 
     return null
@@ -96,10 +96,10 @@ export const Page = {
 
 export const Banner = {
   render: () => {
-    const { open } = useSheetStack()
+    const { push } = useSheetStack()
 
     useEffect(() => {
-      open(<SheetComponent variant="banner" />)
+      push(<SheetComponent variant="banner" />)
     }, [])
 
     return null
@@ -108,10 +108,10 @@ export const Banner = {
 
 export const Anchored = {
   render: () => {
-    const { open } = useSheetStack()
+    const { push } = useSheetStack()
 
     useEffect(() => {
-      open(<SheetComponent variant="banner" rootScroll />)
+      push(<SheetComponent variant="banner" rootScroll />)
     }, [])
 
     return (
