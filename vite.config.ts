@@ -17,6 +17,7 @@ const ALIAS = {
   "@layouts": "./src/layouts",
   "@shared": "./src/shared",
   "@targeting": "./src/targeting",
+  "@utils/": "./src/utils/",
   "@utils": "./src/utils/index",
   "@data": "./data",
 }
