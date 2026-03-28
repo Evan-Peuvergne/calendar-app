@@ -58,6 +58,17 @@ export const SheetProvider = ({ children }: React.PropsWithChildren) => {
     []
   )
 
+  const getCurrent = useCallback(
+    () => stack[stack.length - 1]?.id ?? null,
+    [stack]
+  )
+
+  const replaceCurrent = useCallback(
+    (element: React.ReactElement, id?: string) =>
+      setStack((prev) => [...prev.slice(0, -1), makeItem(element as SheetElement, id)]),
+    []
+  )
+
   const topItem = stack[stack.length - 1]
   const allowClickOutside = (topItem?.element.props as any)?.allowClickOutside ?? false
 
@@ -100,7 +111,7 @@ export const SheetProvider = ({ children }: React.PropsWithChildren) => {
   }, [shouldLockScroll])
 
   return (
-    <SheetStackContext.Provider value={{ push, close, closeAll, closeLast }}>
+    <SheetStackContext.Provider value={{ push, close, closeAll, closeLast, getCurrent, replaceCurrent }}>
       {createPortal(
         <AnimatePresence>
           {stack.map((s, index) => (

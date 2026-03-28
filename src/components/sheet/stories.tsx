@@ -161,3 +161,43 @@ export const Anchored = {
     )
   },
 }
+
+const VARIANTS = ["A", "B", "C"] as const
+type Variant = (typeof VARIANTS)[number]
+
+const ReplaceSheet = ({ variant }: { variant: Variant }) => {
+  const { replaceCurrent, closeLast, getCurrent } = useSheetStack()
+  const next = VARIANTS[(VARIANTS.indexOf(variant) + 1) % VARIANTS.length]
+
+  return (
+    <Sheet>
+      <Sheet.Header>
+        <Sheet.Close onClick={closeLast} />
+        <Sheet.Title>Variant {variant}</Sheet.Title>
+        <Sheet.Subtitle style={{ fontFamily: "monospace", fontSize: 11, letterSpacing: 0 }}>
+          {getCurrent()}
+        </Sheet.Subtitle>
+      </Sheet.Header>
+      <Sheet.Body>
+        <Button.Primary onClick={() => replaceCurrent(<ReplaceSheet variant={next} />)}>
+          Replace → {next}
+        </Button.Primary>
+      </Sheet.Body>
+    </Sheet>
+  )
+}
+
+export const Replace = {
+  render: () => {
+    const { push, closeAll } = useSheetStack()
+
+    useEffect(() => {
+      closeAll()
+      push(<SheetComponent size="full" />)
+      push(<ReplaceSheet variant="A" />)
+      return () => closeAll()
+    }, [])
+
+    return null
+  },
+}

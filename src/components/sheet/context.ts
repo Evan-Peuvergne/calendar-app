@@ -5,6 +5,8 @@ export interface SheetStackContextValue {
   close: (id: string) => void
   closeAll: () => void
   closeLast: () => void
+  getCurrent: () => string | null
+  replaceCurrent: (element: React.ReactElement, id?: string) => void
 }
 
 export interface SheetContextValue {
