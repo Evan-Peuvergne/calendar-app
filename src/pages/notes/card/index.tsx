@@ -3,21 +3,24 @@ import { SecondaryIcon } from "@components/button"
 import { Dropdown } from "@components/dropdown"
 import { useSheetStack, Sheet } from "@components/sheet"
 
-const Test = () => (
-  <Sheet>
-    <Sheet.Header>
-      <Sheet.Close />
-      <Sheet.Title>Career path Senior Brand designer</Sheet.Title>
-      <Sheet.Subtitle>Last edited 2 days ago</Sheet.Subtitle>
-    </Sheet.Header>
-  </Sheet>
-)
+const Test = () => {
+  const { closeLast } = useSheetStack()
+  return (
+    <Sheet>
+      <Sheet.Header>
+        <Sheet.Close onClick={closeLast} />
+        <Sheet.Title>Career path Senior Brand designer</Sheet.Title>
+        <Sheet.Subtitle>Last edited 2 days ago</Sheet.Subtitle>
+      </Sheet.Header>
+    </Sheet>
+  )
+}
 
 export const Card = () => {
-  const { open } = useSheetStack()
+  const { push } = useSheetStack()
 
   return (
-    <Styles.Container onClick={() => open(<Test />)}>
+    <Styles.Container onClick={() => push(<Test />)}>
       <Styles.Head>
         <Dropdown button={<Styles.More />}>
           <Dropdown.Overlay>
