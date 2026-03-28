@@ -1,27 +1,42 @@
 import * as Styles from "./styles"
 import { SecondaryIcon } from "@components/button"
 import { Dropdown } from "@components/dropdown"
+import { useSheetStack, Sheet } from "@components/sheet"
 
-export const Card = () => (
-  <Styles.Container>
-    <Styles.Head>
-      <Dropdown button={<Styles.More />}>
-        <Dropdown.Overlay>
-          <Dropdown.Option icon="external">Open new tab</Dropdown.Option>
-          <Dropdown.Option icon="bottom-to-right">Move to</Dropdown.Option>
-          <Dropdown.Option icon="copy">Duplicate</Dropdown.Option>
-          <Dropdown.Divider />
-          <Dropdown.Option icon="bin" intent="danger">
-            Delete
-          </Dropdown.Option>
-        </Dropdown.Overlay>
-      </Dropdown>
-      <Styles.Title>Career path Senior Brand designer</Styles.Title>
-      <Styles.Substitle>Last update 2 days ago</Styles.Substitle>
-    </Styles.Head>
-    <Styles.Body>{Fake}</Styles.Body>
-  </Styles.Container>
+const Test = () => (
+  <Sheet>
+    <Sheet.Header>
+      <Sheet.Close />
+      <Sheet.Title>Career path Senior Brand designer</Sheet.Title>
+      <Sheet.Subtitle>Last edited 2 days ago</Sheet.Subtitle>
+    </Sheet.Header>
+  </Sheet>
 )
+
+export const Card = () => {
+  const { open } = useSheetStack()
+
+  return (
+    <Styles.Container onClick={() => open(<Test />)}>
+      <Styles.Head>
+        <Dropdown button={<Styles.More />}>
+          <Dropdown.Overlay>
+            <Dropdown.Option icon="external">Open new tab</Dropdown.Option>
+            <Dropdown.Option icon="bottom-to-right">Move to</Dropdown.Option>
+            <Dropdown.Option icon="copy">Duplicate</Dropdown.Option>
+            <Dropdown.Divider />
+            <Dropdown.Option icon="bin" intent="danger">
+              Delete
+            </Dropdown.Option>
+          </Dropdown.Overlay>
+        </Dropdown>
+        <Styles.Title>Career path Senior Brand designer</Styles.Title>
+        <Styles.Substitle>Last update 2 days ago</Styles.Substitle>
+      </Styles.Head>
+      <Styles.Body>{Fake}</Styles.Body>
+    </Styles.Container>
+  )
+}
 
 const Fake = (
   <>
