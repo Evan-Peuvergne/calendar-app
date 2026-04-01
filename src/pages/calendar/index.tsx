@@ -32,7 +32,11 @@ export const Calendar = () => {
           ))}
       </Styles.Hours>
       <Styles.Options>
-        <Secondary>January 12-19, 2026</Secondary>
+        <span style={{ display: "inline-flex", gap: 0 }}>
+          <Secondary>January 12-19, 2026</Secondary>
+          <SecondaryIcon icon="chevron-left" />
+          <SecondaryIcon icon="chevron-right" />
+        </span>
         <hr />
         <SecondaryIcon icon="calendar" />
         <SecondaryIcon icon="flag" />
