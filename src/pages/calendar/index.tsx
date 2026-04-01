@@ -30,6 +30,9 @@ export const Calendar = () => {
           .map((_, k) => (
             <Styles.Hour value={`${k.toString()}h`} key={k} />
           ))}
+        <Styles.CurrentTime style={{ top: "50%" }}>
+          <span>13:20</span>
+        </Styles.CurrentTime>
       </Styles.Hours>
       <Styles.Options>
         <span style={{ display: "inline-flex", gap: 0 }}>

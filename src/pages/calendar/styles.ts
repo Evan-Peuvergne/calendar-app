@@ -54,6 +54,38 @@ export const Hour = styled.span<{ value: string }>`
   }
 `
 
+export const CurrentTime = styled.div`
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-top: 1px solid;
+  border-image: linear-gradient(
+      to right,
+      transparent 0px,
+      var(--c-fill-danger) 64px,
+      var(--c-fill-danger) calc(100% - 64px),
+      transparent 100%
+    )
+    1;
+
+  span {
+    position: absolute;
+    left: 56px;
+    transform: translate3d(-100%, -50%, 0);
+    display: inline-flex;
+    height: 24px;
+    padding: 0 4px;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--c-text-contrast);
+    background: var(--c-fill-danger);
+    border-radius: 20px;
+  }
+`
+
 export const Hours = styled.div`
   display: block;
   position: absolute;
