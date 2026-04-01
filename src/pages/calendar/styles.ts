@@ -82,9 +82,10 @@ export const Event = styled.div`
   }
 `
 
-export const Label = styled.span`
+export const Label = styled.span<{ current?: boolean }>`
   display: inline-flex;
   height: 32px;
+  justify-content: center;
   align-items: center;
   padding: 0 16px;
   font-size: 12px;
@@ -93,6 +94,13 @@ export const Label = styled.span`
   border-radius: 20px;
   background: rgba(248, 248, 248, 0.5);
   backdrop-filter: blur(4px);
+
+  ${(p) =>
+    p.current &&
+    `
+    background: rgba(0, 0, 0, 0.16);
+    color: var(--c-text-base);
+  `}
 `
 
 export const Labels = styled.div`
@@ -102,7 +110,7 @@ export const Labels = styled.div`
   position: fixed;
   top: 120px;
   left: 0;
-  padding: 0 48px;
+  padding: 0 64px;
   z-index: 100;
 `
 

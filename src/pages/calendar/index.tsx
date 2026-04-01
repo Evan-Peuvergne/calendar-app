@@ -8,7 +8,7 @@ export const Calendar = () => {
         <Styles.Labels>
           <Styles.Label>Mon 18</Styles.Label>
           <Styles.Label>Tue 19</Styles.Label>
-          <Styles.Label>Wed 20</Styles.Label>
+          <Styles.Label current>Wed 20</Styles.Label>
           <Styles.Label>Thu 21</Styles.Label>
           <Styles.Label>Fri 22</Styles.Label>
           <Styles.Label>Sat 23</Styles.Label>
