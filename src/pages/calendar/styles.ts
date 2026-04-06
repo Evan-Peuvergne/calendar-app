@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-const HOUR_HEIGHT = 128
+export const HOUR_HEIGHT = 128
 
 export const Options = styled.div`
   display: flex;
