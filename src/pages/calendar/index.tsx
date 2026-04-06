@@ -46,6 +46,10 @@ export const Calendar = () => {
   const currentTimeTop = (now.getHours() + now.getMinutes() / 60) * HOUR_HEIGHT
   const currentTimeLabel = `${now.getHours()}:${now.getMinutes().toString().padStart(2, "0")}`
 
+  useEffect(() => {
+    window.scrollTo(0, currentTimeTop - window.innerHeight / 2)
+  }, [])
+
   return (
     <Styles.Container>
       <Styles.Week>
