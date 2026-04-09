@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 
 import * as Styles from "./styles"
+import { CalendarOptions } from "./options"
 import { Secondary, SecondaryIcon } from "@components/button"
 import { HOUR_HEIGHT } from "./styles"
 
@@ -19,22 +20,18 @@ export const Calendar = () => {
     return () => clearInterval(id)
   }, [])
 
-  const navigate = (dir: number) => {
-    setWeekStart((prev) => {
-      const d = new Date(prev)
-      d.setDate(d.getDate() + dir * 7)
-      return d
-    })
+  const navigate = (date: Date) => {
+    setWeekStart(getWeekStart(date))
   }
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "ArrowLeft") navigate(-1)
-      if (e.key === "ArrowRight") navigate(1)
+      if (e.key === "ArrowLeft")  navigate(new Date(weekStart.getTime() - 7 * 86_400_000))
+      if (e.key === "ArrowRight") navigate(new Date(weekStart.getTime() + 7 * 86_400_000))
     }
     window.addEventListener("keydown", onKey)
     return () => window.removeEventListener("keydown", onKey)
-  }, [])
+  }, [weekStart])
 
   const days = Array.from({ length: 7 }, (_, i) => {
     const d = new Date(weekStart)
@@ -91,20 +88,7 @@ export const Calendar = () => {
           <span>{currentTimeLabel}</span>
         </Styles.CurrentTime>
       </Styles.Hours>
-
-      <Styles.Options>
-        <span style={{ display: "inline-flex", gap: 0 }}>
-          <Secondary>{formatWeekRange(weekStart)}</Secondary>
-          <SecondaryIcon icon="chevron-left" onClick={() => navigate(-1)} />
-          <SecondaryIcon icon="chevron-right" onClick={() => navigate(1)} />
-        </span>
-        <hr />
-        <SecondaryIcon icon="calendar" />
-        <SecondaryIcon icon="flag" />
-        <SecondaryIcon icon="home" />
-        <hr />
-        <SecondaryIcon icon="more" />
-      </Styles.Options>
+      <CalendarOptions weekStart={weekStart} navigate={navigate} />
     </Styles.Container>
   )
 }
