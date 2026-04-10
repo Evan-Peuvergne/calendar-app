@@ -18,15 +18,18 @@ const SheetItem = ({
   stackSize,
   activeHeight,
   reportHeight,
+  reportRootScroll,
 }: SheetStackItem & {
   depth: number
   stackSize: number
   activeHeight: number
   reportHeight: (id: string, height: number) => void
+  reportRootScroll: (id: string, rootScroll: boolean) => void
 }) => {
   const report = useCallback((h: number) => reportHeight(id, h), [id, reportHeight])
+  const reportRoot = useCallback((v: boolean) => reportRootScroll(id, v), [id, reportRootScroll])
   return (
-    <SheetContext value={{ depth, stackSize, activeHeight, reportHeight: report }}>
+    <SheetContext value={{ depth, stackSize, activeHeight, reportHeight: report, reportRootScroll: reportRoot }}>
       {element}
     </SheetContext>
   )
@@ -35,9 +38,14 @@ const SheetItem = ({
 export const SheetProvider = ({ children }: React.PropsWithChildren) => {
   const [stack, setStack] = useState<SheetStackItem[]>([])
   const [heights, setHeights] = useState<Record<string, number>>({})
+  const [rootScrollMap, setRootScrollMap] = useState<Record<string, boolean>>({})
 
   const reportHeight = useCallback((id: string, height: number) => {
     setHeights((prev) => (prev[id] === height ? prev : { ...prev, [id]: height }))
+  }, [])
+
+  const reportRootScroll = useCallback((id: string, rootScroll: boolean) => {
+    setRootScrollMap((prev) => (prev[id] === rootScroll ? prev : { ...prev, [id]: rootScroll }))
   }, [])
 
   const push = useCallback(
@@ -84,7 +92,7 @@ export const SheetProvider = ({ children }: React.PropsWithChildren) => {
     return () => window.removeEventListener("click", handler, true)
   }, [stack.length, allowClickOutside, closeAll])
 
-  const shouldLockScroll = stack.some((s) => !(s.element.props as any).rootScroll)
+  const shouldLockScroll = stack.some((s) => !rootScrollMap[s.id])
 
   useEffect(() => {
     if (!shouldLockScroll) return
@@ -122,6 +130,7 @@ export const SheetProvider = ({ children }: React.PropsWithChildren) => {
               stackSize={stack.length}
               activeHeight={heights[stack[stack.length - 1].id] ?? 0}
               reportHeight={reportHeight}
+              reportRootScroll={reportRootScroll}
             />
           ))}
         </AnimatePresence>,

@@ -14,6 +14,7 @@ export interface SheetContextValue {
   stackSize: number
   activeHeight: number
   reportHeight: (height: number) => void
+  reportRootScroll: (rootScroll: boolean) => void
 }
 
 export const SheetStackContext = createContext<SheetStackContextValue | null>(null)
