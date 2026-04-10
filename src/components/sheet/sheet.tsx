@@ -8,6 +8,8 @@ export interface SheetProps {
   full?: boolean
   rootScroll?: boolean
   allowClickOutside?: boolean
+  style?: React.CSSProperties
+  className?: string
 }
 
 const NAV_HEIGHT = 104
@@ -15,12 +17,17 @@ const PEEK_PX = 12
 const spring = { type: "spring", damping: 28, stiffness: 300 } as const
 
 const SheetComponent = (props: SheetProps) => {
-  const { rootScroll } = props
+  const { rootScroll, style, className } = props
   const ctx = useContext(SheetContext)
   const depth = ctx?.depth ?? 0
   const stackSize = ctx?.stackSize ?? 1
   const activeHeight = ctx?.activeHeight ?? 0
   const reportHeight = ctx?.reportHeight
+  const reportRootScroll = ctx?.reportRootScroll
+
+  useEffect(() => {
+    reportRootScroll?.(!!rootScroll)
+  }, [reportRootScroll, rootScroll])
   const [ownHeight, setOwnHeight] = useState(0)
   const [ready, setReady] = useState(false)
   const $container = useRef<HTMLDivElement>(null)
@@ -43,7 +50,10 @@ const SheetComponent = (props: SheetProps) => {
 
     const observer = new ResizeObserver(() => {
       const contentHeight = content.scrollHeight
-      const maxHeight = window.innerHeight - NAV_HEIGHT - (depth === 0 ? (stackSize - 1) * PEEK_PX : 0)
+      const maxHeight =
+        window.innerHeight -
+        NAV_HEIGHT -
+        (depth === 0 ? (stackSize - 1) * PEEK_PX : 0)
       const visibleHeight = rootScroll
         ? contentHeight
         : Math.min(contentHeight, maxHeight)
@@ -66,7 +76,8 @@ const SheetComponent = (props: SheetProps) => {
       const _onScroll = () => {
         const stickyOffset = scroll.offsetTop
         const overflow = container.scrollTop - stickyOffset
-        content.style.transform = overflow > 0 ? `translateY(-${overflow}px)` : ""
+        content.style.transform =
+          overflow > 0 ? `translateY(-${overflow}px)` : ""
       }
       container.addEventListener("scroll", _onScroll, { passive: true })
       return () => {
@@ -88,6 +99,8 @@ const SheetComponent = (props: SheetProps) => {
       $rootScroll={rootScroll}
       animate={{ y: yOffset, scaleX: 1 - 0.032 * depth }}
       transition={spring}
+      style={style}
+      className={className}
     >
       <Styles.SheetContent
         ref={$content}
@@ -111,10 +124,10 @@ const SheetComponent = (props: SheetProps) => {
       transition={spring}
       onAnimationComplete={() => setReady(true)}
     >
-      {rootScroll ? sheet : (
-        <Styles.Scroll ref={$scroll}>
-          {sheet}
-        </Styles.Scroll>
+      {rootScroll ? (
+        sheet
+      ) : (
+        <Styles.Scroll ref={$scroll}>{sheet}</Styles.Scroll>
       )}
     </Styles.Container>
   )
