@@ -95,25 +95,6 @@ export const Hours = styled.div`
   z-index: -1;
 `
 
-export const Event = styled.div`
-  display: block;
-  height: 80px;
-  position: relative;
-  z-index: 3;
-  padding: 16px;
-  font-weight: 500;
-  color: var(--c-text-neutral);
-  border-radius: 12px;
-  background: var(--c-fill-base);
-  outline: 1px solid var(--c-stroke-base);
-  box-shadow: var(--s-block);
-  cursor: pointer;
-
-  &:hover {
-    outline: 1px solid var(--c-stroke-hover);
-  }
-`
-
 export const Label = styled.span<{ current?: boolean }>`
   display: inline-flex;
   height: 32px;

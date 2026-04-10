@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 
 import * as Styles from "./styles"
+import { CalendarEvent } from "./event"
 import { CalendarOptions } from "./options"
 import { Secondary, SecondaryIcon } from "@components/button"
 import { HOUR_HEIGHT } from "./styles"
@@ -26,8 +27,10 @@ export const Calendar = () => {
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "ArrowLeft")  navigate(new Date(weekStart.getTime() - 7 * 86_400_000))
-      if (e.key === "ArrowRight") navigate(new Date(weekStart.getTime() + 7 * 86_400_000))
+      if (e.key === "ArrowLeft")
+        navigate(new Date(weekStart.getTime() - 7 * 86_400_000))
+      if (e.key === "ArrowRight")
+        navigate(new Date(weekStart.getTime() + 7 * 86_400_000))
     }
     window.addEventListener("keydown", onKey)
     return () => window.removeEventListener("keydown", onKey)
@@ -63,18 +66,13 @@ export const Calendar = () => {
             {mockEvents
               .filter((e) => e.dayIndex === dayIndex)
               .map((event, i) => (
-                <Styles.Event
+                <CalendarEvent
                   key={i}
                   style={{
-                    position: "absolute",
                     top: DAY_PADDING_TOP + event.startHour * HOUR_HEIGHT,
                     height: event.duration * HOUR_HEIGHT,
-                    left: 4,
-                    right: 4,
                   }}
-                >
-                  Event
-                </Styles.Event>
+                />
               ))}
           </Styles.Day>
         ))}
