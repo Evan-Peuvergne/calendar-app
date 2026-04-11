@@ -48,15 +48,17 @@ const SheetComponent = (props: SheetProps) => {
     if (!container || !content) return
     if (!rootScroll && !scroll) return
 
+    const sheet = $sheet.current!
     const observer = new ResizeObserver(() => {
       const contentHeight = content.scrollHeight
+      const sheetHeight = Math.max(sheet.offsetHeight, contentHeight)
       const maxHeight =
         window.innerHeight -
         NAV_HEIGHT -
         (depth === 0 ? (stackSize - 1) * PEEK_PX : 0)
       const visibleHeight = rootScroll
-        ? contentHeight
-        : Math.min(contentHeight, maxHeight)
+        ? sheetHeight
+        : Math.min(sheetHeight, maxHeight)
 
       if (!rootScroll && scroll) {
         const overflow = contentHeight - visibleHeight
@@ -71,6 +73,7 @@ const SheetComponent = (props: SheetProps) => {
       reportHeight?.(visibleHeight)
     })
     observer.observe(content)
+    observer.observe(sheet)
 
     if (!rootScroll && scroll) {
       const _onScroll = () => {

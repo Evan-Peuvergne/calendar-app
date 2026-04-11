@@ -6,9 +6,7 @@ export interface CalendarEventProps {
 }
 
 const EventSheet = () => (
-  <Sheet rootScroll style={{ padding: 24, height: 320 }}>
-    Hello world
-  </Sheet>
+  <Sheet style={{ padding: 24, height: 320 }}>Hello world</Sheet>
 )
 
 export const CalendarEvent = (props: CalendarEventProps) => {
