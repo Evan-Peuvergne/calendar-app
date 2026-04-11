@@ -3,6 +3,7 @@ import { Sheet, useSheetStack } from "@components/sheet"
 
 export interface CalendarEventProps {
   style: React.CSSProperties
+  title?: string
 }
 
 const EventSheet = () => (
@@ -17,7 +18,7 @@ export const CalendarEvent = (props: CalendarEventProps) => {
       onClick={() => push(<EventSheet />, "event-sheet")}
       style={props.style}
     >
-      Event
+      {props.title ?? "Event"}
     </Styles.Container>
   )
 }

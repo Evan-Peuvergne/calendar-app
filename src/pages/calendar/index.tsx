@@ -3,12 +3,12 @@ import { useState, useEffect } from "react"
 import * as Styles from "./styles"
 import { CalendarEvent } from "./event"
 import { CalendarOptions } from "./options"
-import { Secondary, SecondaryIcon } from "@components/button"
+import { Secondary } from "@components/button"
 import { HOUR_HEIGHT } from "./styles"
 
 import { getWeekStart, isToday, formatWeekRange } from "./utils"
 import { DAY_NAMES } from "./utils"
-import { getMockEvents } from "./mock"
+import { useGoogleCalendar } from "./useGoogleCalendar"
 
 const DAY_PADDING_TOP = 112 // matches Day padding-top in styles.ts
 
@@ -42,7 +42,7 @@ export const Calendar = () => {
     return d
   })
 
-  const mockEvents = getMockEvents(weekStart)
+  const { events, ready, signIn } = useGoogleCalendar(weekStart)
   const currentTimeTop = (now.getHours() + now.getMinutes() / 60) * HOUR_HEIGHT
   const currentTimeLabel = `${now.getHours()}:${now.getMinutes().toString().padStart(2, "0")}`
 
@@ -63,11 +63,12 @@ export const Calendar = () => {
 
         {days.map((day, dayIndex) => (
           <Styles.Day key={day.toISOString()}>
-            {mockEvents
+            {events
               .filter((e) => e.dayIndex === dayIndex)
-              .map((event, i) => (
+              .map((event) => (
                 <CalendarEvent
-                  key={i}
+                  key={event.id}
+                  title={event.title}
                   style={{
                     top: DAY_PADDING_TOP + event.startHour * HOUR_HEIGHT,
                     height: event.duration * HOUR_HEIGHT,
@@ -76,16 +77,20 @@ export const Calendar = () => {
               ))}
           </Styles.Day>
         ))}
+        <Styles.Hours style={{ top: DAY_PADDING_TOP }}>
+          {Array.from({ length: 25 }, (_, k) => (
+            <Styles.Hour value={`${k}h`} key={k} />
+          ))}
+          <Styles.CurrentTime style={{ top: currentTimeTop }}>
+            <span>{currentTimeLabel}</span>
+          </Styles.CurrentTime>
+        </Styles.Hours>
       </Styles.Week>
-
-      <Styles.Hours>
-        {Array.from({ length: 25 }, (_, k) => (
-          <Styles.Hour value={`${k}h`} key={k} />
-        ))}
-        <Styles.CurrentTime style={{ top: currentTimeTop }}>
-          <span>{currentTimeLabel}</span>
-        </Styles.CurrentTime>
-      </Styles.Hours>
+      {ready && events.length === 0 && (
+        <Secondary onClick={signIn} style={{ position: "fixed", bottom: 24, right: 24, zIndex: 10 }}>
+          Connecter Google Calendar
+        </Secondary>
+      )}
       <CalendarOptions weekStart={weekStart} navigate={navigate} />
     </Styles.Container>
   )
