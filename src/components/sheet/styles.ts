@@ -58,7 +58,7 @@ export const Sheet = styled(motion.div)<{ $depth: number; $rootScroll?: boolean 
   max-height: ${(p) => (p.$rootScroll ? "none" : "calc(100vh - 104px)")};
   display: block;
   width: 980px;
-  margin-left: calc(50vw - 490px);
+  margin: 0 auto;
   overflow: hidden;
   outline: 1px solid var(--c-stroke-base);
   backdrop-filter: blur(8px);
@@ -81,6 +81,7 @@ export const Container = styled(motion.div)<{
 }>`
   position: fixed;
   width: 100vw;
+  padding-right: var(--scrollbar-width, 0px);
   inset: 0;
   overflow-y: ${(p) => (p.$inactive || !p.$ready || p.$rootScroll ? "hidden" : "auto")};
   z-index: 1000;
