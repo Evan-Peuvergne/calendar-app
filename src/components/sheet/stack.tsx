@@ -97,25 +97,10 @@ export const SheetProvider = ({ children }: React.PropsWithChildren) => {
   useEffect(() => {
     if (!shouldLockScroll) return
 
-    const scrollY = window.scrollY
-    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth
-
-    document.documentElement.style.setProperty("--scrollbar-width", `${scrollbarWidth}px`)
-    document.documentElement.style.setProperty("scrollbar-gutter", "auto")
-    document.body.style.overflow = "hidden"
-    document.body.style.paddingRight = `${scrollbarWidth}px`
-    document.body.style.position = "fixed"
-    document.body.style.top = `-${scrollY}px`
-    document.body.style.width = "100%"
+    document.documentElement.style.overflow = "hidden"
 
     return () => {
-      document.documentElement.style.removeProperty("scrollbar-gutter")
-      document.body.style.overflow = ""
-      document.body.style.paddingRight = ""
-      document.body.style.position = ""
-      document.body.style.top = ""
-      document.body.style.width = ""
-      window.scrollTo(0, scrollY)
+      document.documentElement.style.overflow = ""
     }
   }, [shouldLockScroll])
 

@@ -80,8 +80,6 @@ export const Container = styled(motion.div)<{
   $rootScroll?: boolean
 }>`
   position: fixed;
-  width: 100vw;
-  padding-right: var(--scrollbar-width, 0px);
   inset: 0;
   overflow-y: ${(p) => (p.$inactive || !p.$ready || p.$rootScroll ? "hidden" : "auto")};
   z-index: 1000;
