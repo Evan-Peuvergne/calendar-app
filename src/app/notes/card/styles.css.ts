@@ -1,12 +1,12 @@
 import { style, globalStyle } from "@vanilla-extract/css"
 
-import { tokens } from "@tokens"
+import { t } from "@tokens"
 
 export const title = style({
   fontSize: 20,
   fontWeight: 500,
   lineHeight: "26px",
-  color: tokens.color.text.base,
+  color: t.text.base,
 })
 
 export const subtitle = style({
@@ -14,7 +14,7 @@ export const subtitle = style({
   marginTop: 8,
   fontSize: 14,
   lineHeight: "20px",
-  color: tokens.color.text.light,
+  color: t.text.light,
 })
 
 export const more = style({
@@ -31,7 +31,7 @@ export const moreActive = style({
 
 export const head = style({
   padding: "16px 0",
-  borderBottom: `1px solid ${tokens.color.stroke.base}`,
+  borderBottom: `1px solid ${t.stroke.base}`,
 })
 
 export const body = style({
@@ -39,7 +39,7 @@ export const body = style({
   fontSize: 10,
   fontWeight: 300,
   lineHeight: "14px",
-  color: tokens.color.text.neutral,
+  color: t.text.neutral,
 })
 
 globalStyle(`${body} p + p`, {
@@ -55,15 +55,15 @@ export const container = style({
   flex: "0 0 auto",
   padding: "0 16px",
   background: "rgba(255, 255, 255, 0.88)",
-  outline: `1px solid ${tokens.color.stroke.base}`,
+  outline: `1px solid ${t.stroke.base}`,
   borderRadius: 12,
-  boxShadow: tokens.shadow.block,
+  boxShadow: t.shadow.block,
   overflow: "hidden",
   cursor: "pointer",
 
   ":hover": {
     background: "#fbfbfb",
-    outline: `1px solid ${tokens.color.stroke.hover}`,
+    outline: `1px solid ${t.stroke.hover}`,
   },
 
   "::after": {

@@ -6,8 +6,13 @@ import { typography } from "./typography"
 
 export { colors, shadows, typography }
 
-export const tokens = createGlobalTheme(":root", {
-  color: colors,
+export const t = createGlobalTheme(":root", {
+  fill: colors.fill,
+  text: colors.text,
+  stroke: colors.stroke,
+  opacify: colors.opacify,
   shadow: shadows,
   font: typography,
 })
+
+export const tokens = t

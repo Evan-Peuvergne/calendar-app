@@ -1,6 +1,6 @@
 import { style } from "@vanilla-extract/css"
 
-import { tokens } from "@tokens"
+import { t } from "@tokens"
 
 export const base = style({
   display: "flex",
@@ -9,7 +9,7 @@ export const base = style({
   height: 40,
   padding: 8,
   gap: 8,
-  font: tokens.font.label,
+  font: t.font.label,
   borderRadius: 12,
   cursor: "pointer",
   appearance: "none",

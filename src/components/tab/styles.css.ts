@@ -1,6 +1,6 @@
 import { recipe } from "@vanilla-extract/recipes"
 
-import { tokens } from "@tokens"
+import { t } from "@tokens"
 
 const base = {
   display: "inline-flex",
@@ -8,26 +8,26 @@ const base = {
   height: 40,
   gap: 8,
   padding: "0 12px",
-  font: tokens.font.label,
+  font: t.font.label,
   fontWeight: 600,
-  color: tokens.color.text.light,
+  color: t.text.light,
   borderRadius: 12,
   cursor: "pointer",
   userSelect: "none",
   textDecoration: "none",
   appearance: "none",
   ":hover": {
-    color: tokens.color.text.neutral,
-    background: tokens.color.opacify.hover,
+    color: t.text.neutral,
+    background: t.opacify.hover,
   },
 } as const
 
 const activeVariant = {
-  color: tokens.color.text.neutral,
-  background: tokens.color.opacify.active,
+  color: t.text.neutral,
+  background: t.opacify.active,
   ":hover": {
-    color: tokens.color.text.neutral,
-    background: tokens.color.opacify.active,
+    color: t.text.neutral,
+    background: t.opacify.active,
   },
 } as const
 
