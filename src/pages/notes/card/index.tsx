@@ -1,7 +1,20 @@
-import * as Styles from "./styles"
+import cn from "classnames"
+
+import * as Styles from "./styles.css"
 import { SecondaryIcon } from "@components/button"
 import { Dropdown } from "@components/dropdown"
 import { useSheetStack, Sheet } from "@components/sheet"
+
+import type { AbstractButtonProps } from "@components/button/types"
+
+const More = ({ active, className, ...props }: AbstractButtonProps) => (
+  <SecondaryIcon
+    icon="more"
+    active={active}
+    className={cn(Styles.more, active && Styles.moreActive, className)}
+    {...props}
+  />
+)
 
 const Test = () => {
   const { closeLast } = useSheetStack()
@@ -20,9 +33,9 @@ export const Card = () => {
   const { push } = useSheetStack()
 
   return (
-    <Styles.Container onClick={() => push(<Test />)}>
-      <Styles.Head>
-        <Dropdown button={<Styles.More />}>
+    <div className={Styles.container} onClick={() => push(<Test />)}>
+      <div className={Styles.head}>
+        <Dropdown button={<More />}>
           <Dropdown.Overlay>
             <Dropdown.Option icon="external">Open new tab</Dropdown.Option>
             <Dropdown.Option icon="bottom-to-right">Move to</Dropdown.Option>
@@ -33,11 +46,11 @@ export const Card = () => {
             </Dropdown.Option>
           </Dropdown.Overlay>
         </Dropdown>
-        <Styles.Title>Career path Senior Brand designer</Styles.Title>
-        <Styles.Substitle>Last update 2 days ago</Styles.Substitle>
-      </Styles.Head>
-      <Styles.Body>{Fake}</Styles.Body>
-    </Styles.Container>
+        <h3 className={Styles.title}>Career path Senior Brand designer</h3>
+        <span className={Styles.subtitle}>Last update 2 days ago</span>
+      </div>
+      <div className={Styles.body}>{Fake}</div>
+    </div>
   )
 }
 

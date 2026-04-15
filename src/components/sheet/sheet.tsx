@@ -1,7 +1,11 @@
 import { useContext, useEffect, useRef, useState } from "react"
+import cn from "classnames"
+import { motion } from "motion/react"
 
 import { SheetContext } from "./context"
-import * as Styles from "./styles"
+import * as Styles from "./styles.css"
+
+import { SecondaryIcon } from "@components/button"
 
 export interface SheetProps {
   children: React.ReactNode
@@ -16,8 +20,37 @@ const NAV_HEIGHT = 104
 const PEEK_PX = 12
 const spring = { type: "spring", damping: 28, stiffness: 300 } as const
 
+// Sub-components
+
+const Title = ({ children }: { children: React.ReactNode }) => (
+  <h1 className={Styles.title}>{children}</h1>
+)
+
+const Subtitle = ({ children, style }: { children: React.ReactNode; style?: React.CSSProperties }) => (
+  <p className={Styles.subtitle} style={style}>{children}</p>
+)
+
+const Close = ({ onClick, style }: { onClick?: () => void; style?: React.CSSProperties }) => (
+  <SecondaryIcon
+    icon="close"
+    onClick={onClick}
+    className={Styles.closeInHeader}
+    style={style}
+  />
+)
+
+const Header = ({ children }: { children: React.ReactNode }) => (
+  <header className={Styles.header}>{children}</header>
+)
+
+const Body = ({ children }: { children: React.ReactNode }) => (
+  <div className={Styles.body}>{children}</div>
+)
+
+// Main component
+
 const SheetComponent = (props: SheetProps) => {
-  const { rootScroll, style, className } = props
+  const { rootScroll, style } = props
   const ctx = useContext(SheetContext)
   const depth = ctx?.depth ?? 0
   const stackSize = ctx?.stackSize ?? 1
@@ -95,32 +128,34 @@ const SheetComponent = (props: SheetProps) => {
   const yOffset = depth === 0 ? 0 : ownHeight - activeHeight - depth * PEEK_PX
 
   const sheet = (
-    <Styles.Sheet
+    <motion.div
       ref={$sheet}
       data-sheet-panel
-      $depth={depth}
-      $rootScroll={rootScroll}
+      className={Styles.sheet({ elevated: depth > 0, rootScroll: !!rootScroll })}
       animate={{ y: yOffset, scaleX: 1 - 0.032 * depth }}
       transition={spring}
       style={style}
-      className={className}
     >
-      <Styles.SheetContent
+      <motion.div
         ref={$content}
+        className={Styles.sheetContent}
         animate={{ opacity: depth === 0 ? 1 : 0 }}
         transition={spring}
       >
         {props.children}
-      </Styles.SheetContent>
-    </Styles.Sheet>
+      </motion.div>
+    </motion.div>
   )
 
   return (
-    <Styles.Container
+    <motion.div
       ref={$container}
-      $inactive={depth > 0}
-      $ready={ready}
-      $rootScroll={rootScroll}
+      className={cn(
+        Styles.container,
+        depth > 0 && Styles.containerInactive,
+        (depth > 0 || !ready || !!rootScroll) && Styles.containerHidden,
+        !!rootScroll && Styles.containerRootScroll,
+      )}
       initial={{ y: "100%" }}
       animate={{ y: 0 }}
       exit={{ y: "100%" }}
@@ -130,10 +165,16 @@ const SheetComponent = (props: SheetProps) => {
       {rootScroll ? (
         sheet
       ) : (
-        <Styles.Scroll ref={$scroll}>{sheet}</Styles.Scroll>
+        <div ref={$scroll} className={Styles.scroll}>{sheet}</div>
       )}
-    </Styles.Container>
+    </motion.div>
   )
 }
 
-export const Sheet = Object.assign(SheetComponent, Styles)
+export const Sheet = Object.assign(SheetComponent, {
+  Title,
+  Subtitle,
+  Close,
+  Header,
+  Body,
+})

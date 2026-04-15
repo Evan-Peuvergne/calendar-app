@@ -1,4 +1,4 @@
-import * as Styles from "./styles"
+import * as Styles from "./styles.css"
 import { Tab } from "@components/tab"
 import { PrimaryIcon, SecondaryIcon } from "@components/button"
 
@@ -6,7 +6,7 @@ import { BlurOverlay } from "./blur-overlay"
 
 export const Navigation = () => {
   return (
-    <Styles.Container>
+    <nav className={Styles.container}>
       <BlurOverlay />
       <Tab to="/" icon={["home", "home-fill"]}>
         Overview
@@ -20,11 +20,11 @@ export const Navigation = () => {
       <Tab to="/notes" icon={["document", "document-fill"]}>
         Notes
       </Tab>
-      <Styles.Divider />
+      <hr className={Styles.divider} />
       <div style={{ display: "flex", gap: 12 }}>
         <SecondaryIcon icon="search" />
         <PrimaryIcon icon="plus" />
       </div>
-    </Styles.Container>
+    </nav>
   )
 }

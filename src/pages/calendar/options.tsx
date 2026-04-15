@@ -1,4 +1,4 @@
-import * as Styles from "./styles"
+import * as Styles from "./styles.css"
 import { Secondary, SecondaryIcon } from "@components/button"
 import { formatWeekRange } from "./utils"
 
@@ -9,7 +9,7 @@ export interface CalendarOptionsProps {
 
 export const CalendarOptions = ({ weekStart, navigate }: CalendarOptionsProps) => {
   return (
-    <Styles.Options>
+    <div className={Styles.options}>
       <Secondary onClick={() => navigate(new Date())}>Go to today</Secondary>
       <hr />
       <span style={{ display: "inline-flex", gap: 0 }}>
@@ -19,6 +19,6 @@ export const CalendarOptions = ({ weekStart, navigate }: CalendarOptionsProps) =
       </span>
       <hr />
       <SecondaryIcon icon="more" />
-    </Styles.Options>
+    </div>
   )
 }

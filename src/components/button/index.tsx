@@ -1,36 +1,55 @@
-import { Container as PrimaryContainer } from "./primary"
-import { Container as SecondaryContainer } from "./secondary"
+import cn from "classnames"
+
+import { container as primaryContainer } from "./primary.css"
+import { container as secondaryContainer } from "./secondary.css"
 
 import { Icon as IconComponent } from "@components/icon"
 
-import type { StyledComponent } from "styled-components"
+import type { ButtonIntent } from "./types"
 import type { ButtonProps, IconButtonProps } from "./types"
 
-function createButton<T extends ButtonProps>(
-  Container: StyledComponent<"button", any, any>
-) {
-  return ({ ref, intent, children, onClick, ...rest }: T) => (
-    <Container ref={ref} intent={intent || "neutral"} onClick={onClick} {...rest}>
+type ContainerFn = (variants: {
+  intent?: ButtonIntent
+  icon?: boolean
+  active?: boolean
+  disabled?: boolean
+}) => string
+
+function createButton<T extends ButtonProps>(containerFn: ContainerFn) {
+  return ({ ref, intent, active, disabled, children, onClick, onMouseDown, style, className }: T) => (
+    <button
+      ref={ref}
+      className={cn(containerFn({ intent: intent || "neutral", active, disabled }), className)}
+      onClick={onClick}
+      onMouseDown={onMouseDown}
+      disabled={disabled}
+      style={style}
+    >
       {children}
-    </Container>
+    </button>
   )
 }
 
-function createIconButton<T extends IconButtonProps>(
-  Container: StyledComponent<"button", any, any>
-) {
-  return ({ ref, icon, intent, onClick, ...rest }: T) => (
-    <Container ref={ref} icon intent={intent || "neutral"} onClick={onClick} {...rest}>
+function createIconButton<T extends IconButtonProps>(containerFn: ContainerFn) {
+  return ({ ref, icon, intent, active, disabled, onClick, onMouseDown, style, className }: T) => (
+    <button
+      ref={ref}
+      className={cn(containerFn({ intent: intent || "neutral", icon: true, active, disabled }), className)}
+      onClick={onClick}
+      onMouseDown={onMouseDown}
+      disabled={disabled}
+      style={style}
+    >
       <IconComponent id={icon} />
-    </Container>
+    </button>
   )
 }
 
-export const Primary = createButton(PrimaryContainer)
-export const PrimaryIcon = createIconButton(PrimaryContainer)
+export const Primary = createButton(primaryContainer)
+export const PrimaryIcon = createIconButton(primaryContainer)
 
-export const Secondary = createButton(SecondaryContainer)
-export const SecondaryIcon = createIconButton(SecondaryContainer)
+export const Secondary = createButton(secondaryContainer)
+export const SecondaryIcon = createIconButton(secondaryContainer)
 
 export const Button = { Primary, Secondary }
 export const Icon = { Primary: PrimaryIcon, Secondary: SecondaryIcon }

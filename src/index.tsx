@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client"
 
 import { BrowserRouter, Routes, Route } from "react-router"
 
-import { Global as GlobalStyles } from "./global.styles"
+import "./global.css"
 import { SheetProvider } from "@components/sheet/stack"
 
 import { Navigation } from "@shared/navigation"
@@ -15,7 +15,6 @@ import { Notes } from "@pages/notes"
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <>
     <BrowserRouter>
-      <GlobalStyles />
       <Navigation />
       <SheetProvider>
         <Routes>

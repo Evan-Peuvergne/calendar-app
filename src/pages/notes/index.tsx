@@ -1,13 +1,13 @@
-import * as Styles from "./styles"
+import * as Styles from "./styles.css"
 import { Card } from "./card"
 
 export const Notes = () => (
-  <Styles.Container>
+  <div className={Styles.container}>
     <Card />
     <Card />
     <Card />
     <Card />
     <Card />
     <Card />
-  </Styles.Container>
+  </div>
 )

@@ -3,6 +3,7 @@ import { fileURLToPath, URL } from "node:url"
 
 import react from "@vitejs/plugin-react"
 import svgr from "vite-plugin-svgr"
+import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin"
 
 function objectMap(object, mapFn) {
   return Object.keys(object).reduce(function (result, key) {
@@ -25,6 +26,7 @@ const ALIAS = {
 export default defineConfig({
   base: "",
   plugins: [
+    vanillaExtractPlugin(),
     svgr({
       svgrOptions: {
         replaceAttrValues: {
@@ -39,7 +41,6 @@ export default defineConfig({
     open: false,
     port: 3000,
   },
-  ssr: { noExternal: ["styled-components"] },
   resolve: {
     alias: objectMap(ALIAS, function (v) {
       return fileURLToPath(new URL(v, import.meta.url))
