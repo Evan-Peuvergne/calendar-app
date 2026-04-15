@@ -1,6 +1,6 @@
 import { style, globalStyle } from "@vanilla-extract/css"
 
-import { theme } from "../../../tokens.css"
+import { theme } from "@tokens"
 
 export const title = style({
   fontSize: 20,

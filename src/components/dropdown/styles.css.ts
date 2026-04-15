@@ -1,7 +1,7 @@
 import { style, globalStyle, createVar } from "@vanilla-extract/css"
 import { recipe } from "@vanilla-extract/recipes"
 
-import { theme } from "../../tokens.css"
+import { theme } from "@tokens"
 import { base } from "@components/button/styles.css"
 
 const intentColor = createVar()

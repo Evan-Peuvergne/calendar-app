@@ -1,7 +1,7 @@
 import { style, globalStyle } from "@vanilla-extract/css"
 import { recipe } from "@vanilla-extract/recipes"
 
-import { theme } from "../../tokens.css"
+import { theme } from "@tokens"
 
 export const HOUR_HEIGHT = 128
 export const EVENT_GAP = 6

@@ -1,7 +1,7 @@
 import { recipe } from "@vanilla-extract/recipes"
 import { createVar } from "@vanilla-extract/css"
 
-import { theme } from "../../tokens.css"
+import { theme } from "@tokens"
 import { base, iconBase, disabledBase } from "./styles.css"
 
 const intentColor = createVar()

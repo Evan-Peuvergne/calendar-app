@@ -1,6 +1,6 @@
 import { style } from "@vanilla-extract/css"
 
-import { theme } from "../../tokens.css"
+import { theme } from "@tokens"
 
 export const base = style({
   display: "flex",

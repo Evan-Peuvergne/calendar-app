@@ -1,6 +1,6 @@
 import { recipe } from "@vanilla-extract/recipes"
 
-import { theme } from "../../tokens.css"
+import { theme } from "@tokens"
 
 const base = {
   display: "inline-flex",

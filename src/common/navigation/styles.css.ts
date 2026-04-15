@@ -1,6 +1,6 @@
 import { style, globalStyle } from "@vanilla-extract/css"
 
-import { theme } from "../../tokens.css"
+import { theme } from "@tokens"
 
 export const divider = style({
   width: 1,

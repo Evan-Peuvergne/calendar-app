@@ -13,11 +13,12 @@ function objectMap(object, mapFn) {
 }
 
 const ALIAS = {
-  "@pages": "./src/pages",
+  "@app": "./src/app",
+  "@common": "./src/common",
   "@components": "./src/components",
   "@layouts": "./src/layouts",
-  "@shared": "./src/shared",
   "@targeting": "./src/targeting",
+  "@tokens": "./src/tokens.css",
   "@utils/": "./src/utils/",
   "@utils": "./src/utils/index",
   "@data": "./data",
