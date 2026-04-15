@@ -4,7 +4,7 @@ import * as Styles from "./styles"
 import { CalendarEvent } from "./event"
 import { CalendarOptions } from "./options"
 import { Secondary } from "@components/button"
-import { HOUR_HEIGHT } from "./styles"
+import { HOUR_HEIGHT, EVENT_GAP } from "./styles"
 
 import { getWeekStart, isToday, formatWeekRange } from "./utils"
 import { DAY_NAMES } from "./utils"
@@ -70,8 +70,11 @@ export const Calendar = () => {
                   key={event.id}
                   title={event.title}
                   style={{
-                    top: DAY_PADDING_TOP + event.startHour * HOUR_HEIGHT,
-                    height: event.duration * HOUR_HEIGHT,
+                    position: "absolute",
+                    top: DAY_PADDING_TOP + event.startHour * HOUR_HEIGHT + EVENT_GAP / 2,
+                    height: event.duration * HOUR_HEIGHT - EVENT_GAP,
+                    left: 4,
+                    right: 4,
                   }}
                 />
               ))}

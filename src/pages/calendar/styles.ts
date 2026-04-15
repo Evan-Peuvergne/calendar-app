@@ -1,6 +1,7 @@
 import styled from "styled-components"
 
 export const HOUR_HEIGHT = 128
+export const EVENT_GAP = 6
 
 export const Options = styled.div`
   display: flex;
