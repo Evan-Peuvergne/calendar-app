@@ -2,6 +2,7 @@ import { withThemeFromJSXProvider } from "@storybook/addon-themes"
 
 import type { Preview } from "@storybook/react-vite"
 
+import "../src/tokens/index.css"
 import "../src/common/reset.css"
 import "../src/common/base.css"
 import { SheetProvider } from "../src/components/sheet/stack"

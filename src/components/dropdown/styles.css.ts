@@ -1,7 +1,7 @@
 import { style, globalStyle, createVar } from "@vanilla-extract/css"
 import { recipe } from "@vanilla-extract/recipes"
 
-import { theme } from "@tokens"
+import { tokens } from "@tokens"
 import { base } from "@components/button/styles.css"
 
 const intentColor = createVar()
@@ -20,19 +20,19 @@ export const option = recipe({
 
       ":hover": {
         color: intentColor,
-        backgroundColor: theme.color.opacify.hover,
+        backgroundColor: tokens.color.opacify.hover,
       },
       ":active": {
         color: intentColor,
-        backgroundColor: theme.color.opacify.active,
+        backgroundColor: tokens.color.opacify.active,
       },
     },
   ],
   variants: {
     intent: {
-      neutral: { vars: { [intentColor]: theme.color.text.neutral } },
-      action: { vars: { [intentColor]: theme.color.text.action } },
-      danger: { vars: { [intentColor]: theme.color.text.danger } },
+      neutral: { vars: { [intentColor]: tokens.color.text.neutral } },
+      action: { vars: { [intentColor]: tokens.color.text.action } },
+      danger: { vars: { [intentColor]: tokens.color.text.danger } },
     },
   },
   defaultVariants: { intent: "neutral" },
@@ -47,7 +47,7 @@ globalStyle(`${option.classNames.base} i`, {
 
 export const divider = style({
   width: "100%",
-  borderBottom: `1px solid ${theme.color.stroke.base}`,
+  borderBottom: `1px solid ${tokens.color.stroke.base}`,
   margin: "4px 2px",
 })
 
@@ -57,8 +57,8 @@ export const overlay = style({
   padding: 8,
   gap: 4,
   background: "rgba(255, 255, 255, 0.88)",
-  outline: `1px solid ${theme.color.stroke.base}`,
+  outline: `1px solid ${tokens.color.stroke.base}`,
   borderRadius: 12,
-  boxShadow: theme.shadow.overlay,
+  boxShadow: tokens.shadow.overlay,
   backdropFilter: "blur(4px)",
 })

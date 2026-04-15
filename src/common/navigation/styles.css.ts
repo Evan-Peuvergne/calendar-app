@@ -1,11 +1,11 @@
 import { style, globalStyle } from "@vanilla-extract/css"
 
-import { theme } from "@tokens"
+import { tokens } from "@tokens"
 
 export const divider = style({
   width: 1,
   height: 24,
-  background: theme.color.stroke.base,
+  background: tokens.color.stroke.base,
   border: "none",
   margin: 0,
 })

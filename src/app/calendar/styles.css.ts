@@ -1,7 +1,7 @@
 import { style, globalStyle } from "@vanilla-extract/css"
 import { recipe } from "@vanilla-extract/recipes"
 
-import { theme } from "@tokens"
+import { tokens } from "@tokens"
 
 export const HOUR_HEIGHT = 128
 export const EVENT_GAP = 6
@@ -19,15 +19,15 @@ export const options = style({
   transform: "translate3d(-50%, 0, 0)",
   background: "rgba(255, 255, 255, 0.88)",
   backdropFilter: "blur(4px)",
-  outline: `1px solid ${theme.color.stroke.base}`,
-  boxShadow: theme.shadow.overlay,
+  outline: `1px solid ${tokens.color.stroke.base}`,
+  boxShadow: tokens.shadow.overlay,
   borderRadius: "16px 16px 0 0",
 })
 
 globalStyle(`${options} hr`, {
   display: "block",
   height: 24,
-  borderRight: `1px solid ${theme.color.stroke.base}`,
+  borderRight: `1px solid ${tokens.color.stroke.base}`,
 })
 
 export const hour = style({
@@ -47,7 +47,7 @@ export const hour = style({
     textAlign: "right",
     fontSize: 12,
     fontWeight: 500,
-    color: theme.color.text.disabled,
+    color: tokens.color.text.disabled,
     content: "var(--hour-value)",
   },
 })
@@ -58,7 +58,7 @@ export const currentTime = style({
   left: 0,
   right: 0,
   borderTop: "1px solid",
-  borderImage: `linear-gradient(to right, transparent 0px, ${theme.color.fill.danger} 64px, ${theme.color.fill.danger} calc(100% - 64px), transparent 100%) 1`,
+  borderImage: `linear-gradient(to right, transparent 0px, ${tokens.color.fill.danger} 64px, ${tokens.color.fill.danger} calc(100% - 64px), transparent 100%) 1`,
 })
 
 globalStyle(`${currentTime} span`, {
@@ -72,8 +72,8 @@ globalStyle(`${currentTime} span`, {
   alignItems: "center",
   fontSize: 12,
   fontWeight: 500,
-  color: theme.color.text.contrast,
-  background: theme.color.fill.danger,
+  color: tokens.color.text.contrast,
+  background: tokens.color.fill.danger,
   borderRadius: 20,
 })
 
@@ -95,7 +95,7 @@ export const label = recipe({
     padding: "0 16px",
     fontSize: 12,
     fontWeight: 600,
-    color: theme.color.text.light,
+    color: tokens.color.text.light,
     borderRadius: 20,
     background: "rgba(248, 248, 248, 0.5)",
     backdropFilter: "blur(4px)",
@@ -104,7 +104,7 @@ export const label = recipe({
     current: {
       true: {
         background: "rgba(0, 0, 0, 0.16)",
-        color: theme.color.text.base,
+        color: tokens.color.text.base,
       },
     },
   },
@@ -153,12 +153,12 @@ export const week = style({
     "&::before": {
       top: 0,
       height: 288,
-      background: `linear-gradient(to bottom, ${theme.color.fill.background}, transparent)`,
+      background: `linear-gradient(to bottom, ${tokens.color.fill.background}, transparent)`,
     },
     "&::after": {
       bottom: 0,
       height: 48,
-      background: `linear-gradient(to top, ${theme.color.fill.background}, transparent)`,
+      background: `linear-gradient(to top, ${tokens.color.fill.background}, transparent)`,
     },
   },
 })

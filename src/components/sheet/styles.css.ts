@@ -1,17 +1,17 @@
 import { style, globalStyle } from "@vanilla-extract/css"
 import { recipe } from "@vanilla-extract/recipes"
 
-import { theme } from "@tokens"
+import { tokens } from "@tokens"
 
 export const title = style({
   fontSize: 32,
   fontWeight: 600,
   lineHeight: "48px",
-  color: theme.color.text.base,
+  color: tokens.color.text.base,
 })
 
 export const subtitle = style({
-  color: theme.color.text.light,
+  color: tokens.color.text.light,
 })
 
 globalStyle(`${title} + ${subtitle}`, {
@@ -29,7 +29,7 @@ export const header = style({
     right: 32,
     display: "block",
     content: '""',
-    borderBottom: `1px solid ${theme.color.stroke.base}`,
+    borderBottom: `1px solid ${tokens.color.stroke.base}`,
   },
 })
 
@@ -55,10 +55,10 @@ export const sheet = recipe({
     width: 980,
     margin: "0 auto",
     overflow: "hidden",
-    outline: `1px solid ${theme.color.stroke.base}`,
+    outline: `1px solid ${tokens.color.stroke.base}`,
     backdropFilter: "blur(8px)",
     borderRadius: "24px 24px 0 0",
-    boxShadow: theme.shadow.overlay,
+    boxShadow: tokens.shadow.overlay,
     transition: "background 300ms ease",
   },
   variants: {

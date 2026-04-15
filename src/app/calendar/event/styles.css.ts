@@ -1,7 +1,7 @@
 import { style, globalStyle } from "@vanilla-extract/css"
 import { recipe } from "@vanilla-extract/recipes"
 
-import { theme } from "@tokens"
+import { tokens } from "@tokens"
 
 export const time = style({
   display: "block",
@@ -44,12 +44,12 @@ export const container = recipe({
       "&::before": {
         inset: "-1px",
         borderRadius: 13,
-        background: theme.color.stroke.base,
-        boxShadow: theme.shadow.raised,
+        background: tokens.color.stroke.base,
+        boxShadow: tokens.shadow.raised,
       },
       "&::after": {
         inset: 0,
-        background: `radial-gradient(126.03% 93.63% at 8.16% 12.64%, rgba(57, 167, 132, 0.08) 0%, rgba(57, 167, 132, 0.04) 100%), ${theme.color.fill.base}`,
+        background: `radial-gradient(126.03% 93.63% at 8.16% 12.64%, rgba(57, 167, 132, 0.08) 0%, rgba(57, 167, 132, 0.04) 100%), ${tokens.color.fill.base}`,
         transition: "background 0.2s ease",
       },
       "&:hover::before": {
