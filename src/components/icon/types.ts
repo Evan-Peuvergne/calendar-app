@@ -4,6 +4,8 @@ export const IconsList = [
  'bottom-to-right',
  'calendar-fill',
  'calendar',
+ 'chevron-left',
+ 'chevron-right',
  'close',
  'copy-1',
  'copy-fill',

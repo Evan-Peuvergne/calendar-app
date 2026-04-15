@@ -15,6 +15,8 @@ export const Container = styled.nav`
   height: 112px;
   gap: 32px;
   position: sticky;
+  position: fixed;
+  width: 100%;
   top: 0;
   z-index: 10;
 
