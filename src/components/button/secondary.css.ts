@@ -1,6 +1,7 @@
 import { recipe } from "@vanilla-extract/recipes"
 import { createVar } from "@vanilla-extract/css"
 
+import { theme } from "../../tokens.css"
 import { base, iconBase, disabledBase } from "./styles.css"
 
 const intentColor = createVar()
@@ -14,19 +15,19 @@ export const container = recipe({
 
       ":hover": {
         color: intentColor,
-        backgroundColor: "var(--c-opacify-hover)",
+        backgroundColor: theme.color.opacify.hover,
       },
       ":active": {
         color: intentColor,
-        backgroundColor: "var(--c-opacify-active)",
+        backgroundColor: theme.color.opacify.active,
       },
     },
   ],
   variants: {
     intent: {
-      neutral: { vars: { [intentColor]: "var(--c-text-neutral)" } },
-      action: { vars: { [intentColor]: "var(--c-text-action)" } },
-      danger: { vars: { [intentColor]: "var(--c-text-danger)" } },
+      neutral: { vars: { [intentColor]: theme.color.text.neutral } },
+      action: { vars: { [intentColor]: theme.color.text.action } },
+      danger: { vars: { [intentColor]: theme.color.text.danger } },
     },
     icon: {
       true: iconBase,
@@ -34,14 +35,14 @@ export const container = recipe({
     active: {
       true: {
         color: intentColor,
-        backgroundColor: "var(--c-opacify-active)",
+        backgroundColor: theme.color.opacify.active,
       },
     },
     disabled: {
       true: [
         disabledBase,
         {
-          color: "var(--c-text-disabled)",
+          color: theme.color.text.disabled,
           backgroundColor: "transparent",
         },
       ],

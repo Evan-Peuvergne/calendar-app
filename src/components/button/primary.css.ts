@@ -1,6 +1,7 @@
 import { recipe } from "@vanilla-extract/recipes"
 import { createVar } from "@vanilla-extract/css"
 
+import { theme } from "../../tokens.css"
 import { base, iconBase, disabledBase } from "./styles.css"
 
 const intentColor = createVar()
@@ -10,38 +11,35 @@ export const container = recipe({
     base,
     {
       color: intentColor,
-      background: "var(--c-fill-base)",
-      outline: "1px solid var(--c-stroke-base)",
-      boxShadow: "var(--s-raised)",
+      background: theme.color.fill.base,
+      outline: `1px solid ${theme.color.stroke.base}`,
+      boxShadow: theme.shadow.raised,
       transition: "background 0.2s ease-in-out, outline 0.2s ease-in-out",
 
       ":hover": {
-        background:
-          "linear-gradient(var(--c-opacify-hover), var(--c-opacify-hover)), var(--c-fill-base)",
-        outline: "1px solid var(--c-stroke-hover)",
+        background: `linear-gradient(${theme.color.opacify.hover}, ${theme.color.opacify.hover}), ${theme.color.fill.base}`,
+        outline: `1px solid ${theme.color.stroke.hover}`,
       },
       ":active": {
-        background:
-          "linear-gradient(var(--c-opacify-active), var(--c-opacify-active)), var(--c-fill-base)",
-        outline: "1px solid var(--c-stroke-hover)",
+        background: `linear-gradient(${theme.color.opacify.active}, ${theme.color.opacify.active}), ${theme.color.fill.base}`,
+        outline: `1px solid ${theme.color.stroke.hover}`,
         boxShadow: "none",
       },
     },
   ],
   variants: {
     intent: {
-      neutral: { vars: { [intentColor]: "var(--c-text-neutral)" } },
-      action: { vars: { [intentColor]: "var(--c-text-action)" } },
-      danger: { vars: { [intentColor]: "var(--c-text-danger)" } },
+      neutral: { vars: { [intentColor]: theme.color.text.neutral } },
+      action: { vars: { [intentColor]: theme.color.text.action } },
+      danger: { vars: { [intentColor]: theme.color.text.danger } },
     },
     icon: {
       true: iconBase,
     },
     active: {
       true: {
-        background:
-          "linear-gradient(var(--c-opacify-active), var(--c-opacify-active)), var(--c-fill-base)",
-        outline: "1px solid var(--c-stroke-hover)",
+        background: `linear-gradient(${theme.color.opacify.active}, ${theme.color.opacify.active}), ${theme.color.fill.base}`,
+        outline: `1px solid ${theme.color.stroke.hover}`,
         boxShadow: "none",
       },
     },
@@ -49,9 +47,9 @@ export const container = recipe({
       true: [
         disabledBase,
         {
-          color: "var(--c-text-disabled)",
-          backgroundColor: "var(--c-fill-disabled)",
-          outline: "1px solid var(--c-stroke-base)",
+          color: theme.color.text.disabled,
+          backgroundColor: theme.color.fill.disabled,
+          outline: `1px solid ${theme.color.stroke.base}`,
           boxShadow: "none",
         },
       ],

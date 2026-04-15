@@ -1,11 +1,12 @@
 import { style, globalStyle } from "@vanilla-extract/css"
 
+import { theme } from "../../../tokens.css"
 
 export const title = style({
   fontSize: 20,
   fontWeight: 500,
   lineHeight: "26px",
-  color: "var(--c-text-base)",
+  color: theme.color.text.base,
 })
 
 export const subtitle = style({
@@ -13,7 +14,7 @@ export const subtitle = style({
   marginTop: 8,
   fontSize: 14,
   lineHeight: "20px",
-  color: "var(--c-text-light)",
+  color: theme.color.text.light,
 })
 
 export const more = style({
@@ -30,7 +31,7 @@ export const moreActive = style({
 
 export const head = style({
   padding: "16px 0",
-  borderBottom: "1px solid var(--c-stroke-base)",
+  borderBottom: `1px solid ${theme.color.stroke.base}`,
 })
 
 export const body = style({
@@ -38,7 +39,7 @@ export const body = style({
   fontSize: 10,
   fontWeight: 300,
   lineHeight: "14px",
-  color: "var(--c-text-neutral)",
+  color: theme.color.text.neutral,
 })
 
 globalStyle(`${body} p + p`, {
@@ -54,15 +55,15 @@ export const container = style({
   flex: "0 0 auto",
   padding: "0 16px",
   background: "rgba(255, 255, 255, 0.88)",
-  outline: "1px solid var(--c-stroke-base)",
+  outline: `1px solid ${theme.color.stroke.base}`,
   borderRadius: 12,
-  boxShadow: "var(--s-block)",
+  boxShadow: theme.shadow.block,
   overflow: "hidden",
   cursor: "pointer",
 
   ":hover": {
     background: "#fbfbfb",
-    outline: "1px solid var(--c-stroke-hover)",
+    outline: `1px solid ${theme.color.stroke.hover}`,
   },
 
   "::after": {

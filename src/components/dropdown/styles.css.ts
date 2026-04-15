@@ -1,6 +1,7 @@
 import { style, globalStyle, createVar } from "@vanilla-extract/css"
 import { recipe } from "@vanilla-extract/recipes"
 
+import { theme } from "../../tokens.css"
 import { base } from "@components/button/styles.css"
 
 const intentColor = createVar()
@@ -19,27 +20,24 @@ export const option = recipe({
 
       ":hover": {
         color: intentColor,
-        backgroundColor: "var(--c-opacify-hover)",
+        backgroundColor: theme.color.opacify.hover,
       },
       ":active": {
         color: intentColor,
-        backgroundColor: "var(--c-opacify-active)",
+        backgroundColor: theme.color.opacify.active,
       },
     },
   ],
   variants: {
     intent: {
-      neutral: { vars: { [intentColor]: "var(--c-text-neutral)" } },
-      action: { vars: { [intentColor]: "var(--c-text-action)" } },
-      danger: { vars: { [intentColor]: "var(--c-text-danger)" } },
+      neutral: { vars: { [intentColor]: theme.color.text.neutral } },
+      action: { vars: { [intentColor]: theme.color.text.action } },
+      danger: { vars: { [intentColor]: theme.color.text.danger } },
     },
   },
-  defaultVariants: {
-    intent: "neutral",
-  },
+  defaultVariants: { intent: "neutral" },
 })
 
-// Dropdown option icon sizing — descendant selector requires globalStyle
 globalStyle(`${option.classNames.base} i`, {
   width: 16,
   marginRight: -4,
@@ -49,7 +47,7 @@ globalStyle(`${option.classNames.base} i`, {
 
 export const divider = style({
   width: "100%",
-  borderBottom: "1px solid var(--c-stroke-base)",
+  borderBottom: `1px solid ${theme.color.stroke.base}`,
   margin: "4px 2px",
 })
 
@@ -59,8 +57,8 @@ export const overlay = style({
   padding: 8,
   gap: 4,
   background: "rgba(255, 255, 255, 0.88)",
-  outline: "1px solid var(--c-stroke-base)",
+  outline: `1px solid ${theme.color.stroke.base}`,
   borderRadius: 12,
-  boxShadow: "var(--s-overlay)",
+  boxShadow: theme.shadow.overlay,
   backdropFilter: "blur(4px)",
 })
