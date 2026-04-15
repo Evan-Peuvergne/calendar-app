@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "esnext",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "types": ["vite/client", "node", "@types/styled-components"],
+    "types": ["vite/client", "node"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -17,11 +17,12 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "paths": {
-      "@pages/*": ["./src/pages/*"],
+      "@app/*": ["./src/app/*"],
+      "@common/*": ["./src/common/*"],
       "@components/*": ["./src/components/*"],
       "@layouts/*": ["./src/layouts/*"],
-      "@shared/*": ["./src/shared/*"],
       "@targeting/*": ["./src/targeting/*"],
+      "@tokens": ["./src/tokens/index.css"],
       "@utils/*": ["./src/utils/*"],
       "@utils": ["./src/utils/index"],
       "@data/*": ["./data/*"],

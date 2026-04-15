@@ -1,16 +1,16 @@
 import { useState, useEffect } from "react"
 
-import * as Styles from "./styles"
+import * as Styles from "./styles.css"
 import { CalendarEvent } from "./event"
 import { CalendarOptions } from "./options"
 import { Secondary } from "@components/button"
-import { HOUR_HEIGHT, EVENT_GAP } from "./styles"
+import { HOUR_HEIGHT, EVENT_GAP } from "./styles.css"
 
 import { getWeekStart, isToday, formatWeekRange } from "./utils"
 import { DAY_NAMES } from "./utils"
 import { useGoogleCalendar } from "./useGoogleCalendar"
 
-const DAY_PADDING_TOP = 112 // matches Day padding-top in styles.ts
+const DAY_PADDING_TOP = 112 // matches Day padding-top in styles.css.ts
 
 export const Calendar = () => {
   const [weekStart, setWeekStart] = useState(() => getWeekStart(new Date()))
@@ -51,18 +51,21 @@ export const Calendar = () => {
   }, [])
 
   return (
-    <Styles.Container>
-      <Styles.Week>
-        <Styles.Labels>
+    <div className={Styles.container}>
+      <div className={Styles.week}>
+        <div className={Styles.labels}>
           {days.map((day) => (
-            <Styles.Label key={day.toISOString()} current={isToday(day)}>
+            <span
+              key={day.toISOString()}
+              className={Styles.label({ current: isToday(day) })}
+            >
               {DAY_NAMES[day.getDay()]} {day.getDate()}
-            </Styles.Label>
+            </span>
           ))}
-        </Styles.Labels>
+        </div>
 
         {days.map((day, dayIndex) => (
-          <Styles.Day key={day.toISOString()}>
+          <div key={day.toISOString()} className={Styles.day}>
             {events
               .filter((e) => e.dayIndex === dayIndex)
               .map((event) => (
@@ -78,23 +81,27 @@ export const Calendar = () => {
                   }}
                 />
               ))}
-          </Styles.Day>
+          </div>
         ))}
-        <Styles.Hours style={{ top: DAY_PADDING_TOP }}>
+        <div className={Styles.hours} style={{ top: DAY_PADDING_TOP }}>
           {Array.from({ length: 25 }, (_, k) => (
-            <Styles.Hour value={`${k}h`} key={k} />
+            <span
+              key={k}
+              className={Styles.hour}
+              style={{ "--hour-value": `"${k}h"` } as React.CSSProperties}
+            />
           ))}
-          <Styles.CurrentTime style={{ top: currentTimeTop }}>
+          <div className={Styles.currentTime} style={{ top: currentTimeTop }}>
             <span>{currentTimeLabel}</span>
-          </Styles.CurrentTime>
-        </Styles.Hours>
-      </Styles.Week>
+          </div>
+        </div>
+      </div>
       {ready && events.length === 0 && (
         <Secondary onClick={signIn} style={{ position: "fixed", bottom: 24, right: 24, zIndex: 10 }}>
           Connecter Google Calendar
         </Secondary>
       )}
       <CalendarOptions weekStart={weekStart} navigate={navigate} />
-    </Styles.Container>
+    </div>
   )
 }

@@ -1,0 +1,24 @@
+import { style } from "@vanilla-extract/css"
+
+import { t } from "@tokens"
+
+export const base = style({
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  height: 40,
+  padding: 8,
+  gap: 8,
+  font: t.font.label,
+  borderRadius: 12,
+  cursor: "pointer",
+  appearance: "none",
+})
+
+export const iconBase = style({
+  aspectRatio: "1 / 1",
+})
+
+export const disabledBase = style({
+  cursor: "not-allowed",
+})

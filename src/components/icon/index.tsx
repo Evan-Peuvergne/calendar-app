@@ -1,6 +1,6 @@
 import type { Icons } from "./types"
 
-import * as Styles from "./styles"
+import * as Styles from "./styles.css"
 
 const modules = import.meta.glob<React.FC<React.SVGProps<SVGSVGElement>>>(
   "../../../assets/icons/*.svg",
@@ -28,9 +28,9 @@ export const Icon = (props: IconProps) => {
   const SVG = ICONS[id]
 
   return (
-    <Styles.Container {...rest}>
+    <i className={Styles.container} {...rest}>
       <SVG height="1em" />
-    </Styles.Container>
+    </i>
   )
 }
 

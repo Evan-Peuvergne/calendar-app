@@ -1,5 +1,7 @@
 import type { StorybookConfig } from "@storybook/react-vite"
 import svgr from "vite-plugin-svgr"
+import tsconfigPaths from "vite-tsconfig-paths"
+import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin"
 
 const config: StorybookConfig = {
   stories: ["../src/**/stories.tsx", "../src/**/*.stories.tsx"],
@@ -24,6 +26,8 @@ const config: StorybookConfig = {
   async viteFinal(config) {
     config.plugins = config.plugins ?? []
     config.plugins.push(
+      tsconfigPaths(),
+      vanillaExtractPlugin(),
       svgr({
         svgrOptions: {
           replaceAttrValues: { "#383838": "currentColor" },

@@ -1,10 +1,19 @@
-import React, { useState } from "react"
+import React, { forwardRef, useState } from "react"
+import cn from "classnames"
 import { useFloating, useDismiss } from "@floating-ui/react"
 import { offset, flip, shift } from "@floating-ui/react"
 import { FloatingPortal } from "@floating-ui/react"
 
-import * as Styles from "./styles"
+import * as Styles from "./styles.css"
 import { Option } from "./option"
+
+const Overlay = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div ref={ref} className={cn(Styles.overlay, className)} {...props} />
+  )
+)
+
+const Divider = () => <hr className={Styles.divider} />
 
 import type { AbstractButtonProps } from "@components/button/types"
 
@@ -81,4 +90,4 @@ const DropdownComponent = (props: DropdownProps) => {
   )
 }
 
-export const Dropdown = Object.assign(DropdownComponent, { ...Styles, Option })
+export const Dropdown = Object.assign(DropdownComponent, { Overlay, Divider, Option })

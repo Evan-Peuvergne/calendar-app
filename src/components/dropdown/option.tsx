@@ -1,4 +1,4 @@
-import * as Styles from "./styles"
+import { option } from "./styles.css"
 import { Icon } from "@components/icon"
 
 import type { ButtonIntent } from "@components/button/types"
@@ -13,9 +13,9 @@ export interface DropdownOptionProps {
 
 export const Option = (props: DropdownOptionProps) => {
   return (
-    <Styles.Option intent={props.intent || "neutral"} onClick={props.onClick}>
+    <button className={option({ intent: props.intent || "neutral" })} onClick={props.onClick}>
       {props.children}
       {props.icon && <Icon id={props.icon} />}
-    </Styles.Option>
+    </button>
   )
 }

@@ -1,6 +1,6 @@
-import { useLocation } from "react-router"
+import { useLocation, Link } from "react-router"
 
-import * as Styles from "./styles"
+import * as Styles from "./styles.css"
 import { Icon } from "@components/icon"
 
 import type { Icons } from "@components/icon"
@@ -24,17 +24,17 @@ export const Tab = (props: TabProps) => {
 
   if (props.to) {
     return (
-      <Styles.LinkContainer to={props.to} $active={isActive}>
+      <Link to={props.to} className={Styles.linkContainer({ active: isActive })}>
         {resolvedIcon && <Icon id={resolvedIcon} />}
         {props.children}
-      </Styles.LinkContainer>
+      </Link>
     )
   }
 
   return (
-    <Styles.Container $active={isActive}>
+    <button className={Styles.container({ active: isActive })}>
       {resolvedIcon && <Icon id={resolvedIcon} />}
       {props.children}
-    </Styles.Container>
+    </button>
   )
 }

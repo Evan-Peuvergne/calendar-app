@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-import * as Styles from "./styles"
+import * as Styles from "./styles.css"
 import { Sheet, useSheetStack } from "@components/sheet"
 
 export interface CalendarEventProps {
@@ -22,9 +22,9 @@ export const CalendarEvent = (props: CalendarEventProps) => {
   }
 
   return (
-    <Styles.Container onClick={onClick} active={open} style={props.style}>
-      <Styles.Title>{props.title}</Styles.Title>
-      <Styles.Time>7h50 — 8h30</Styles.Time>
-    </Styles.Container>
+    <div className={Styles.container({ active: open })} onClick={onClick} style={props.style}>
+      <span className={Styles.title}>{props.title}</span>
+      <span className={Styles.time}>7h50 — 8h30</span>
+    </div>
   )
 }

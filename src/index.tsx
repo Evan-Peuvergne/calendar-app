@@ -3,19 +3,20 @@ import ReactDOM from "react-dom/client"
 
 import { BrowserRouter, Routes, Route } from "react-router"
 
-import { Global as GlobalStyles } from "./global.styles"
+import "@tokens"
+import "@common/reset.css"
+import "@common/base.css"
 import { SheetProvider } from "@components/sheet/stack"
 
-import { Navigation } from "@shared/navigation"
-import { Home } from "@pages/home"
-import { Calendar } from "@pages/calendar"
-import { Priorize } from "@pages/priorize"
-import { Notes } from "@pages/notes"
+import { Navigation } from "@common/navigation"
+import { Home } from "@app/home"
+import { Calendar } from "@app/calendar"
+import { Priorize } from "@app/priorize"
+import { Notes } from "@app/notes"
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <>
     <BrowserRouter>
-      <GlobalStyles />
       <Navigation />
       <SheetProvider>
         <Routes>
