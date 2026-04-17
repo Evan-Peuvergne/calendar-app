@@ -28,7 +28,7 @@ const config: StorybookConfig = {
     config.plugins.push(
       tsconfigPaths(),
       wyw({
-        include: ["../src/**/*.{ts,tsx}"],
+        include: ["./src/**/*.{ts,tsx}"],
         babelOptions: {
           presets: ["@babel/preset-typescript", "@babel/preset-react"],
         },

@@ -1,6 +1,6 @@
 import { css } from "@linaria/core"
 
-import { t } from "@tokens"
+import { font } from "@tokens"
 
 export const base = css`
   display: flex;
@@ -9,7 +9,7 @@ export const base = css`
   height: 40px;
   padding: 8px;
   gap: 8px;
-  font: ${t.font.label};
+  font: ${font.label};
   border-radius: 12px;
   cursor: pointer;
   appearance: none;

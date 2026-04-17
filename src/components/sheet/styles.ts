@@ -1,12 +1,12 @@
 import { css, cx } from "@linaria/core"
 
-import { t } from "@tokens"
+import { color, shadow } from "@tokens"
 
 export const title = css`
   font-size: 32px;
   font-weight: 600;
   line-height: 48px;
-  color: ${t.text.base};
+  color: ${color.text.base};
 
   & + * {
     margin-top: 8px;
@@ -14,7 +14,7 @@ export const title = css`
 `
 
 export const subtitle = css`
-  color: ${t.text.light};
+  color: ${color.text.light};
 `
 
 export const header = css`
@@ -28,7 +28,7 @@ export const header = css`
     right: 32px;
     display: block;
     content: "";
-    border-bottom: 1px solid ${t.stroke.base};
+    border-bottom: 1px solid ${color.stroke.base};
   }
 `
 
@@ -53,10 +53,10 @@ const sheetBase = css`
   width: 980px;
   margin: 0 auto;
   overflow: hidden;
-  outline: 1px solid ${t.stroke.base};
+  outline: 1px solid ${color.stroke.base};
   backdrop-filter: blur(8px);
   border-radius: 24px 24px 0 0;
-  box-shadow: ${t.shadow.overlay};
+  box-shadow: ${shadow.overlay};
   transition: background 300ms ease;
 `
 

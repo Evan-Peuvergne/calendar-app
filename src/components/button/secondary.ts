@@ -1,30 +1,30 @@
 import { css, cx } from "@linaria/core"
 
-import { t } from "@tokens"
+import { color } from "@tokens"
 import { base, iconBase, disabledBase } from "./styles"
 
 const buttonBase = css`
-  color: ${t.text.neutral};
+  color: ${color.text.neutral};
   transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
 
   &:hover {
-    background-color: ${t.opacify.hover};
+    background-color: ${color.opacify.hover};
   }
 
   &:active {
-    background-color: ${t.opacify.active};
+    background-color: ${color.opacify.active};
   }
 `
 
-const intentNeutral = css`color: ${t.text.neutral};`
-const intentAction = css`color: ${t.text.action};`
-const intentDanger = css`color: ${t.text.danger};`
+const intentNeutral = css`color: ${color.text.neutral};`
+const intentAction = css`color: ${color.text.action};`
+const intentDanger = css`color: ${color.text.danger};`
 const intentClasses = { neutral: intentNeutral, action: intentAction, danger: intentDanger }
 
-const activeStyle = css`background-color: ${t.opacify.active};`
+const activeStyle = css`background-color: ${color.opacify.active};`
 
 const disabledStyle = css`
-  color: ${t.text.disabled};
+  color: ${color.text.disabled};
   background-color: transparent;
 `
 

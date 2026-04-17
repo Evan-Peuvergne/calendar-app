@@ -19,7 +19,7 @@ const ALIAS = {
   "@components": "./src/components",
   "@layouts": "./src/layouts",
   "@targeting": "./src/targeting",
-  "@tokens": "./src/tokens/index",
+  "@tokens": "./src/tokens",
   "@utils/": "./src/utils/",
   "@utils": "./src/utils/index",
   "@data": "./data",

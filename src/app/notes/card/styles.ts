@@ -1,12 +1,12 @@
 import { css } from "@linaria/core"
 
-import { t } from "@tokens"
+import { color, shadow } from "@tokens"
 
 export const title = css`
   font-size: 20px;
   font-weight: 500;
   line-height: 26px;
-  color: ${t.text.base};
+  color: ${color.text.base};
 `
 
 export const subtitle = css`
@@ -14,7 +14,7 @@ export const subtitle = css`
   margin-top: 8px;
   font-size: 14px;
   line-height: 20px;
-  color: ${t.text.light};
+  color: ${color.text.light};
 `
 
 export const more = css`
@@ -31,7 +31,7 @@ export const moreActive = css`
 
 export const head = css`
   padding: 16px 0;
-  border-bottom: 1px solid ${t.stroke.base};
+  border-bottom: 1px solid ${color.stroke.base};
 `
 
 export const body = css`
@@ -39,7 +39,7 @@ export const body = css`
   font-size: 10px;
   font-weight: 300;
   line-height: 14px;
-  color: ${t.text.neutral};
+  color: ${color.text.neutral};
 
   & p + p {
     margin-top: 6px;
@@ -55,15 +55,15 @@ export const container = css`
   flex: 0 0 auto;
   padding: 0 16px;
   background: rgba(255, 255, 255, 0.88);
-  outline: 1px solid ${t.stroke.base};
+  outline: 1px solid ${color.stroke.base};
   border-radius: 12px;
-  box-shadow: ${t.shadow.block};
+  box-shadow: ${shadow.block};
   overflow: hidden;
   cursor: pointer;
 
   &:hover {
     background: #fbfbfb;
-    outline: 1px solid ${t.stroke.hover};
+    outline: 1px solid ${color.stroke.hover};
   }
 
   &:hover .${more} {

@@ -1,6 +1,6 @@
 import { css, cx } from "@linaria/core"
 
-import { t } from "@tokens"
+import { color, font } from "@tokens"
 
 const base = css`
   display: inline-flex;
@@ -8,9 +8,9 @@ const base = css`
   height: 40px;
   gap: 8px;
   padding: 0 12px;
-  font: ${t.font.label};
+  font: ${font.label};
   font-weight: 600;
-  color: ${t.text.light};
+  color: ${color.text.light};
   border-radius: 12px;
   cursor: pointer;
   user-select: none;
@@ -18,18 +18,18 @@ const base = css`
   appearance: none;
 
   &:hover {
-    color: ${t.text.neutral};
-    background: ${t.opacify.hover};
+    color: ${color.text.neutral};
+    background: ${color.opacify.hover};
   }
 `
 
 const activeStyle = css`
-  color: ${t.text.neutral};
-  background: ${t.opacify.active};
+  color: ${color.text.neutral};
+  background: ${color.opacify.active};
 
   &:hover {
-    color: ${t.text.neutral};
-    background: ${t.opacify.active};
+    color: ${color.text.neutral};
+    background: ${color.opacify.active};
   }
 `
 

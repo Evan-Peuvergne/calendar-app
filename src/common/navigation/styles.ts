@@ -1,12 +1,12 @@
 import { css } from "@linaria/core"
 
-import { t } from "@tokens"
+import { color } from "@tokens"
 import { NAV_HEIGHT } from "./tokens"
 
 export const divider = css`
   width: 1px;
   height: 24px;
-  background: ${t.stroke.base};
+  background: ${color.stroke.base};
   border: none;
   margin: 0;
 `

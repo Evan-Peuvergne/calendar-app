@@ -1,42 +1,42 @@
 import { css, cx } from "@linaria/core"
 
-import { t } from "@tokens"
+import { color, shadow } from "@tokens"
 import { base, iconBase, disabledBase } from "./styles"
 
 const buttonBase = css`
-  color: ${t.text.neutral};
-  background: ${t.fill.base};
-  outline: 1px solid ${t.stroke.base};
-  box-shadow: ${t.shadow.raised};
+  color: ${color.text.neutral};
+  background: ${color.fill.base};
+  outline: 1px solid ${color.stroke.base};
+  box-shadow: ${shadow.raised};
   transition: background 0.2s ease-in-out, outline 0.2s ease-in-out;
 
   &:hover {
-    background: linear-gradient(${t.opacify.hover}, ${t.opacify.hover}), ${t.fill.base};
-    outline: 1px solid ${t.stroke.hover};
+    background: linear-gradient(${color.opacify.hover}, ${color.opacify.hover}), ${color.fill.base};
+    outline: 1px solid ${color.stroke.hover};
   }
 
   &:active {
-    background: linear-gradient(${t.opacify.active}, ${t.opacify.active}), ${t.fill.base};
-    outline: 1px solid ${t.stroke.hover};
+    background: linear-gradient(${color.opacify.active}, ${color.opacify.active}), ${color.fill.base};
+    outline: 1px solid ${color.stroke.hover};
     box-shadow: none;
   }
 `
 
-const intentNeutral = css`color: ${t.text.neutral};`
-const intentAction = css`color: ${t.text.action};`
-const intentDanger = css`color: ${t.text.danger};`
+const intentNeutral = css`color: ${color.text.neutral};`
+const intentAction = css`color: ${color.text.action};`
+const intentDanger = css`color: ${color.text.danger};`
 const intentClasses = { neutral: intentNeutral, action: intentAction, danger: intentDanger }
 
 const activeStyle = css`
-  background: linear-gradient(${t.opacify.active}, ${t.opacify.active}), ${t.fill.base};
-  outline: 1px solid ${t.stroke.hover};
+  background: linear-gradient(${color.opacify.active}, ${color.opacify.active}), ${color.fill.base};
+  outline: 1px solid ${color.stroke.hover};
   box-shadow: none;
 `
 
 const disabledStyle = css`
-  color: ${t.text.disabled};
-  background-color: ${t.fill.disabled};
-  outline: 1px solid ${t.stroke.base};
+  color: ${color.text.disabled};
+  background-color: ${color.fill.disabled};
+  outline: 1px solid ${color.stroke.base};
   box-shadow: none;
 `
 

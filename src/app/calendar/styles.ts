@@ -1,6 +1,6 @@
 import { css, cx } from "@linaria/core"
 
-import { t } from "@tokens"
+import { color, shadow } from "@tokens"
 import { NAV_HEIGHT } from "@common/navigation/tokens"
 import { HOUR_HEIGHT } from "./tokens"
 
@@ -17,14 +17,14 @@ export const options = css`
   transform: translate3d(-50%, 0, 0);
   background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(4px);
-  outline: 1px solid ${t.stroke.base};
-  box-shadow: ${t.shadow.overlay};
+  outline: 1px solid ${color.stroke.base};
+  box-shadow: ${shadow.overlay};
   border-radius: 16px 16px 0 0;
 
   & hr {
     display: block;
     height: 24px;
-    border-right: 1px solid ${t.stroke.base};
+    border-right: 1px solid ${color.stroke.base};
   }
 `
 
@@ -44,7 +44,7 @@ export const hour = css`
     text-align: right;
     font-size: 12px;
     font-weight: 500;
-    color: ${t.text.disabled};
+    color: ${color.text.disabled};
     content: var(--hour-value);
   }
 `
@@ -55,7 +55,7 @@ export const currentTime = css`
   left: 0;
   right: 0;
   border-top: 1px solid;
-  border-image: linear-gradient(to right, transparent 0px, ${t.fill.danger} 64px, ${t.fill.danger} calc(100% - 64px), transparent 100%) 1;
+  border-image: linear-gradient(to right, transparent 0px, ${color.fill.danger} 64px, ${color.fill.danger} calc(100% - 64px), transparent 100%) 1;
 
   & span {
     position: absolute;
@@ -68,8 +68,8 @@ export const currentTime = css`
     align-items: center;
     font-size: 12px;
     font-weight: 500;
-    color: ${t.text.contrast};
-    background: ${t.fill.danger};
+    color: ${color.text.contrast};
+    background: ${color.fill.danger};
     border-radius: 20px;
   }
 `
@@ -91,7 +91,7 @@ const labelBase = css`
   padding: 0 16px;
   font-size: 12px;
   font-weight: 600;
-  color: ${t.text.light};
+  color: ${color.text.light};
   border-radius: 20px;
   background: rgba(248, 248, 248, 0.5);
   backdrop-filter: blur(4px);
@@ -99,7 +99,7 @@ const labelBase = css`
 
 const labelCurrent = css`
   background: rgba(0, 0, 0, 0.16);
-  color: ${t.text.base};
+  color: ${color.text.base};
 `
 
 export const label = ({ current = false } = {}) => cx(labelBase, current && labelCurrent)
@@ -152,13 +152,13 @@ export const week = css`
   &::before {
     top: 0;
     height: 288px;
-    background: linear-gradient(to bottom, ${t.fill.background}, transparent);
+    background: linear-gradient(to bottom, ${color.fill.background}, transparent);
   }
 
   &::after {
     bottom: 0;
     height: 48px;
-    background: linear-gradient(to top, ${t.fill.background}, transparent);
+    background: linear-gradient(to top, ${color.fill.background}, transparent);
   }
 `
 

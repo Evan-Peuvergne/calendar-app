@@ -1,7 +1,7 @@
 import { css, cx } from "@linaria/core"
 import { styled } from "@linaria/react"
 
-import { t } from "@tokens"
+import { color, shadow } from "@tokens"
 import { NAV_HEIGHT } from "@common/navigation/tokens"
 import { HOUR_HEIGHT, EVENT_GAP } from "../tokens"
 
@@ -47,13 +47,13 @@ const containerBase = css`
   &::before {
     inset: -1px;
     border-radius: 13px;
-    background: ${t.stroke.base};
-    box-shadow: ${t.shadow.raised};
+    background: ${color.stroke.base};
+    box-shadow: ${shadow.raised};
   }
 
   &::after {
     inset: 0;
-    background: radial-gradient(126.03% 93.63% at 8.16% 12.64%, rgba(57, 167, 132, 0.08) 0%, rgba(57, 167, 132, 0.04) 100%), ${t.fill.base};
+    background: radial-gradient(126.03% 93.63% at 8.16% 12.64%, rgba(57, 167, 132, 0.08) 0%, rgba(57, 167, 132, 0.04) 100%), ${color.fill.base};
     transition: background 0.2s ease;
   }
 
