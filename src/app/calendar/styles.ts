@@ -33,7 +33,14 @@ export const hour = css`
   height: ${HOUR_HEIGHT}px;
   position: relative;
   border-top: 1px solid;
-  border-image: linear-gradient(to right, transparent 0px, #ececec 64px, #ececec calc(100% - 64px), transparent 100%) 1;
+  border-image: linear-gradient(
+      to right,
+      transparent 0px,
+      #ececec 64px,
+      #ececec calc(100% - 64px),
+      transparent 100%
+    )
+    1;
 
   &::after {
     display: block;
@@ -55,7 +62,14 @@ export const currentTime = css`
   left: 0;
   right: 0;
   border-top: 1px solid;
-  border-image: linear-gradient(to right, transparent 0px, ${color.fill.danger} 64px, ${color.fill.danger} calc(100% - 64px), transparent 100%) 1;
+  border-image: linear-gradient(
+      to right,
+      transparent 0px,
+      ${color.fill.danger} 64px,
+      ${color.fill.danger} calc(100% - 64px),
+      transparent 100%
+    )
+    1;
 
   & span {
     position: absolute;
@@ -102,7 +116,8 @@ const labelCurrent = css`
   color: ${color.text.base};
 `
 
-export const label = ({ current = false } = {}) => cx(labelBase, current && labelCurrent)
+export const label = ({ current = false } = {}) =>
+  cx(labelBase, current && labelCurrent)
 
 export const labels = css`
   display: flex;
@@ -147,12 +162,17 @@ export const week = css`
     left: 0;
     right: 0;
     content: "";
+    pointer-events: none;
   }
 
   &::before {
     top: 0;
     height: 288px;
-    background: linear-gradient(to bottom, ${color.fill.background}, transparent);
+    background: linear-gradient(
+      to bottom,
+      ${color.fill.background},
+      transparent
+    );
   }
 
   &::after {
