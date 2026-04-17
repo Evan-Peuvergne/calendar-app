@@ -7,9 +7,10 @@ import { Secondary } from "@components/button"
 import { HOUR_HEIGHT, LABELS_BAR_HEIGHT, CALENDAR_PADDING } from "./tokens"
 import { NAV_HEIGHT } from "@common/navigation/tokens"
 
-import { getWeekStart, isToday, formatWeekRange } from "./utils"
+import { getWeekStart, isToday, formatWeekRange, getDayIndex } from "./utils"
 import { DAY_NAMES } from "./utils"
 import { useGoogleCalendar } from "./useGoogleCalendar"
+import { computeCalendarLayout } from "./layout"
 
 export const Calendar = () => {
   const [weekStart, setWeekStart] = useState(() => getWeekStart(new Date()))
@@ -63,20 +64,22 @@ export const Calendar = () => {
           ))}
         </div>
 
-        {days.map((day, dayIndex) => (
-          <div key={day.toISOString()} className={Styles.day}>
-            {events
-              .filter((e) => e.dayIndex === dayIndex)
-              .map((event) => (
+        {days.map((day, dayIndex) => {
+          const dayEvents = events.filter(e => getDayIndex(e.start, weekStart) === dayIndex)
+          const positioned = computeCalendarLayout(dayEvents)
+          return (
+            <div key={day.toISOString()} className={Styles.day}>
+              {positioned.map(({ event, position }) => (
                 <CalendarEvent
                   key={event.id}
-                  title={event.title}
-                  startHour={event.startHour}
-                  duration={event.duration}
+                  id={event.id}
+                  metadata={event}
+                  position={position}
                 />
               ))}
-          </div>
-        ))}
+            </div>
+          )
+        })}
         <div className={Styles.hours}>
           {Array.from({ length: 25 }, (_, k) => (
             <span

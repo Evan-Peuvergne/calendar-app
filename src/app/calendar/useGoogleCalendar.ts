@@ -19,12 +19,13 @@ const loadToken = (): string | null => {
   }
 }
 
-export interface GoogleCalendarEvent {
-  dayIndex: number
-  startHour: number
-  duration: number
-  title: string
+export interface CalendarEvent {
   id: string
+  title: string
+  start: Date
+  end: Date
+  description?: string
+  location?: string
 }
 
 declare global {
@@ -44,7 +45,7 @@ declare global {
 }
 
 export function useGoogleCalendar(weekStart: Date) {
-  const [events, setEvents] = useState<GoogleCalendarEvent[]>([])
+  const [events, setEvents] = useState<CalendarEvent[]>([])
   const [loading, setLoading] = useState(false)
   const [ready, setReady] = useState(false)
   const accessTokenRef = useRef<string | null>(null)
@@ -83,29 +84,17 @@ export function useGoogleCalendar(weekStart: Date) {
       const weekMidnight = new Date(week)
       weekMidnight.setHours(0, 0, 0, 0)
 
-      const mapped: GoogleCalendarEvent[] = (data.items ?? [])
+      const mapped: CalendarEvent[] = (data.items ?? [])
         .filter((item: any) => item.start?.dateTime) // ignore all-day events
-        .map((item: any) => {
-          const start = new Date(item.start.dateTime)
-          const end = new Date(item.end.dateTime)
-          const dayIndex = Math.floor((start.getTime() - weekMidnight.getTime()) / 86_400_000)
-          const startHour = start.getHours() + start.getMinutes() / 60
-          const duration = (end.getTime() - start.getTime()) / 3_600_000
-          return {
-            dayIndex,
-            startHour,
-            duration,
-            title: item.summary ?? "(sans titre)",
-            id: item.id,
-          }
-        })
+        .map((item: any) => ({
+          id: item.id,
+          title: item.summary ?? "(sans titre)",
+          start: new Date(item.start.dateTime),
+          end: new Date(item.end.dateTime),
+          description: item.description,
+          location: item.location,
+        }))
 
-      console.table(mapped.map(e => ({
-        title: e.title,
-        dayIndex: e.dayIndex,
-        startHour: e.startHour.toFixed(2),
-        duration: e.duration.toFixed(2),
-      })))
       setEvents(mapped)
     } catch (e) {
       console.error("Google Calendar fetch error", e)

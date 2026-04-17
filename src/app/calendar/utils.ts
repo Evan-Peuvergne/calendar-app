@@ -32,6 +32,15 @@ export const isToday = (date: Date): boolean => {
   )
 }
 
+export const formatHour = (date: Date): string => {
+  const h = date.getHours()
+  const m = date.getMinutes()
+  return m > 0 ? `${h}h${m.toString().padStart(2, "0")}` : `${h}h`
+}
+
+export const getDayIndex = (date: Date, weekStart: Date): number =>
+  Math.floor((date.getTime() - weekStart.getTime()) / 86_400_000)
+
 export const formatWeekRange = (weekStart: Date): string => {
   const end = new Date(weekStart)
   end.setDate(end.getDate() + 6)
