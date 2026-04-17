@@ -1,6 +1,6 @@
 import { useLocation, Link } from "react-router"
 
-import * as Styles from "./styles.css"
+import * as Styles from "./styles"
 import { Icon } from "@components/icon"
 
 import type { Icons } from "@components/icon"

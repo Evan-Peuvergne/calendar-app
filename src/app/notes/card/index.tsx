@@ -1,6 +1,6 @@
 import cn from "classnames"
 
-import * as Styles from "./styles.css"
+import * as Styles from "./styles"
 import { SecondaryIcon } from "@components/button"
 import { Dropdown } from "@components/dropdown"
 import { useSheetStack, Sheet } from "@components/sheet"

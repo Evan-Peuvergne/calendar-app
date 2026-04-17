@@ -1,11 +1,12 @@
 import { useState } from "react"
 
-import * as Styles from "./styles.css"
+import { container, Container, title, time } from "./styles"
 import { Sheet, useSheetStack } from "@components/sheet"
 
 export interface CalendarEventProps {
-  style: React.CSSProperties
   title: string
+  startHour: number
+  duration: number
 }
 
 const EventSheet = () => (
@@ -22,9 +23,14 @@ export const CalendarEvent = (props: CalendarEventProps) => {
   }
 
   return (
-    <div className={Styles.container({ active: open })} onClick={onClick} style={props.style}>
-      <span className={Styles.title}>{props.title}</span>
-      <span className={Styles.time}>7h50 — 8h30</span>
-    </div>
+    <Container
+      startHour={props.startHour}
+      duration={props.duration}
+      className={container({ active: open })}
+      onClick={onClick}
+    >
+      <span className={title}>{props.title}</span>
+      <span className={time}>7h50 — 8h30</span>
+    </Container>
   )
 }

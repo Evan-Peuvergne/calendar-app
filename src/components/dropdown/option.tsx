@@ -1,4 +1,4 @@
-import { option } from "./styles.css"
+import { option } from "./styles"
 import { Icon } from "@components/icon"
 
 import type { ButtonIntent } from "@components/button/types"

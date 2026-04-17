@@ -1,16 +1,14 @@
 import { useState, useEffect } from "react"
 
-import * as Styles from "./styles.css"
+import * as Styles from "./styles"
 import { CalendarEvent } from "./event"
 import { CalendarOptions } from "./options"
 import { Secondary } from "@components/button"
-import { HOUR_HEIGHT, EVENT_GAP } from "./styles.css"
+import { HOUR_HEIGHT } from "./tokens"
 
 import { getWeekStart, isToday, formatWeekRange } from "./utils"
 import { DAY_NAMES } from "./utils"
 import { useGoogleCalendar } from "./useGoogleCalendar"
-
-const DAY_PADDING_TOP = 112 // matches Day padding-top in styles.css.ts
 
 export const Calendar = () => {
   const [weekStart, setWeekStart] = useState(() => getWeekStart(new Date()))
@@ -72,18 +70,13 @@ export const Calendar = () => {
                 <CalendarEvent
                   key={event.id}
                   title={event.title}
-                  style={{
-                    position: "absolute",
-                    top: DAY_PADDING_TOP + event.startHour * HOUR_HEIGHT + EVENT_GAP / 2,
-                    height: event.duration * HOUR_HEIGHT - EVENT_GAP,
-                    left: 4,
-                    right: 4,
-                  }}
+                  startHour={event.startHour}
+                  duration={event.duration}
                 />
               ))}
           </div>
         ))}
-        <div className={Styles.hours} style={{ top: DAY_PADDING_TOP }}>
+        <div className={Styles.hours}>
           {Array.from({ length: 25 }, (_, k) => (
             <span
               key={k}

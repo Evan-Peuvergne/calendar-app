@@ -1,7 +1,7 @@
 import cn from "classnames"
 
-import { container as primaryContainer } from "./primary.css"
-import { container as secondaryContainer } from "./secondary.css"
+import { container as primaryContainer } from "./primary"
+import { container as secondaryContainer } from "./secondary"
 
 import { Icon as IconComponent } from "@components/icon"
 
