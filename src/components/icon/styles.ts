@@ -11,7 +11,7 @@ export const container = css`
   &::before {
     display: inline-block;
     width: 0;
-    content: "\00A0";
+    content: "\\00A0";
     visibility: hidden;
   }
 

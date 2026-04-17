@@ -29,7 +29,7 @@ export const Icon = (props: IconProps) => {
 
   return (
     <i className={Styles.container} {...rest}>
-      <SVG height="1em" />
+      <SVG height="1em" overflow="visible" />
     </i>
   )
 }
