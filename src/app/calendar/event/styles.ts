@@ -2,8 +2,7 @@ import { css, cx } from "@linaria/core"
 import { styled } from "@linaria/react"
 
 import { color, shadow } from "@tokens"
-import { NAV_HEIGHT } from "@common/navigation/tokens"
-import { HOUR_HEIGHT, EVENT_GAP } from "../tokens"
+import { HOUR_HEIGHT, EVENT_GAP, CALENDAR_PADDING } from "../tokens"
 
 export const time = css`
   display: block;
@@ -75,7 +74,7 @@ const containerActive = css`
 `
 
 export const Container = styled.div<{ startHour: number; duration: number }>`
-  top: ${({ startHour }) => NAV_HEIGHT + startHour * HOUR_HEIGHT + EVENT_GAP / 2}px;
+  top: ${({ startHour }) => CALENDAR_PADDING + startHour * HOUR_HEIGHT + EVENT_GAP / 2}px;
   height: ${({ duration }) => duration * HOUR_HEIGHT - EVENT_GAP}px;
 `
 

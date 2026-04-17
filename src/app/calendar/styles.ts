@@ -2,7 +2,7 @@ import { css, cx } from "@linaria/core"
 
 import { color, shadow } from "@tokens"
 import { NAV_HEIGHT } from "@common/navigation/tokens"
-import { HOUR_HEIGHT } from "./tokens"
+import { HOUR_HEIGHT, LABELS_BAR_HEIGHT, CALENDAR_PADDING } from "./tokens"
 
 export const options = css`
   display: flex;
@@ -91,7 +91,7 @@ export const currentTime = css`
 export const hours = css`
   display: block;
   position: absolute;
-  top: ${NAV_HEIGHT}px;
+  top: ${CALENDAR_PADDING}px;
   left: 0;
   width: 100%;
   z-index: -1;
@@ -124,7 +124,7 @@ export const labels = css`
   justify-content: space-around;
   width: 100%;
   position: fixed;
-  top: 120px;
+  top: ${NAV_HEIGHT + 8}px;
   left: 0;
   padding: 0 64px;
   z-index: 100;
@@ -145,7 +145,7 @@ export const day = css`
 export const week = css`
   display: flex;
   padding: 0 64px;
-  height: ${HOUR_HEIGHT * 24}px;
+  height: ${CALENDAR_PADDING * 2 + HOUR_HEIGHT * 24}px;
   position: relative;
 
   & .${day} {
@@ -157,7 +157,7 @@ export const week = css`
   &::before,
   &::after {
     display: block;
-    position: fixed;
+    position: absolute;
     z-index: 2;
     left: 0;
     right: 0;
@@ -167,22 +167,26 @@ export const week = css`
 
   &::before {
     top: 0;
-    height: 288px;
+    height: ${CALENDAR_PADDING}px;
     background: linear-gradient(
       to bottom,
-      ${color.fill.background},
-      transparent
+      ${color.fill.background} 0%,
+      transparent 88%
     );
   }
 
   &::after {
     bottom: 0;
-    height: 48px;
-    background: linear-gradient(to top, ${color.fill.background}, transparent);
+    height: ${CALENDAR_PADDING}px;
+    background: linear-gradient(
+      to top,
+      ${color.fill.background} 0%,
+      transparent 88%
+    );
   }
 `
 
 export const container = css`
   min-height: 100vh;
-  padding-top: ${NAV_HEIGHT}px;
+  padding-top: ${NAV_HEIGHT + LABELS_BAR_HEIGHT}px;
 `

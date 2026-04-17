@@ -4,7 +4,8 @@ import * as Styles from "./styles"
 import { CalendarEvent } from "./event"
 import { CalendarOptions } from "./options"
 import { Secondary } from "@components/button"
-import { HOUR_HEIGHT } from "./tokens"
+import { HOUR_HEIGHT, LABELS_BAR_HEIGHT, CALENDAR_PADDING } from "./tokens"
+import { NAV_HEIGHT } from "@common/navigation/tokens"
 
 import { getWeekStart, isToday, formatWeekRange } from "./utils"
 import { DAY_NAMES } from "./utils"
@@ -45,7 +46,7 @@ export const Calendar = () => {
   const currentTimeLabel = `${now.getHours()}:${now.getMinutes().toString().padStart(2, "0")}`
 
   useEffect(() => {
-    window.scrollTo(0, currentTimeTop - window.innerHeight / 2)
+    window.scrollTo(0, NAV_HEIGHT + LABELS_BAR_HEIGHT + CALENDAR_PADDING + currentTimeTop - window.innerHeight / 2)
   }, [])
 
   return (
