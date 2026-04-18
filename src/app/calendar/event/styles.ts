@@ -2,11 +2,34 @@ import { css, cx } from "@linaria/core"
 import { styled } from "@linaria/react"
 
 import { color, shadow } from "@tokens"
+
+// Defined before containerBase so they can be referenced via ${} interpolation
+
 export const time = css`
   display: block;
+  margin-top: 2px;
   font-size: 14px;
   line-height: 20px;
   color: rgba(15, 15, 15, 0.48);
+  flex-shrink: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`
+
+export const timeEnd = css`
+  /* hidden in tier 1 */
+`
+
+export const eventLocation = css`
+  display: none;
+  font-size: 14px;
+  line-height: 20px;
+  color: rgba(15, 15, 15, 0.48);
+  flex-shrink: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `
 
 export const title = css`
@@ -15,10 +38,13 @@ export const title = css`
   line-height: 20px;
   font-weight: 500;
   color: #246a54;
+`
 
-  & + .${time} {
-    margin-top: 2px;
-  }
+export const inner = css`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
 `
 
 const containerBase = css`
@@ -82,6 +108,51 @@ const containerBase = css`
         rgba(57, 167, 132, 0.04) 100%
       ),
       #f8f8f8;
+  }
+
+  /* Tier 1 — compact horizontal (< 48px)
+     No vertical padding, content centered, title + start time on one line */
+  &[data-tier="1"] {
+    padding: 0 12px;
+  }
+  &[data-tier="1"] .${inner} {
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+  }
+  &[data-tier="1"] .${title} {
+    flex: 1 0 0;
+    min-width: 1px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  &[data-tier="1"] .${title} + .${time} {
+    margin-top: 0;
+  }
+  &[data-tier="1"] .${timeEnd} {
+    display: none;
+  }
+
+  /* Tier 2 — vertical, title on 1 line (48–85px) */
+  &[data-tier="2"] .${title} {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Tier 3 — vertical, title up to 2 lines (≥ 86px) */
+  &[data-tier="3"] .${title} {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Location — shown only when data-show-location is present */
+  &[data-show-location] .${eventLocation} {
+    display: block;
+    margin-top: 2px;
   }
 `
 
