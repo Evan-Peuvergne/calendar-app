@@ -17,7 +17,7 @@ export const title = css`
   color: #246a54;
 
   & + .${time} {
-    margin-top: 4px;
+    margin-top: 2px;
   }
 `
 
@@ -27,7 +27,13 @@ const containerBase = css`
   z-index: 3;
   padding: 12px;
   border-radius: 12px;
-  background: radial-gradient(126.03% 93.63% at 8.16% 12.64%, rgba(57, 167, 132, 0.08) 0%, rgba(57, 167, 132, 0.04) 100%), var(--colors-lightlucent-70, rgba(255, 255, 255, 0.78));
+  background:
+    radial-gradient(
+      126.03% 93.63% at 8.16% 12.64%,
+      rgba(57, 167, 132, 0.08) 0%,
+      rgba(57, 167, 132, 0.04) 100%
+    ),
+    var(--colors-lightlucent-70, rgba(255, 255, 255, 0.78));
   cursor: pointer;
 
   &::before,
@@ -48,16 +54,34 @@ const containerBase = css`
 
   &::after {
     inset: 0;
-    background: radial-gradient(126.03% 93.63% at 8.16% 12.64%, rgba(57, 167, 132, 0.08) 0%, rgba(57, 167, 132, 0.04) 100%), ${color.fill.base};
+    background:
+      radial-gradient(
+        126.03% 93.63% at 8.16% 12.64%,
+        rgba(57, 167, 132, 0.08) 0%,
+        rgba(57, 167, 132, 0.04) 100%
+      ),
+      ${color.fill.base};
     transition: background 0.2s ease;
   }
 
   &:hover::before {
-    background: radial-gradient(126.03% 93.63% at 8.16% 12.64%, rgb(51, 103, 86, 0.8) 0%, rgba(43, 87, 73, 0.4) 100%), var(--colors-lightlucent-70, rgba(255, 255, 255, 0.78));
+    background:
+      radial-gradient(
+        126.03% 93.63% at 8.16% 12.64%,
+        rgb(51, 103, 86, 0.8) 0%,
+        rgba(43, 87, 73, 0.4) 100%
+      ),
+      var(--colors-lightlucent-70, rgba(255, 255, 255, 0.78));
   }
 
   &:hover::after {
-    background: radial-gradient(126.03% 93.63% at 8.16% 12.64%, rgba(57, 167, 132, 0.08) 0%, rgba(57, 167, 132, 0.04) 100%), #f8f8f8;
+    background:
+      radial-gradient(
+        126.03% 93.63% at 8.16% 12.64%,
+        rgba(57, 167, 132, 0.08) 0%,
+        rgba(57, 167, 132, 0.04) 100%
+      ),
+      #f8f8f8;
   }
 `
 
@@ -65,10 +89,17 @@ const containerActive = css`
   &::before {
     inset: -2px;
     border-radius: 14px;
-    background: radial-gradient(126.03% 93.63% at 8.16% 12.64%, rgb(51, 103, 86, 0.8) 0%, rgba(43, 87, 73, 0.4) 100%), var(--colors-lightlucent-70, rgba(255, 255, 255, 0.78));
+    background:
+      radial-gradient(
+        126.03% 93.63% at 8.16% 12.64%,
+        rgb(51, 103, 86, 0.8) 0%,
+        rgba(43, 87, 73, 0.4) 100%
+      ),
+      var(--colors-lightlucent-70, rgba(255, 255, 255, 0.78));
   }
 `
 
 export const Container = styled.div``
 
-export const container = ({ active = false } = {}) => cx(containerBase, active && containerActive)
+export const container = ({ active = false } = {}) =>
+  cx(containerBase, active && containerActive)

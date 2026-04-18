@@ -131,7 +131,6 @@ export const labels = css`
 `
 
 export const day = css`
-  padding-top: ${NAV_HEIGHT}px;
   padding-left: 4px;
   padding-right: 4px;
   position: relative;
