@@ -20,6 +20,9 @@ const AVATAR_COLORS = [
   "#4cac8a",
 ]
 
+const hashOffset = (s: string) =>
+  Math.abs(s.split("").reduce((acc, c) => (acc * 31 + c.charCodeAt(0)) | 0, 0)) % AVATAR_COLORS.length
+
 export interface CalendarEventProps {
   id: string
   metadata: CalendarEventData
@@ -103,7 +106,7 @@ export const CalendarEvent = ({
         )}
         {showAvatarGroup && (
           <div className={avatarWrapper}>
-            <AvatarGroup colors={AVATAR_COLORS} limit={5}>
+            <AvatarGroup colors={[...AVATAR_COLORS.slice(hashOffset(id)), ...AVATAR_COLORS.slice(0, hashOffset(id))]} limit={5}>
               {avatarAttendees.map(attendee => (
                 <Avatar key={attendee.email} src={attendee.photoUrl}>
                   {getInitials(attendee)}
