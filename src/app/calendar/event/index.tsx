@@ -33,7 +33,7 @@ const EventSheet = () => (
 const getInitials = (attendee: Attendee): string => {
   if (attendee.displayName) {
     const parts = attendee.displayName.trim().split(/\s+/)
-    return (parts[0][0] + (parts.length > 1 ? parts[parts.length - 1][0] : "")).toUpperCase()
+    return parts[0][0].toUpperCase()
   }
   return attendee.email[0].toUpperCase()
 }
