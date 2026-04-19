@@ -145,12 +145,11 @@ const containerBase = css`
     text-overflow: ellipsis;
   }
 
-  /* Tier 3 — vertical, title up to 2 lines (≥ 86px adjusted) */
+  /* Tier 3 — vertical, title on 1 line */
   &[data-tier="3"] .${title} {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
+    white-space: nowrap;
     overflow: hidden;
+    text-overflow: ellipsis;
   }
 
 `
