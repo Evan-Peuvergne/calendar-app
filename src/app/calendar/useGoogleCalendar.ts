@@ -1,7 +1,10 @@
 import { useState, useEffect, useRef } from "react"
 
 const CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID
-const SCOPE = "https://www.googleapis.com/auth/calendar.readonly"
+const SCOPE = [
+  "https://www.googleapis.com/auth/calendar.readonly",
+  "https://www.googleapis.com/auth/contacts.readonly",
+].join(" ")
 const STORAGE_KEY = "gcal_token"
 
 const saveToken = (token: string) => {
@@ -19,12 +22,21 @@ const loadToken = (): string | null => {
   }
 }
 
-export interface GoogleCalendarEvent {
-  dayIndex: number
-  startHour: number
-  duration: number
-  title: string
+export interface Attendee {
+  email: string
+  displayName?: string
+  self: boolean
+  photoUrl?: string
+}
+
+export interface CalendarEvent {
   id: string
+  title: string
+  start: Date
+  end: Date
+  description?: string
+  location?: string
+  attendees?: Attendee[]
 }
 
 declare global {
@@ -44,7 +56,7 @@ declare global {
 }
 
 export function useGoogleCalendar(weekStart: Date) {
-  const [events, setEvents] = useState<GoogleCalendarEvent[]>([])
+  const [events, setEvents] = useState<CalendarEvent[]>([])
   const [loading, setLoading] = useState(false)
   const [ready, setReady] = useState(false)
   const accessTokenRef = useRef<string | null>(null)
@@ -57,6 +69,50 @@ export function useGoogleCalendar(weekStart: Date) {
     refreshTimerRef.current = setTimeout(() => {
       tokenClientRef.current?.requestAccessToken({ prompt: "" })
     }, 50 * 60 * 1000) // refresh silently after 50min, before the 1h expiry
+  }
+
+  const photoCache = useRef<Map<string, string | null>>(new Map())
+
+  const fetchAttendeePhotos = async (token: string, events: CalendarEvent[]) => {
+    const emails = [
+      ...new Set(
+        events
+          .flatMap(e => e.attendees ?? [])
+          .filter(a => !a.self && !photoCache.current.has(a.email))
+          .map(a => a.email)
+      ),
+    ]
+    if (emails.length === 0) return
+
+    await Promise.all(
+      emails.map(async (email) => {
+        try {
+          const url = new URL("https://people.googleapis.com/v1/people:searchContacts")
+          url.searchParams.set("query", email)
+          url.searchParams.set("readMask", "photos,emailAddresses")
+          url.searchParams.set("pageSize", "1")
+          const res = await fetch(url.toString(), {
+            headers: { Authorization: `Bearer ${token}` },
+          })
+          const data = await res.json()
+          const photo = data.results?.[0]?.person?.photos?.[0]
+          const photoUrl: string | undefined = photo && !photo.default ? photo.url : undefined
+          photoCache.current.set(email, photoUrl ?? null)
+        } catch {
+          photoCache.current.set(email, null)
+        }
+      })
+    )
+
+    setEvents(prev =>
+      prev.map(event => ({
+        ...event,
+        attendees: event.attendees?.map(a => ({
+          ...a,
+          photoUrl: photoCache.current.get(a.email) ?? undefined,
+        })),
+      }))
+    )
   }
 
   const fetchEvents = async (token: string, week: Date) => {
@@ -83,30 +139,24 @@ export function useGoogleCalendar(weekStart: Date) {
       const weekMidnight = new Date(week)
       weekMidnight.setHours(0, 0, 0, 0)
 
-      const mapped: GoogleCalendarEvent[] = (data.items ?? [])
+      const mapped: CalendarEvent[] = (data.items ?? [])
         .filter((item: any) => item.start?.dateTime) // ignore all-day events
-        .map((item: any) => {
-          const start = new Date(item.start.dateTime)
-          const end = new Date(item.end.dateTime)
-          const dayIndex = Math.floor((start.getTime() - weekMidnight.getTime()) / 86_400_000)
-          const startHour = start.getHours() + start.getMinutes() / 60
-          const duration = (end.getTime() - start.getTime()) / 3_600_000
-          return {
-            dayIndex,
-            startHour,
-            duration,
-            title: item.summary ?? "(sans titre)",
-            id: item.id,
-          }
-        })
+        .map((item: any) => ({
+          id: item.id,
+          title: item.summary ?? "(sans titre)",
+          start: new Date(item.start.dateTime),
+          end: new Date(item.end.dateTime),
+          description: item.description,
+          location: item.location,
+          attendees: (item.attendees ?? []).map((a: any): Attendee => ({
+            email: a.email,
+            displayName: a.displayName,
+            self: !!a.self,
+          })),
+        }))
 
-      console.table(mapped.map(e => ({
-        title: e.title,
-        dayIndex: e.dayIndex,
-        startHour: e.startHour.toFixed(2),
-        duration: e.duration.toFixed(2),
-      })))
       setEvents(mapped)
+      fetchAttendeePhotos(token, mapped)
     } catch (e) {
       console.error("Google Calendar fetch error", e)
     }

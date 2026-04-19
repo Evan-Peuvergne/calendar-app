@@ -22,7 +22,7 @@
       "@components/*": ["./src/components/*"],
       "@layouts/*": ["./src/layouts/*"],
       "@targeting/*": ["./src/targeting/*"],
-      "@tokens": ["./src/tokens/index.css"],
+      "@tokens": ["./src/tokens"],
       "@utils/*": ["./src/utils/*"],
       "@utils": ["./src/utils/index"],
       "@data/*": ["./data/*"],

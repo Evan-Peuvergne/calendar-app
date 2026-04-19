@@ -1,16 +1,16 @@
 import { useState, useEffect } from "react"
 
-import * as Styles from "./styles.css"
+import * as Styles from "./styles"
 import { CalendarEvent } from "./event"
 import { CalendarOptions } from "./options"
 import { Secondary } from "@components/button"
-import { HOUR_HEIGHT, EVENT_GAP } from "./styles.css"
+import { HOUR_HEIGHT, LABELS_BAR_HEIGHT, CALENDAR_PADDING } from "./tokens"
+import { NAV_HEIGHT } from "@common/navigation/tokens"
 
-import { getWeekStart, isToday, formatWeekRange } from "./utils"
+import { getWeekStart, isToday, formatWeekRange, getDayIndex } from "./utils"
 import { DAY_NAMES } from "./utils"
 import { useGoogleCalendar } from "./useGoogleCalendar"
-
-const DAY_PADDING_TOP = 112 // matches Day padding-top in styles.css.ts
+import { computeCalendarLayout } from "./layout"
 
 export const Calendar = () => {
   const [weekStart, setWeekStart] = useState(() => getWeekStart(new Date()))
@@ -47,7 +47,7 @@ export const Calendar = () => {
   const currentTimeLabel = `${now.getHours()}:${now.getMinutes().toString().padStart(2, "0")}`
 
   useEffect(() => {
-    window.scrollTo(0, currentTimeTop - window.innerHeight / 2)
+    window.scrollTo(0, NAV_HEIGHT + LABELS_BAR_HEIGHT + CALENDAR_PADDING + currentTimeTop - window.innerHeight / 2)
   }, [])
 
   return (
@@ -64,26 +64,23 @@ export const Calendar = () => {
           ))}
         </div>
 
-        {days.map((day, dayIndex) => (
-          <div key={day.toISOString()} className={Styles.day}>
-            {events
-              .filter((e) => e.dayIndex === dayIndex)
-              .map((event) => (
+        {days.map((day, dayIndex) => {
+          const dayEvents = events.filter(e => getDayIndex(e.start, weekStart) === dayIndex)
+          const positioned = computeCalendarLayout(dayEvents)
+          return (
+            <div key={day.toISOString()} className={Styles.day}>
+              {positioned.map(({ event, position }) => (
                 <CalendarEvent
                   key={event.id}
-                  title={event.title}
-                  style={{
-                    position: "absolute",
-                    top: DAY_PADDING_TOP + event.startHour * HOUR_HEIGHT + EVENT_GAP / 2,
-                    height: event.duration * HOUR_HEIGHT - EVENT_GAP,
-                    left: 4,
-                    right: 4,
-                  }}
+                  id={event.id}
+                  metadata={event}
+                  position={position}
                 />
               ))}
-          </div>
-        ))}
-        <div className={Styles.hours} style={{ top: DAY_PADDING_TOP }}>
+            </div>
+          )
+        })}
+        <div className={Styles.hours}>
           {Array.from({ length: 25 }, (_, k) => (
             <span
               key={k}

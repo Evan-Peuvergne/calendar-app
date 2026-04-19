@@ -1,4 +1,4 @@
-import * as Styles from "./styles.css"
+import * as Styles from "./styles"
 import { Secondary, SecondaryIcon } from "@components/button"
 import { formatWeekRange } from "./utils"
 

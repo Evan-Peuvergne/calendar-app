@@ -3,7 +3,6 @@ import ReactDOM from "react-dom/client"
 
 import { BrowserRouter, Routes, Route } from "react-router"
 
-import "@tokens"
 import "@common/reset.css"
 import "@common/base.css"
 import { SheetProvider } from "@components/sheet/stack"

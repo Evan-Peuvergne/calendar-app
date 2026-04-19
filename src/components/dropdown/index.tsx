@@ -4,7 +4,7 @@ import { useFloating, useDismiss } from "@floating-ui/react"
 import { offset, flip, shift } from "@floating-ui/react"
 import { FloatingPortal } from "@floating-ui/react"
 
-import * as Styles from "./styles.css"
+import * as Styles from "./styles"
 import { Option } from "./option"
 
 const Overlay = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(

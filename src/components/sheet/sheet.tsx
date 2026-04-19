@@ -3,7 +3,7 @@ import cn from "classnames"
 import { motion } from "motion/react"
 
 import { SheetContext } from "./context"
-import * as Styles from "./styles.css"
+import * as Styles from "./styles"
 
 import { SecondaryIcon } from "@components/button"
 

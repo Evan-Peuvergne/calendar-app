@@ -1,4 +1,4 @@
-import * as Styles from "./styles.css"
+import * as Styles from "./styles"
 import { Tab } from "@components/tab"
 import { PrimaryIcon, SecondaryIcon } from "@components/button"
 

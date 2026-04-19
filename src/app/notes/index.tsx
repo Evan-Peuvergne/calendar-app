@@ -1,4 +1,4 @@
-import * as Styles from "./styles.css"
+import * as Styles from "./styles"
 import { Card } from "./card"
 
 export const Notes = () => (
