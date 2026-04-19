@@ -95,7 +95,8 @@ export function useGoogleCalendar(weekStart: Date) {
             headers: { Authorization: `Bearer ${token}` },
           })
           const data = await res.json()
-          const photoUrl: string | undefined = data.results?.[0]?.person?.photos?.[0]?.url
+          const photo = data.results?.[0]?.person?.photos?.[0]
+          const photoUrl: string | undefined = photo && !photo.default ? photo.url : undefined
           photoCache.current.set(email, photoUrl ?? null)
         } catch {
           photoCache.current.set(email, null)
