@@ -1,10 +1,12 @@
 import { useState } from "react"
 
-import { container, Container, inner, title, time, timeEnd, eventLocation } from "./styles"
+import { container, Container, inner, title, time, timeEnd, eventLocation, avatarWrapper } from "./styles"
 import { Sheet, useSheetStack } from "@components/sheet"
+import { Avatar } from "@components/avatar"
+import { AvatarGroup } from "@components/avatar/group"
 import { formatHour } from "../utils"
 import { EVENT_GAP } from "../tokens"
-import type { CalendarEvent as CalendarEventData } from "../useGoogleCalendar"
+import type { CalendarEvent as CalendarEventData, Attendee } from "../useGoogleCalendar"
 import type { EventPosition } from "../layout"
 
 export interface CalendarEventProps {
@@ -16,6 +18,14 @@ export interface CalendarEventProps {
 const EventSheet = () => (
   <Sheet style={{ padding: 24, height: 320 }}>Hello world</Sheet>
 )
+
+const getInitials = (attendee: Attendee): string => {
+  if (attendee.displayName) {
+    const parts = attendee.displayName.trim().split(/\s+/)
+    return (parts[0][0] + (parts.length > 1 ? parts[parts.length - 1][0] : "")).toUpperCase()
+  }
+  return attendee.email[0].toUpperCase()
+}
 
 export const CalendarEvent = ({
   id,
@@ -32,14 +42,30 @@ export const CalendarEvent = ({
 
   const { top, height, left, width } = position
 
-  const tier = height < 48 ? 1 : height < 86 ? 2 : 3
-  const showLocation = tier === 3 && height >= 108 && !!metadata.location
+  // Avatar group: shown when there's room for title (20px) + gap (12px) + avatars (16px)
+  // meaning the card needs at least 72px (48px content + 24px padding)
+  const avatarAttendees = (metadata.attendees ?? []).filter(a => !a.self)
+  const showAvatarGroup = avatarAttendees.length > 0 && height >= 72
+
+  // Avatar space reserves 16px (avatars) + 12px (gap) at the bottom
+  const avatarSpace = showAvatarGroup ? 28 : 0
+
+  // Tier is based on the effective layout height after subtracting avatar space
+  const layoutHeight = height - avatarSpace
+  const tier = layoutHeight < 48 ? 1 : layoutHeight < 86 ? 2 : 3
+
+  // Text content area: card height minus padding (24px) and avatar space
+  const textArea = height - 24 - avatarSpace
+
+  // Time and location visibility (priority: title > avatarGroup > time > location)
+  const showTime = tier >= 2 && textArea >= 42   // title (20) + time (20 + 2 margin) = 42
+  const showLocation = tier === 3 && !!metadata.location && textArea >= 64  // + location (22)
 
   return (
     <Container
       className={container({ active: open })}
       data-tier={tier}
-      data-show-location={showLocation || undefined}
+      data-show-avatars={showAvatarGroup || undefined}
       style={{
         top,
         height,
@@ -50,11 +76,31 @@ export const CalendarEvent = ({
     >
       <div className={inner}>
         <span className={title}>{metadata.title}</span>
-        <span className={time}>
-          {formatHour(metadata.start)}
-          <span className={timeEnd}> — {formatHour(metadata.end)}</span>
-        </span>
-        {metadata.location && <span className={eventLocation}>{metadata.location}</span>}
+
+        {tier === 1 ? (
+          // Horizontal layout: start time only, no dash
+          <span className={time}>{formatHour(metadata.start)}</span>
+        ) : showTime ? (
+          <span className={time}>
+            {formatHour(metadata.start)}
+            <span className={timeEnd}> — {formatHour(metadata.end)}</span>
+          </span>
+        ) : null}
+
+        {showLocation && (
+          <span className={eventLocation}>{metadata.location}</span>
+        )}
+        {showAvatarGroup && (
+          <div className={avatarWrapper}>
+            <AvatarGroup>
+              {avatarAttendees.map(attendee => (
+                <Avatar key={attendee.email} src={attendee.photoUrl}>
+                  {getInitials(attendee)}
+                </Avatar>
+              ))}
+            </AvatarGroup>
+          </div>
+        )}
       </div>
     </Container>
   )

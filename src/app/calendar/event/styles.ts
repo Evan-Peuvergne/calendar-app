@@ -3,7 +3,7 @@ import { styled } from "@linaria/react"
 
 import { color, shadow } from "@tokens"
 
-// Defined before containerBase so they can be referenced via ${} interpolation
+// All classes defined before containerBase so they can be referenced via ${} interpolation
 
 export const time = css`
   display: block;
@@ -18,11 +18,12 @@ export const time = css`
 `
 
 export const timeEnd = css`
-  /* hidden in tier 1 */
+  /* hidden in tier 1 via conditional rendering, always visible when rendered */
 `
 
 export const eventLocation = css`
-  display: none;
+  display: block;
+  margin-top: 2px;
   font-size: 14px;
   line-height: 20px;
   color: rgba(15, 15, 15, 0.48);
@@ -41,10 +42,16 @@ export const title = css`
 `
 
 export const inner = css`
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   height: 100%;
   overflow: hidden;
+`
+
+export const avatarWrapper = css`
+  margin-top: auto;
+  padding-top: 12px;
 `
 
 const containerBase = css`
@@ -127,21 +134,18 @@ const containerBase = css`
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  &[data-tier="1"] .${title} + .${time} {
+  &[data-tier="1"] .${time} {
     margin-top: 0;
   }
-  &[data-tier="1"] .${timeEnd} {
-    display: none;
-  }
 
-  /* Tier 2 — vertical, title on 1 line (48–85px) */
+  /* Tier 2 — vertical, title on 1 line (48–85px adjusted) */
   &[data-tier="2"] .${title} {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
-  /* Tier 3 — vertical, title up to 2 lines (≥ 86px) */
+  /* Tier 3 — vertical, title up to 2 lines (≥ 86px adjusted) */
   &[data-tier="3"] .${title} {
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -149,11 +153,6 @@ const containerBase = css`
     overflow: hidden;
   }
 
-  /* Location — shown only when data-show-location is present */
-  &[data-show-location] .${eventLocation} {
-    display: block;
-    margin-top: 2px;
-  }
 `
 
 const containerActive = css`

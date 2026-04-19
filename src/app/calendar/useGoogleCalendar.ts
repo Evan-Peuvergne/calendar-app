@@ -1,7 +1,10 @@
 import { useState, useEffect, useRef } from "react"
 
 const CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID
-const SCOPE = "https://www.googleapis.com/auth/calendar.readonly"
+const SCOPE = [
+  "https://www.googleapis.com/auth/calendar.readonly",
+  "https://www.googleapis.com/auth/contacts.readonly",
+].join(" ")
 const STORAGE_KEY = "gcal_token"
 
 const saveToken = (token: string) => {
@@ -19,6 +22,13 @@ const loadToken = (): string | null => {
   }
 }
 
+export interface Attendee {
+  email: string
+  displayName?: string
+  self: boolean
+  photoUrl?: string
+}
+
 export interface CalendarEvent {
   id: string
   title: string
@@ -26,6 +36,7 @@ export interface CalendarEvent {
   end: Date
   description?: string
   location?: string
+  attendees?: Attendee[]
 }
 
 declare global {
@@ -58,6 +69,49 @@ export function useGoogleCalendar(weekStart: Date) {
     refreshTimerRef.current = setTimeout(() => {
       tokenClientRef.current?.requestAccessToken({ prompt: "" })
     }, 50 * 60 * 1000) // refresh silently after 50min, before the 1h expiry
+  }
+
+  const photoCache = useRef<Map<string, string | null>>(new Map())
+
+  const fetchAttendeePhotos = async (token: string, events: CalendarEvent[]) => {
+    const emails = [
+      ...new Set(
+        events
+          .flatMap(e => e.attendees ?? [])
+          .filter(a => !a.self && !photoCache.current.has(a.email))
+          .map(a => a.email)
+      ),
+    ]
+    if (emails.length === 0) return
+
+    await Promise.all(
+      emails.map(async (email) => {
+        try {
+          const url = new URL("https://people.googleapis.com/v1/people:searchContacts")
+          url.searchParams.set("query", email)
+          url.searchParams.set("readMask", "photos,emailAddresses")
+          url.searchParams.set("pageSize", "1")
+          const res = await fetch(url.toString(), {
+            headers: { Authorization: `Bearer ${token}` },
+          })
+          const data = await res.json()
+          const photoUrl: string | undefined = data.results?.[0]?.person?.photos?.[0]?.url
+          photoCache.current.set(email, photoUrl ?? null)
+        } catch {
+          photoCache.current.set(email, null)
+        }
+      })
+    )
+
+    setEvents(prev =>
+      prev.map(event => ({
+        ...event,
+        attendees: event.attendees?.map(a => ({
+          ...a,
+          photoUrl: photoCache.current.get(a.email) ?? undefined,
+        })),
+      }))
+    )
   }
 
   const fetchEvents = async (token: string, week: Date) => {
@@ -93,9 +147,15 @@ export function useGoogleCalendar(weekStart: Date) {
           end: new Date(item.end.dateTime),
           description: item.description,
           location: item.location,
+          attendees: (item.attendees ?? []).map((a: any): Attendee => ({
+            email: a.email,
+            displayName: a.displayName,
+            self: !!a.self,
+          })),
         }))
 
       setEvents(mapped)
+      fetchAttendeePhotos(token, mapped)
     } catch (e) {
       console.error("Google Calendar fetch error", e)
     }
