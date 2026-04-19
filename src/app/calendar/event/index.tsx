@@ -9,6 +9,17 @@ import { EVENT_GAP } from "../tokens"
 import type { CalendarEvent as CalendarEventData, Attendee } from "../useGoogleCalendar"
 import type { EventPosition } from "../layout"
 
+const AVATAR_COLORS = [
+  "#246a54",
+  "#2d8c6e",
+  "#39a784",
+  "#64be9b",
+  "#124837",
+  "#0c3426",
+  "#1a5c44",
+  "#4cac8a",
+]
+
 export interface CalendarEventProps {
   id: string
   metadata: CalendarEventData
@@ -92,7 +103,7 @@ export const CalendarEvent = ({
         )}
         {showAvatarGroup && (
           <div className={avatarWrapper}>
-            <AvatarGroup>
+            <AvatarGroup colors={AVATAR_COLORS} limit={5}>
               {avatarAttendees.map(attendee => (
                 <Avatar key={attendee.email} src={attendee.photoUrl}>
                   {getInitials(attendee)}

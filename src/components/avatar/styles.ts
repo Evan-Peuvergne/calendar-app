@@ -19,10 +19,11 @@ export const Initials = styled.span`
   align-items: center;
   justify-content: center;
   font-size: 0.5em;
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1;
   letter-spacing: 0.02em;
   color: ${color.text.neutral};
+  transform: translateX(var(--avatar-initials-offset, 0));
 `
 
 export const Image = styled.img`
