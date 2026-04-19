@@ -56,10 +56,13 @@ export const CalendarEvent = ({
 
   const { top, height, left, width } = position
 
+  // Avatar limit based on column width: 1 event = 5, 2 events (~50%) = 3, 3+ events (~33%) = hidden
+  const avatarLimit = width > 60 ? 5 : width > 40 ? 3 : 0
+
   // Avatar group: shown when there's room for title (20px) + gap (12px) + avatars (16px)
   // meaning the card needs at least 72px (48px content + 24px padding)
   const avatarAttendees = (metadata.attendees ?? []).filter(a => !a.self)
-  const showAvatarGroup = avatarAttendees.length > 0 && height >= 72
+  const showAvatarGroup = avatarAttendees.length > 0 && height >= 72 && avatarLimit > 0
 
   // Avatar space reserves 16px (avatars) + 12px (gap) at the bottom
   const avatarSpace = showAvatarGroup ? 28 : 0
@@ -106,7 +109,7 @@ export const CalendarEvent = ({
         )}
         {showAvatarGroup && (
           <div className={avatarWrapper}>
-            <AvatarGroup colors={[...AVATAR_COLORS.slice(hashOffset(id)), ...AVATAR_COLORS.slice(0, hashOffset(id))]} limit={5}>
+            <AvatarGroup colors={[...AVATAR_COLORS.slice(hashOffset(id)), ...AVATAR_COLORS.slice(0, hashOffset(id))]} limit={avatarLimit}>
               {avatarAttendees.map(attendee => (
                 <Avatar key={attendee.email} src={attendee.photoUrl}>
                   {getInitials(attendee)}
