@@ -11,7 +11,7 @@ export function useScrollSticky(
   eventHeight: number,
   enabled: boolean,
 ): {
-  contentRef: RefObject<HTMLDivElement>
+  contentRef: RefObject<HTMLDivElement | null>
   offset: MotionValue<number>
 } {
   const contentRef = useRef<HTMLDivElement>(null)
