@@ -81,7 +81,7 @@ export const CalendarEvent = ({
   const showLocation = tier === 3 && !!metadata.location && textArea >= 64  // + location (22)
 
   const isLongEvent = metadata.end.getTime() - metadata.start.getTime() >= 2 * 60 * 60 * 1000
-  const { contentRef, springOffset } = useScrollSticky(top, height, isLongEvent)
+  const { contentRef, offset } = useScrollSticky(top, height, isLongEvent)
 
   const eventContent = (
     <>
@@ -129,7 +129,7 @@ export const CalendarEvent = ({
     >
       <div className={inner}>
         {isLongEvent ? (
-          <motion.div ref={contentRef} style={{ y: springOffset }}>
+          <motion.div ref={contentRef} style={{ y: offset }}>
             {eventContent}
           </motion.div>
         ) : eventContent}
