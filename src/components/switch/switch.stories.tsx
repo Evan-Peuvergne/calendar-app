@@ -17,3 +17,12 @@ const SwitchStory = ({ checked: controlledChecked }: { checked: boolean }) => {
 export const Default: StoryObj = {
   render: (args) => <SwitchStory checked={args.checked} />,
 }
+
+const ControlledSwitch = () => {
+  const [checked, setChecked] = useState(false)
+  return <Switch checked={checked} onChange={setChecked} />
+}
+
+export const Controlled: StoryObj = {
+  render: () => <ControlledSwitch />,
+}
