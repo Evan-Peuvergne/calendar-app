@@ -6,7 +6,7 @@ import { base } from "@components/button/styles"
 const optionBase = css`
   color: ${color.text.neutral};
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding-right: 16px;
   font-weight: 500;
   border-radius: 8px;
@@ -23,7 +23,7 @@ const optionBase = css`
   & i {
     width: 16px;
     margin-right: -4px;
-    margin-left: 16px;
+    margin-left: auto;
     justify-content: center;
   }
 `
@@ -52,4 +52,5 @@ export const overlay = css`
   border-radius: 12px;
   box-shadow: ${shadow.overlay};
   backdrop-filter: blur(4px);
+  z-index: 1000;
 `

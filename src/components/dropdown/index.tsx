@@ -45,6 +45,7 @@ const DropdownComponent = (props: DropdownProps) => {
   const { refs, floatingStyles, context } = useFloating({
     open,
     onOpenChange: setOpen,
+    strategy: "fixed",
     placement: "bottom-start",
     middleware: [
       offset(({ placement }) => ({

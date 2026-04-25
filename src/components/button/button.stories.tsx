@@ -21,3 +21,7 @@ export default {
 export const Primary = {
   render: (args: any) => <Button.Primary {...args} />,
 }
+
+export const Secondary = {
+  render: (args: any) => <Button.Secondary {...args} />,
+}
