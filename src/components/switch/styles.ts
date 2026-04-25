@@ -7,6 +7,8 @@ export const Container = styled.span`
   height: 14px;
   border-radius: 10px;
   background-color: rgba(15, 15, 15, 0.12);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 
   &[data-checked="true"] {
     background-color: #0968ac;
@@ -23,6 +25,7 @@ export const Container = styled.span`
     background: #fff;
     box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.08);
     border-radius: 100px;
+    transition: transform 0.2s ease;
   }
   &[data-checked="true"]::after {
     transform: translate3d(10px, 0, 0);
