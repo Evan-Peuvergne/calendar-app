@@ -3,11 +3,13 @@ import type { Meta, StoryObj } from "@storybook/react-vite"
 import { Switch } from "./"
 import { Secondary as SecondaryButton } from "@components/button"
 
+type Args = { checked: boolean }
+
 export default {
   title: "Switch",
   args: { checked: false },
   argTypes: { checked: { control: "boolean" } },
-} satisfies Meta
+} satisfies Meta<Args>
 
 const SwitchStory = ({ checked: controlledChecked }: { checked: boolean }) => {
   const [checked, setChecked] = useState(controlledChecked)
@@ -15,7 +17,7 @@ const SwitchStory = ({ checked: controlledChecked }: { checked: boolean }) => {
   return <Switch checked={checked} onChange={setChecked} />
 }
 
-export const Default: StoryObj = {
+export const Default: StoryObj<Args> = {
   render: (args) => <SwitchStory checked={args.checked} />,
 }
 
