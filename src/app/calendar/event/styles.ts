@@ -50,8 +50,7 @@ export const inner = css`
 `
 
 export const avatarWrapper = css`
-  margin-top: auto;
-  padding-top: 12px;
+  margin-top: 16px;
 `
 
 const containerBase = css`

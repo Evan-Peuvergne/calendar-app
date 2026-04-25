@@ -64,8 +64,8 @@ export const CalendarEvent = ({
   const avatarAttendees = (metadata.attendees ?? []).filter(a => !a.self)
   const showAvatarGroup = avatarAttendees.length > 0 && height >= 72 && avatarLimit > 0
 
-  // Avatar space reserves 16px (avatars) + 12px (gap) at the bottom
-  const avatarSpace = showAvatarGroup ? 28 : 0
+  // Avatar space reserves 16px (avatars) + 16px (gap from content above)
+  const avatarSpace = showAvatarGroup ? 32 : 0
 
   // Tier is based on the effective layout height after subtracting avatar space
   const layoutHeight = height - avatarSpace
