@@ -1,6 +1,6 @@
 import { styled } from "@linaria/react"
 
-export const Container = styled.span`
+export const Thumb = styled.span`
   position: relative;
   display: inline-block;
   width: 30px;

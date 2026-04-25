@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import { Switch } from "./"
+import { Secondary as SecondaryButton } from "@components/button"
 
 export default {
   title: "Switch",
@@ -25,4 +26,17 @@ const ControlledSwitch = () => {
 
 export const Controlled: StoryObj = {
   render: () => <ControlledSwitch />,
+}
+
+const ButtonSwitch = () => {
+  const [checked, setChecked] = useState(false)
+  return (
+    <Switch checked={checked} onChange={setChecked} as={SecondaryButton}>
+      Dark mode
+    </Switch>
+  )
+}
+
+export const AsButton: StoryObj = {
+  render: () => <ButtonSwitch />,
 }
