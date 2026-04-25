@@ -1,6 +1,8 @@
 import { useState } from "react"
+import { motion } from "motion/react"
 
 import { container, Container, inner, title, time, timeEnd, eventLocation, avatarWrapper } from "./styles"
+import { useScrollSticky } from "./useScrollSticky"
 import { Sheet, useSheetStack } from "@components/sheet"
 import { Avatar } from "@components/avatar"
 import { AvatarGroup } from "@components/avatar/group"
@@ -78,6 +80,40 @@ export const CalendarEvent = ({
   const showTime = tier >= 2 && textArea >= 42   // title (20) + time (20 + 2 margin) = 42
   const showLocation = tier === 3 && !!metadata.location && textArea >= 64  // + location (22)
 
+  const isLongEvent = metadata.end.getTime() - metadata.start.getTime() >= 2 * 60 * 60 * 1000
+  const { contentRef, springOffset } = useScrollSticky(top, height, isLongEvent)
+
+  const eventContent = (
+    <>
+      <span className={title}>{metadata.title}</span>
+
+      {tier === 1 ? (
+        // Horizontal layout: start time only, no dash
+        <span className={time}>{formatHour(metadata.start)}</span>
+      ) : showTime ? (
+        <span className={time}>
+          {formatHour(metadata.start)}
+          <span className={timeEnd}> — {formatHour(metadata.end)}</span>
+        </span>
+      ) : null}
+
+      {showLocation && (
+        <span className={eventLocation}>{metadata.location}</span>
+      )}
+      {showAvatarGroup && (
+        <div className={avatarWrapper}>
+          <AvatarGroup colors={[...AVATAR_COLORS.slice(hashOffset(id)), ...AVATAR_COLORS.slice(0, hashOffset(id))]} limit={avatarLimit}>
+            {avatarAttendees.map(attendee => (
+              <Avatar key={attendee.email} src={attendee.photoUrl}>
+                {getInitials(attendee)}
+              </Avatar>
+            ))}
+          </AvatarGroup>
+        </div>
+      )}
+    </>
+  )
+
   return (
     <Container
       className={container({ active: open })}
@@ -92,32 +128,11 @@ export const CalendarEvent = ({
       onClick={onClick}
     >
       <div className={inner}>
-        <span className={title}>{metadata.title}</span>
-
-        {tier === 1 ? (
-          // Horizontal layout: start time only, no dash
-          <span className={time}>{formatHour(metadata.start)}</span>
-        ) : showTime ? (
-          <span className={time}>
-            {formatHour(metadata.start)}
-            <span className={timeEnd}> — {formatHour(metadata.end)}</span>
-          </span>
-        ) : null}
-
-        {showLocation && (
-          <span className={eventLocation}>{metadata.location}</span>
-        )}
-        {showAvatarGroup && (
-          <div className={avatarWrapper}>
-            <AvatarGroup colors={[...AVATAR_COLORS.slice(hashOffset(id)), ...AVATAR_COLORS.slice(0, hashOffset(id))]} limit={avatarLimit}>
-              {avatarAttendees.map(attendee => (
-                <Avatar key={attendee.email} src={attendee.photoUrl}>
-                  {getInitials(attendee)}
-                </Avatar>
-              ))}
-            </AvatarGroup>
-          </div>
-        )}
+        {isLongEvent ? (
+          <motion.div ref={contentRef} style={{ y: springOffset }}>
+            {eventContent}
+          </motion.div>
+        ) : eventContent}
       </div>
     </Container>
   )
