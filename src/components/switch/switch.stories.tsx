@@ -1,0 +1,19 @@
+import { useState, useEffect } from "react"
+import type { Meta, StoryObj } from "@storybook/react-vite"
+import { Switch } from "./"
+
+export default {
+  title: "Switch",
+  args: { checked: false },
+  argTypes: { checked: { control: "boolean" } },
+} satisfies Meta
+
+const SwitchStory = ({ checked: controlledChecked }: { checked: boolean }) => {
+  const [checked, setChecked] = useState(controlledChecked)
+  useEffect(() => setChecked(controlledChecked), [controlledChecked])
+  return <Switch checked={checked} onChange={setChecked} />
+}
+
+export const Default: StoryObj = {
+  render: (args) => <SwitchStory checked={args.checked} />,
+}
