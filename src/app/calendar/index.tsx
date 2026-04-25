@@ -15,7 +15,11 @@ import { computeCalendarLayout } from "./layout"
 export const Calendar = () => {
   const [weekStart, setWeekStart] = useState(() => getWeekStart(new Date()))
   const [now, setNow] = useState(new Date())
-  const [weekends, setWeekends] = useState(false)
+  const [weekends, setWeekends] = useState(() => localStorage.getItem("calendar:weekends") === "true")
+
+  useEffect(() => {
+    localStorage.setItem("calendar:weekends", String(weekends))
+  }, [weekends])
 
   useEffect(() => {
     const id = setInterval(() => setNow(new Date()), 60_000)
