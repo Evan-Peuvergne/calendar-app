@@ -8,11 +8,12 @@ import { formatWeekRange } from "./utils"
 export interface CalendarOptionsProps {
   weekStart: Date
   navigate: (date: Date) => void
+  weekends: boolean
+  onWeekendsChange: (value: boolean) => void
 }
 
-export const CalendarOptions = ({ weekStart, navigate }: CalendarOptionsProps) => {
-  const [weekends, setWeekends] = useState(true)
-  const [declinedEvents, setDeclinedEvents] = useState(true)
+export const CalendarOptions = ({ weekStart, navigate, weekends, onWeekendsChange }: CalendarOptionsProps) => {
+  const [declinedEvents, setDeclinedEvents] = useState(false)
   const [completedTasks, setCompletedTasks] = useState(false)
 
   return (
@@ -28,7 +29,7 @@ export const CalendarOptions = ({ weekStart, navigate }: CalendarOptionsProps) =
       <Dropdown button={<SecondaryIcon icon="more" />}>
         {(ref, style, close) => (
           <Dropdown.Overlay ref={ref as React.Ref<HTMLDivElement>} style={style}>
-            <Switch as={Dropdown.Option} checked={weekends} onChange={setWeekends}>
+            <Switch as={Dropdown.Option} checked={weekends} onChange={onWeekendsChange}>
               View week-ends
             </Switch>
             <Switch as={Dropdown.Option} checked={declinedEvents} onChange={setDeclinedEvents}>

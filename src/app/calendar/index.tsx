@@ -15,6 +15,7 @@ import { computeCalendarLayout } from "./layout"
 export const Calendar = () => {
   const [weekStart, setWeekStart] = useState(() => getWeekStart(new Date()))
   const [now, setNow] = useState(new Date())
+  const [weekends, setWeekends] = useState(false)
 
   useEffect(() => {
     const id = setInterval(() => setNow(new Date()), 60_000)
@@ -40,7 +41,7 @@ export const Calendar = () => {
     const d = new Date(weekStart)
     d.setDate(d.getDate() + i)
     return d
-  })
+  }).filter((d) => weekends || (d.getDay() !== 0 && d.getDay() !== 6))
 
   const { events, ready, signIn } = useGoogleCalendar(weekStart)
   const currentTimeTop = (now.getHours() + now.getMinutes() / 60) * HOUR_HEIGHT
@@ -98,7 +99,7 @@ export const Calendar = () => {
           Connecter Google Calendar
         </Secondary>
       )}
-      <CalendarOptions weekStart={weekStart} navigate={navigate} />
+      <CalendarOptions weekStart={weekStart} navigate={navigate} weekends={weekends} onWeekendsChange={setWeekends} />
     </div>
   )
 }
