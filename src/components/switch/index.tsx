@@ -8,5 +8,5 @@ export interface SwitchProps {
 }
 
 export const Switch = (props: SwitchProps) => {
-  return <Styles.Container className={props.className} style={props.style} />
+  return <Styles.Container data-checked={props.checked} className={props.className} style={props.style} />
 }
