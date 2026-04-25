@@ -27,6 +27,7 @@ const ControlledSwitch = () => {
 }
 
 export const Controlled: StoryObj = {
+  argTypes: { checked: { control: false } },
   render: () => <ControlledSwitch />,
 }
 
@@ -40,5 +41,6 @@ const ButtonSwitch = () => {
 }
 
 export const AsButton: StoryObj = {
+  argTypes: { checked: { control: false } },
   render: () => <ButtonSwitch />,
 }
