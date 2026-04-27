@@ -1,7 +1,6 @@
 import type { StorybookConfig } from "@storybook/react-vite"
 import svgr from "vite-plugin-svgr"
 import tsconfigPaths from "vite-tsconfig-paths"
-import wyw from "@wyw-in-js/vite"
 
 const config: StorybookConfig = {
   stories: ["../src/**/stories.tsx", "../src/**/*.stories.tsx"],
@@ -27,12 +26,6 @@ const config: StorybookConfig = {
     config.plugins = config.plugins ?? []
     config.plugins.push(
       tsconfigPaths(),
-      wyw({
-        include: ["./src/**/*.{ts,tsx}"],
-        babelOptions: {
-          presets: ["@babel/preset-typescript", "@babel/preset-react"],
-        },
-      }),
       svgr({
         svgrOptions: {
           replaceAttrValues: { "#383838": "currentColor" },

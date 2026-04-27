@@ -73,7 +73,7 @@ export const Calendar = () => {
           const dayEvents = events.filter(e => getDayIndex(e.start, weekStart) === dayIndex)
           const positioned = computeCalendarLayout(dayEvents)
           return (
-            <div key={day.toISOString()} className={Styles.day}>
+            <div key={day.toISOString()} className={Styles.day} data-day="">
               {positioned.map(({ event, position }) => (
                 <CalendarEvent
                   key={event.id}

@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { motion } from "motion/react"
 
-import { container, Container, inner, title, time, timeEnd, eventLocation, avatarWrapper } from "./styles"
+import { container, inner, title, time, timeEnd, eventLocation, avatarWrapper } from "./styles"
 import { useScrollSticky } from "./useScrollSticky"
 import { Sheet, useSheetStack } from "@components/sheet"
 import { Avatar } from "@components/avatar"
@@ -85,13 +85,12 @@ export const CalendarEvent = ({
 
   const eventContent = (
     <>
-      <span className={title}>{metadata.title}</span>
+      <span className={title} data-title="">{metadata.title}</span>
 
       {tier === 1 ? (
-        // Horizontal layout: start time only, no dash
-        <span className={time}>{formatHour(metadata.start)}</span>
+        <span className={time} data-time="">{formatHour(metadata.start)}</span>
       ) : showTime ? (
-        <span className={time}>
+        <span className={time} data-time="">
           {formatHour(metadata.start)}
           <span className={timeEnd}> — {formatHour(metadata.end)}</span>
         </span>
@@ -115,7 +114,7 @@ export const CalendarEvent = ({
   )
 
   return (
-    <Container
+    <div
       className={container({ active: open })}
       data-tier={tier}
       data-show-avatars={showAvatarGroup || undefined}
@@ -127,13 +126,13 @@ export const CalendarEvent = ({
       }}
       onClick={onClick}
     >
-      <div className={inner}>
+      <div className={inner} data-inner="">
         {isLongEvent ? (
           <motion.div ref={contentRef} style={{ y: offset }}>
             {eventContent}
           </motion.div>
         ) : eventContent}
       </div>
-    </Container>
+    </div>
   )
 }

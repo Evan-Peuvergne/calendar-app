@@ -3,6 +3,8 @@ import ReactDOM from "react-dom/client"
 
 import { BrowserRouter, Routes, Route } from "react-router"
 
+import "./panda.css"
+import "@common/design-tokens.css"
 import "@common/reset.css"
 import "@common/base.css"
 import { SheetProvider } from "@components/sheet/stack"

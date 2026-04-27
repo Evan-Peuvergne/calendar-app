@@ -13,7 +13,7 @@ export interface SwitchProps {
 export const Switch = ({ as: Tag = "span", children, checked, onChange, className, style }: SwitchProps) => {
   return (
     <Tag onClick={() => onChange(!checked)} className={className} style={style}>
-      <Styles.Thumb data-checked={checked} />
+      <span className={Styles.thumb} data-checked={checked} />
       {children}
     </Tag>
   )

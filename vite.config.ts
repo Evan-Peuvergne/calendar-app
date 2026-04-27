@@ -3,7 +3,6 @@ import { fileURLToPath, URL } from "node:url"
 
 import react from "@vitejs/plugin-react"
 import svgr from "vite-plugin-svgr"
-import wyw from "@wyw-in-js/vite"
 import tsconfigPaths from "vite-tsconfig-paths"
 
 function objectMap(object, mapFn) {
@@ -29,12 +28,6 @@ export default defineConfig({
   base: "",
   plugins: [
     tsconfigPaths(),
-    wyw({
-      include: ["./src/**/*.{ts,tsx}"],
-      babelOptions: {
-        presets: ["@babel/preset-typescript", "@babel/preset-react"],
-      },
-    }),
     svgr({
       svgrOptions: {
         replaceAttrValues: {

@@ -26,8 +26,9 @@
       "@utils/*": ["./src/utils/*"],
       "@utils": ["./src/utils/index"],
       "@data/*": ["./data/*"],
-      "@data": ["./data/index"]
+      "@data": ["./data/index"],
+      "styled-system/*": ["./styled-system/*"]
     }
   },
-  "include": ["src", "data"]
+  "include": ["src", "data", "styled-system"]
 }

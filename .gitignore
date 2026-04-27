@@ -13,6 +13,9 @@
 /build
 /dist
 
+# panda css
+/styled-system
+
 # misc
 .DS_Store
 .env.local

@@ -9,9 +9,6 @@
   "dependencies": {
     "@floating-ui/react": "^0.26.28",
     "@floating-ui/react-dom": "^2.1.2",
-    "@linaria/babel-preset": "^5.0.4",
-    "@linaria/core": "^7.0.0",
-    "@linaria/react": "^7.0.1",
     "@react-router/node": "^7.6.2",
     "@react-router/serve": "^7.6.2",
     "@react-spring/web": "^10.0.1",
@@ -35,7 +32,8 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "prepare": "panda codegen --silent",
+    "build": "panda codegen --silent && tsc && vite build",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006 --ci",
     "build-storybook": "storybook build",
@@ -61,10 +59,9 @@
     ]
   },
   "devDependencies": {
-    "@babel/preset-react": "^7.28.5",
-    "@babel/preset-typescript": "^7.28.5",
     "@chromatic-com/storybook": "^5.0.2",
     "@faker-js/faker": "^8.4.1",
+    "@pandacss/dev": "^1.10.0",
     "@react-router/dev": "^7.6.2",
     "@storybook/addon-docs": "^10.3.3",
     "@storybook/addon-links": "^10.3.3",
@@ -74,7 +71,6 @@
     "@types/node": "^20.19.27",
     "@types/uuid": "^11.0.0",
     "@vitejs/plugin-react": "^4.4.1",
-    "@wyw-in-js/vite": "^1.0.8",
     "prettier": "^3.8.1",
     "sass": "^1.87.0",
     "storybook": "^10.3.3",

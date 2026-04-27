@@ -1,4 +1,6 @@
-import { Root, Initials, Image } from "./styles"
+import cn from "classnames"
+
+import { root, initials, image } from "./styles"
 
 export interface AvatarProps {
   src?: string
@@ -8,12 +10,12 @@ export interface AvatarProps {
 }
 
 export const Avatar = ({ src, children, className, color }: AvatarProps) => (
-  <Root className={className} style={color ? { backgroundColor: color } : undefined}>
+  <div className={cn(root, className)} style={color ? { backgroundColor: color } : undefined}>
     {children && (
-      <Initials style={color ? { color: "white" } : undefined}>
+      <span className={initials} style={color ? { color: "white" } : undefined}>
         {children}
-      </Initials>
+      </span>
     )}
-    {src && <Image src={src} alt={children ?? ""} />}
-  </Root>
+    {src && <img className={image} src={src} alt={children ?? ""} />}
+  </div>
 )

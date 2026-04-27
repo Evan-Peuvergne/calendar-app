@@ -1,173 +1,132 @@
-import { css, cx } from "@linaria/core"
-import { styled } from "@linaria/react"
+import { css, cx } from "styled-system/css"
 
-import { color, shadow } from "@tokens"
+export const time = css({
+  display: "block",
+  marginTop: "2px",
+  fontSize: "14px",
+  lineHeight: "20px",
+  color: "rgba(15, 15, 15, 0.48)",
+  flexShrink: "0",
+  whiteSpace: "nowrap",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+})
 
-// All classes defined before containerBase so they can be referenced via ${} interpolation
+export const timeEnd = ""
 
-export const time = css`
-  display: block;
-  margin-top: 2px;
-  font-size: 14px;
-  line-height: 20px;
-  color: rgba(15, 15, 15, 0.48);
-  flex-shrink: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-`
+export const eventLocation = css({
+  display: "block",
+  marginTop: "2px",
+  fontSize: "14px",
+  lineHeight: "20px",
+  color: "rgba(15, 15, 15, 0.48)",
+  flexShrink: "0",
+  whiteSpace: "nowrap",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+})
 
-export const timeEnd = css`
-  /* hidden in tier 1 via conditional rendering, always visible when rendered */
-`
+export const title = css({
+  display: "block",
+  fontSize: "16px",
+  lineHeight: "20px",
+  fontWeight: "500",
+  color: "#246a54",
+})
 
-export const eventLocation = css`
-  display: block;
-  margin-top: 2px;
-  font-size: 14px;
-  line-height: 20px;
-  color: rgba(15, 15, 15, 0.48);
-  flex-shrink: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-`
+export const inner = css({
+  boxSizing: "border-box",
+  display: "flex",
+  flexDirection: "column",
+  height: "100%",
+  overflow: "hidden",
+})
 
-export const title = css`
-  display: block;
-  font-size: 16px;
-  line-height: 20px;
-  font-weight: 500;
-  color: #246a54;
-`
+export const avatarWrapper = css({
+  marginTop: "16px",
+})
 
-export const inner = css`
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  overflow: hidden;
-`
-
-export const avatarWrapper = css`
-  margin-top: 16px;
-`
-
-const containerBase = css`
-  display: block;
-  position: absolute;
-  z-index: 3;
-  padding: 12px;
-  border-radius: 12px;
+const containerBase = css({
+  display: "block",
+  position: "absolute",
+  zIndex: 3,
+  padding: "12px",
+  borderRadius: "12px",
   background:
-    radial-gradient(
-      126.03% 93.63% at 8.16% 12.64%,
-      rgba(57, 167, 132, 0.08) 0%,
-      rgba(57, 167, 132, 0.04) 100%
-    ),
-    var(--colors-lightlucent-70, rgba(255, 255, 255, 0.78));
-  cursor: pointer;
+    "radial-gradient(126.03% 93.63% at 8.16% 12.64%, rgba(57, 167, 132, 0.08) 0%, rgba(57, 167, 132, 0.04) 100%), var(--colors-lightlucent-70, rgba(255, 255, 255, 0.78))",
+  cursor: "pointer",
 
-  &::before,
-  &::after {
-    display: block;
-    position: absolute;
-    z-index: -1;
-    content: "";
-    border-radius: 12px;
-  }
+  "&::before, &::after": {
+    display: "block",
+    position: "absolute",
+    zIndex: -1,
+    content: '""',
+    borderRadius: "12px",
+  },
 
-  &::before {
-    inset: -1px;
-    border-radius: 13px;
-    background: ${color.stroke.base};
-    box-shadow: ${shadow.raised};
-  }
+  "&::before": {
+    inset: "-1px",
+    borderRadius: "13px",
+    background: "var(--color-stroke-base)",
+    boxShadow: "var(--shadow-raised)",
+  },
 
-  &::after {
-    inset: 0;
+  "&::after": {
+    inset: "0",
+    background: "radial-gradient(126.03% 93.63% at 8.16% 12.64%, rgba(57, 167, 132, 0.08) 0%, rgba(57, 167, 132, 0.04) 100%), var(--color-fill-base)",
+    transition: "background 0.2s ease",
+  },
+
+  "&:hover::before": {
     background:
-      radial-gradient(
-        126.03% 93.63% at 8.16% 12.64%,
-        rgba(57, 167, 132, 0.08) 0%,
-        rgba(57, 167, 132, 0.04) 100%
-      ),
-      ${color.fill.base};
-    transition: background 0.2s ease;
-  }
+      "radial-gradient(126.03% 93.63% at 8.16% 12.64%, rgb(51, 103, 86, 0.8) 0%, rgba(43, 87, 73, 0.4) 100%), var(--colors-lightlucent-70, rgba(255, 255, 255, 0.78))",
+  },
 
-  &:hover::before {
+  "&:hover::after": {
     background:
-      radial-gradient(
-        126.03% 93.63% at 8.16% 12.64%,
-        rgb(51, 103, 86, 0.8) 0%,
-        rgba(43, 87, 73, 0.4) 100%
-      ),
-      var(--colors-lightlucent-70, rgba(255, 255, 255, 0.78));
-  }
+      "radial-gradient(126.03% 93.63% at 8.16% 12.64%, rgba(57, 167, 132, 0.08) 0%, rgba(57, 167, 132, 0.04) 100%), #f8f8f8",
+  },
 
-  &:hover::after {
+  '&[data-tier="1"]': {
+    padding: "0 12px",
+  },
+  '&[data-tier="1"] [data-inner]': {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: "8px",
+  },
+  '&[data-tier="1"] [data-title]': {
+    flex: "1 0 0",
+    minWidth: "1px",
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+  },
+  '&[data-tier="1"] [data-time]': {
+    marginTop: "0",
+  },
+
+  '&[data-tier="2"] [data-title]': {
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+  },
+
+  '&[data-tier="3"] [data-title]': {
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+  },
+})
+
+const containerActive = css({
+  "&::before": {
+    inset: "-2px",
+    borderRadius: "14px",
     background:
-      radial-gradient(
-        126.03% 93.63% at 8.16% 12.64%,
-        rgba(57, 167, 132, 0.08) 0%,
-        rgba(57, 167, 132, 0.04) 100%
-      ),
-      #f8f8f8;
-  }
-
-  /* Tier 1 — compact horizontal (< 48px)
-     No vertical padding, content centered, title + start time on one line */
-  &[data-tier="1"] {
-    padding: 0 12px;
-  }
-  &[data-tier="1"] .${inner} {
-    flex-direction: row;
-    align-items: center;
-    gap: 8px;
-  }
-  &[data-tier="1"] .${title} {
-    flex: 1 0 0;
-    min-width: 1px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  &[data-tier="1"] .${time} {
-    margin-top: 0;
-  }
-
-  /* Tier 2 — vertical, title on 1 line (48–85px adjusted) */
-  &[data-tier="2"] .${title} {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  /* Tier 3 — vertical, title on 1 line */
-  &[data-tier="3"] .${title} {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-`
-
-const containerActive = css`
-  &::before {
-    inset: -2px;
-    border-radius: 14px;
-    background:
-      radial-gradient(
-        126.03% 93.63% at 8.16% 12.64%,
-        rgb(51, 103, 86, 0.8) 0%,
-        rgba(43, 87, 73, 0.4) 100%
-      ),
-      var(--colors-lightlucent-70, rgba(255, 255, 255, 0.78));
-  }
-`
-
-export const Container = styled.div``
+      "radial-gradient(126.03% 93.63% at 8.16% 12.64%, rgb(51, 103, 86, 0.8) 0%, rgba(43, 87, 73, 0.4) 100%), var(--colors-lightlucent-70, rgba(255, 255, 255, 0.78))",
+  },
+})
 
 export const container = ({ active = false } = {}) =>
   cx(containerBase, active && containerActive)

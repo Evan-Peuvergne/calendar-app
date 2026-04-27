@@ -1,24 +1,22 @@
-import { css } from "@linaria/core"
+import { css } from "styled-system/css"
 
-import { font } from "@tokens"
+export const base = css({
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  height: "40px",
+  padding: "8px",
+  gap: "8px",
+  font: "var(--font-label)",
+  borderRadius: "12px",
+  cursor: "pointer",
+  appearance: "none",
+})
 
-export const base = css`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 40px;
-  padding: 8px;
-  gap: 8px;
-  font: ${font.label};
-  border-radius: 12px;
-  cursor: pointer;
-  appearance: none;
-`
+export const iconBase = css({
+  aspectRatio: "1 / 1",
+})
 
-export const iconBase = css`
-  aspect-ratio: 1 / 1;
-`
-
-export const disabledBase = css`
-  cursor: not-allowed;
-`
+export const disabledBase = css({
+  cursor: "not-allowed",
+})
