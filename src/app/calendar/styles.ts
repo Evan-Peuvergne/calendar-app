@@ -3,7 +3,7 @@ import { css, cx } from "styled-system/css"
 export const options = css({
   display: "flex",
   alignItems: "center",
-  padding: "0 8",
+  padding: "0 8px",
   gap: "8",
   position: "fixed",
   zIndex: 5,
