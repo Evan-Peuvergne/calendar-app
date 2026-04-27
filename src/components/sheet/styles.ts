@@ -4,7 +4,7 @@ export const title = css({
   fontSize: "32px",
   fontWeight: "600",
   lineHeight: "48px",
-  color: "var(--color-text-base)",
+  color: "text.base",
 
   "& + *": {
     marginTop: "8px",
@@ -12,7 +12,7 @@ export const title = css({
 })
 
 export const subtitle = css({
-  color: "var(--color-text-light)",
+  color: "text.light",
 })
 
 export const header = css({
@@ -26,7 +26,7 @@ export const header = css({
     right: "32px",
     display: "block",
     content: '""',
-    borderBottom: "1px solid var(--color-stroke-base)",
+    borderBottom: "1px solid {colors.stroke.base}",
   },
 })
 
@@ -51,10 +51,10 @@ const sheetBase = css({
   width: "980px",
   margin: "0 auto",
   overflow: "hidden",
-  outline: "1px solid var(--color-stroke-base)",
+  outline: "1px solid {colors.stroke.base}",
   backdropFilter: "blur(8px)",
   borderRadius: "24px 24px 0 0",
-  boxShadow: "var(--shadow-overlay)",
+  boxShadow: "overlay",
   transition: "background 300ms ease",
 })
 

@@ -4,7 +4,7 @@ export const title = css({
   fontSize: "20px",
   fontWeight: "500",
   lineHeight: "26px",
-  color: "var(--color-text-base)",
+  color: "text.base",
 })
 
 export const subtitle = css({
@@ -12,7 +12,7 @@ export const subtitle = css({
   marginTop: "8px",
   fontSize: "14px",
   lineHeight: "20px",
-  color: "var(--color-text-light)",
+  color: "text.light",
 })
 
 export const moreStaticClass = "card-more"
@@ -31,7 +31,7 @@ export const moreActive = css({
 
 export const head = css({
   padding: "16px 0",
-  borderBottom: "1px solid var(--color-stroke-base)",
+  borderBottom: "1px solid {colors.stroke.base}",
 })
 
 export const body = css({
@@ -39,7 +39,7 @@ export const body = css({
   fontSize: "10px",
   fontWeight: "300",
   lineHeight: "14px",
-  color: "var(--color-text-neutral)",
+  color: "text.neutral",
 
   "& p + p": {
     marginTop: "6px",
@@ -55,15 +55,15 @@ export const container = css({
   flex: "0 0 auto",
   padding: "0 16px",
   background: "rgba(255, 255, 255, 0.88)",
-  outline: "1px solid var(--color-stroke-base)",
+  outline: "1px solid {colors.stroke.base}",
   borderRadius: "12px",
-  boxShadow: "var(--shadow-block)",
+  boxShadow: "block",
   overflow: "hidden",
   cursor: "pointer",
 
   "&:hover": {
     background: "#fbfbfb",
-    outline: "1px solid var(--color-stroke-hover)",
+    outline: "1px solid {colors.stroke.hover}",
   },
 
   [`&:hover .${moreStaticClass}`]: {

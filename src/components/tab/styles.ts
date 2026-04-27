@@ -6,9 +6,9 @@ const base = css({
   height: "40px",
   gap: "8px",
   padding: "0 12px",
-  font: "var(--font-label)",
+  textStyle: "label",
   fontWeight: "600",
-  color: "var(--color-text-light)",
+  color: "text.light",
   borderRadius: "12px",
   cursor: "pointer",
   userSelect: "none",
@@ -16,18 +16,18 @@ const base = css({
   appearance: "none",
 
   "&:hover": {
-    color: "var(--color-text-neutral)",
-    background: "var(--color-opacify-hover)",
+    color: "text.neutral",
+    background: "opacify.hover",
   },
 })
 
 const activeStyle = css({
-  color: "var(--color-text-neutral)",
-  background: "var(--color-opacify-active)",
+  color: "text.neutral",
+  background: "opacify.active",
 
   "&:hover": {
-    color: "var(--color-text-neutral)",
-    background: "var(--color-opacify-active)",
+    color: "text.neutral",
+    background: "opacify.active",
   },
 })
 

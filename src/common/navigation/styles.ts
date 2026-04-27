@@ -3,7 +3,7 @@ import { css } from "styled-system/css"
 export const divider = css({
   width: "1px",
   height: "24px",
-  background: "var(--color-stroke-base)",
+  background: "stroke.base",
   border: "none",
   margin: "0",
 })
@@ -12,7 +12,7 @@ export const container = css({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  height: "var(--nav-height)",
+  height: "{sizes.navHeight}",
   gap: "32px",
   position: "fixed",
   width: "100%",

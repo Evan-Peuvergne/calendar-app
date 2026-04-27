@@ -19,5 +19,5 @@ export const gradientLayer = css({
   maskImage: "linear-gradient(180deg, black, transparent)",
   WebkitMaskImage: "linear-gradient(180deg, black, transparent)",
   height: "152px",
-  background: "linear-gradient(180deg, var(--color-fill-background), transparent)",
+  background: "linear-gradient(180deg, {colors.fill.background}, transparent)",
 })

@@ -21,7 +21,7 @@ export const globalCss: NonNullable<
     scrollbarGutter: "stable",
   },
   body: {
-    background: "hsla(0, 0%, 97%, 1)",
+    background: "fill.background",
   },
   label: {
     font: `500 16px/24px ${FONT_STACK}`,

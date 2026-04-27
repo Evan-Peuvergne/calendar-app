@@ -7,7 +7,7 @@ export const base = css({
   height: "40px",
   padding: "8px",
   gap: "8px",
-  font: "var(--font-label)",
+  textStyle: "label",
   borderRadius: "12px",
   cursor: "pointer",
   appearance: "none",

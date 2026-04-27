@@ -3,7 +3,7 @@ import { css, cx } from "styled-system/css"
 import { base } from "@components/button/styles"
 
 const optionBase = css({
-  color: "var(--color-text-neutral)",
+  color: "text.neutral",
   display: "flex",
   justifyContent: "flex-start",
   paddingRight: "16px",
@@ -12,11 +12,11 @@ const optionBase = css({
   transition: "color 0.2s ease-in-out, background-color 0.2s ease-in-out",
 
   "&:hover": {
-    backgroundColor: "var(--color-opacify-hover)",
+    backgroundColor: "opacify.hover",
   },
 
   "&:active": {
-    backgroundColor: "var(--color-opacify-active)",
+    backgroundColor: "opacify.active",
   },
 
   "& i": {
@@ -27,9 +27,9 @@ const optionBase = css({
   },
 })
 
-const intentNeutral = css({ color: "var(--color-text-neutral)" })
-const intentAction = css({ color: "var(--color-text-action)" })
-const intentDanger = css({ color: "var(--color-text-danger)" })
+const intentNeutral = css({ color: "text.neutral" })
+const intentAction = css({ color: "text.action" })
+const intentDanger = css({ color: "text.danger" })
 const intentClasses = { neutral: intentNeutral, action: intentAction, danger: intentDanger }
 
 export const option = ({ intent = "neutral" as "neutral" | "action" | "danger" } = {}) =>
@@ -37,7 +37,7 @@ export const option = ({ intent = "neutral" as "neutral" | "action" | "danger" }
 
 export const divider = css({
   width: "100%",
-  borderBottom: "1px solid var(--color-stroke-base)",
+  borderBottom: "1px solid {colors.stroke.base}",
   margin: "4px 2px",
 })
 
@@ -47,9 +47,9 @@ export const overlay = css({
   padding: "8px",
   gap: "4px",
   background: "rgba(255, 255, 255, 0.88)",
-  outline: "1px solid var(--color-stroke-base)",
+  outline: "1px solid {colors.stroke.base}",
   borderRadius: "12px",
-  boxShadow: "var(--shadow-overlay)",
+  boxShadow: "overlay",
   backdropFilter: "blur(4px)",
   zIndex: 1000,
 })

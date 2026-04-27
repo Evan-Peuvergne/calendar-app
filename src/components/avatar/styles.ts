@@ -20,7 +20,7 @@ export const initials = css({
   fontWeight: "700",
   lineHeight: "1",
   letterSpacing: "0.02em",
-  color: "var(--color-text-neutral)",
+  color: "text.neutral",
   transform: "translateX(var(--avatar-initials-offset, 0))",
 })
 
