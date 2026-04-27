@@ -4,7 +4,7 @@ export const options = css({
   display: "flex",
   alignItems: "center",
   padding: "0 8px",
-  gap: "8",
+  gap: "8px",
   position: "fixed",
   zIndex: 5,
   left: "50%",
@@ -20,6 +20,7 @@ export const options = css({
   "& hr": {
     display: "block",
     height: "24px",
+    border: "none",
     borderRight: "1px solid {colors.stroke.base}",
   },
 })
