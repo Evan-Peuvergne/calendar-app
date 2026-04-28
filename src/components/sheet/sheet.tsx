@@ -1,5 +1,4 @@
 import { useContext, useEffect, useRef, useState } from "react"
-import cn from "classnames"
 import { motion } from "motion/react"
 
 import { SheetContext } from "./context"
@@ -150,12 +149,11 @@ const SheetComponent = (props: SheetProps) => {
   return (
     <motion.div
       ref={$container}
-      className={cn(
-        Styles.container,
-        depth > 0 && Styles.containerInactive,
-        (depth > 0 || !ready || !!rootScroll) && Styles.containerHidden,
-        !!rootScroll && Styles.containerRootScroll,
-      )}
+      className={Styles.container({
+        inactive: depth > 0,
+        hidden: depth > 0 || !ready || !!rootScroll,
+        rootScroll: !!rootScroll,
+      })}
       initial={{ y: "100%" }}
       animate={{ y: 0 }}
       exit={{ y: "100%" }}

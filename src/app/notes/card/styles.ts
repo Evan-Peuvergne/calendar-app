@@ -1,4 +1,4 @@
-import { css } from "styled-system/css"
+import { css, cva } from "styled-system/css"
 
 export const title = css({
   fontSize: "20px",
@@ -17,16 +17,19 @@ export const subtitle = css({
 
 export const moreStaticClass = "card-more"
 
-export const more = css({
-  float: "right",
-  marginRight: "-8px",
-  marginTop: "-8px",
-  opacity: 0,
-  transition: "opacity 0.2s ease",
-})
-
-export const moreActive = css({
-  opacity: 1,
+export const more = cva({
+  base: {
+    float: "right",
+    marginRight: "-8px",
+    marginTop: "-8px",
+    opacity: 0,
+    transition: "opacity 0.2s ease",
+  },
+  variants: {
+    active: {
+      true: { opacity: 1 },
+    },
+  },
 })
 
 export const head = css({

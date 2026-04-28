@@ -1,4 +1,4 @@
-import { css, cx } from "styled-system/css"
+import { css, cva } from "styled-system/css"
 
 export const title = css({
   fontSize: "32px",
@@ -46,42 +46,55 @@ export const sheetContent = css({
   flexDirection: "column",
 })
 
-const sheetBase = css({
-  display: "block",
-  width: "980px",
-  margin: "0 auto",
-  overflow: "hidden",
-  outline: "1px solid {colors.stroke.base}",
-  backdropFilter: "blur(8px)",
-  borderRadius: "24px 24px 0 0",
-  boxShadow: "overlay",
-  transition: "background 300ms ease",
+export const sheet = cva({
+  base: {
+    display: "block",
+    width: "980px",
+    margin: "0 auto",
+    overflow: "hidden",
+    outline: "1px solid {colors.stroke.base}",
+    backdropFilter: "blur(8px)",
+    borderRadius: "24px 24px 0 0",
+    boxShadow: "overlay",
+    transition: "background 300ms ease",
+  },
+  variants: {
+    elevated: {
+      true: { background: "rgba(248, 248, 248, 0.88)" },
+      false: { background: "rgba(255, 255, 255, 0.88)" },
+    },
+    rootScroll: {
+      true: { position: "relative", top: "auto", maxHeight: "none" },
+      false: { position: "sticky", top: "104px", maxHeight: "calc(100vh - 104px)" },
+    },
+  },
+  defaultVariants: {
+    elevated: false,
+    rootScroll: false,
+  },
 })
-
-const sheetElevated = css({ background: "rgba(248, 248, 248, 0.88)" })
-const sheetNotElevated = css({ background: "rgba(255, 255, 255, 0.88)" })
-const sheetRootScroll = css({ position: "relative", top: "auto", maxHeight: "none" })
-const sheetNotRootScroll = css({ position: "sticky", top: "104px", maxHeight: "calc(100vh - 104px)" })
-
-export const sheet = ({ elevated = false, rootScroll = false } = {}) =>
-  cx(
-    sheetBase,
-    elevated ? sheetElevated : sheetNotElevated,
-    rootScroll ? sheetRootScroll : sheetNotRootScroll,
-  )
 
 export const scroll = css({
   minHeight: "100vh",
   position: "relative",
 })
 
-export const container = css({
-  position: "fixed",
-  inset: "0",
-  overflowY: "auto",
-  zIndex: 1000,
+export const container = cva({
+  base: {
+    position: "fixed",
+    inset: "0",
+    overflowY: "auto",
+    zIndex: 1000,
+  },
+  variants: {
+    inactive: {
+      true: { pointerEvents: "none" },
+    },
+    hidden: {
+      true: { overflowY: "hidden" },
+    },
+    rootScroll: {
+      true: { display: "flex", alignItems: "flex-end" },
+    },
+  },
 })
-
-export const containerInactive = css({ pointerEvents: "none" })
-export const containerHidden = css({ overflowY: "hidden" })
-export const containerRootScroll = css({ display: "flex", alignItems: "flex-end" })

@@ -1,39 +1,40 @@
-import { css, cx } from "styled-system/css"
+import { css, cva } from "styled-system/css"
 
-import { base } from "@components/button/styles"
-
-const optionBase = css({
-  color: "text.neutral",
-  display: "flex",
-  justifyContent: "flex-start",
-  paddingRight: "16px",
-  fontWeight: "500",
-  borderRadius: "8px",
-  transition: "color 0.2s ease-in-out, background-color 0.2s ease-in-out",
-
-  "&:hover": {
-    backgroundColor: "opacify.hover",
+export const option = cva({
+  base: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    height: "40px",
+    padding: "8px",
+    paddingRight: "16px",
+    gap: "8px",
+    textStyle: "label",
+    fontWeight: "500",
+    borderRadius: "8px",
+    cursor: "pointer",
+    appearance: "none",
+    transition: "color 0.2s ease-in-out, background-color 0.2s ease-in-out",
+    "&:hover": { backgroundColor: "opacify.hover" },
+    "&:active": { backgroundColor: "opacify.active" },
+    "& i": {
+      width: "16px",
+      marginRight: "-4px",
+      marginLeft: "auto",
+      justifyContent: "center",
+    },
   },
-
-  "&:active": {
-    backgroundColor: "opacify.active",
+  variants: {
+    intent: {
+      neutral: { color: "text.neutral" },
+      action: { color: "text.action" },
+      danger: { color: "text.danger" },
+    },
   },
-
-  "& i": {
-    width: "16px",
-    marginRight: "-4px",
-    marginLeft: "auto",
-    justifyContent: "center",
+  defaultVariants: {
+    intent: "neutral",
   },
 })
-
-const intentNeutral = css({ color: "text.neutral" })
-const intentAction = css({ color: "text.action" })
-const intentDanger = css({ color: "text.danger" })
-const intentClasses = { neutral: intentNeutral, action: intentAction, danger: intentDanger }
-
-export const option = ({ intent = "neutral" as "neutral" | "action" | "danger" } = {}) =>
-  cx(base, optionBase, intentClasses[intent])
 
 export const divider = css({
   width: "100%",

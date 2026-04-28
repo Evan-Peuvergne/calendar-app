@@ -1,4 +1,4 @@
-import { css, cx } from "styled-system/css"
+import { css, cva } from "styled-system/css"
 
 export const options = css({
   display: "flex",
@@ -82,27 +82,29 @@ export const hours = css({
   zIndex: -1,
 })
 
-const labelBase = css({
-  display: "inline-flex",
-  height: "32px",
-  justifyContent: "center",
-  alignItems: "center",
-  padding: "0 16px",
-  fontSize: "12px",
-  fontWeight: "600",
-  color: "text.light",
-  borderRadius: "20px",
-  background: "rgba(248, 248, 248, 0.5)",
-  backdropFilter: "blur(4px)",
+export const label = cva({
+  base: {
+    display: "inline-flex",
+    height: "32px",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: "0 16px",
+    fontSize: "12px",
+    fontWeight: "600",
+    color: "text.light",
+    borderRadius: "20px",
+    background: "rgba(248, 248, 248, 0.5)",
+    backdropFilter: "blur(4px)",
+  },
+  variants: {
+    current: {
+      true: {
+        background: "rgba(0, 0, 0, 0.16)",
+        color: "text.base",
+      },
+    },
+  },
 })
-
-const labelCurrent = css({
-  background: "rgba(0, 0, 0, 0.16)",
-  color: "text.base",
-})
-
-export const label = ({ current = false } = {}) =>
-  cx(labelBase, current && labelCurrent)
 
 export const labels = css({
   display: "flex",
@@ -129,8 +131,7 @@ export const day = css({
 export const week = css({
   display: "flex",
   padding: "0 64px",
-  height:
-    "calc({sizes.calendarPadding} * 2 + {sizes.calendarHourHeight} * 24)",
+  height: "calc({sizes.calendarPadding} * 2 + {sizes.calendarHourHeight} * 24)",
   position: "relative",
 
   "& [data-day]": {
@@ -152,15 +153,13 @@ export const week = css({
   "&::before": {
     top: "0",
     height: "{sizes.calendarPadding}",
-    background:
-      "linear-gradient(to bottom, {colors.fill.background} 0%, transparent 88%)",
+    background: "linear-gradient(to bottom, {colors.fill.background} 0%, transparent 88%)",
   },
 
   "&::after": {
     bottom: "0",
     height: "{sizes.calendarPadding}",
-    background:
-      "linear-gradient(to top, {colors.fill.background} 0%, transparent 88%)",
+    background: "linear-gradient(to top, {colors.fill.background} 0%, transparent 88%)",
   },
 })
 

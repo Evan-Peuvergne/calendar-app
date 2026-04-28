@@ -11,7 +11,7 @@ const More = ({ active, className, ...props }: AbstractButtonProps) => (
   <SecondaryIcon
     icon="more"
     active={active}
-    className={cn(Styles.more, Styles.moreStaticClass, active && Styles.moreActive, className)}
+    className={cn(Styles.more({ active }), Styles.moreStaticClass, className)}
     {...props}
   />
 )
