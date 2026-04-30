@@ -1,4 +1,4 @@
-import { HOUR_HEIGHT, EVENT_GAP, CALENDAR_PADDING } from "./tokens"
+import { HOUR_HEIGHT, EVENT_GAP, CALENDAR_PADDING } from "./constants"
 import type { CalendarEvent } from "./useGoogleCalendar"
 
 export interface EventPosition {

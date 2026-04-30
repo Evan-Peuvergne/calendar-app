@@ -7,7 +7,7 @@ import { Sheet, useSheetStack } from "@components/sheet"
 import { Avatar } from "@components/avatar"
 import { AvatarGroup } from "@components/avatar/group"
 import { formatHour } from "../utils"
-import { EVENT_GAP } from "../tokens"
+import { EVENT_GAP } from "../constants"
 import type { CalendarEvent as CalendarEventData, Attendee } from "../useGoogleCalendar"
 import type { EventPosition } from "../layout"
 
