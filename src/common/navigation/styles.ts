@@ -1,4 +1,5 @@
 import { css } from "styled-system/css"
+import { NAV_HEIGHT } from "./constants"
 
 export const divider = css({
   width: "1px",
@@ -12,7 +13,7 @@ export const container = css({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  height: "{sizes.navHeight}",
+  height: `${NAV_HEIGHT}px`,
   gap: "32px",
   position: "fixed",
   width: "100%",

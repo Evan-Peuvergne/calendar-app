@@ -31,12 +31,6 @@ export const tokens = defineTokens({
     block: { value: "0px 1px 8px 0px rgba(15, 15, 15, 0.02), 0px 1px 3px 0px rgba(15, 15, 15, 0.08)" },
     overlay: { value: "0px 1px 12px 0px rgba(15, 15, 15, 0.08), 0px 1px 4px 0px rgba(15, 15, 15, 0.06)" },
   },
-  sizes: {
-    navHeight: { value: "112px" },
-    calendarHourHeight: { value: "144px" },
-    calendarLabelsBarHeight: { value: "40px" },
-    calendarPadding: { value: "144px" },
-  },
 })
 
 export const textStyles = defineTextStyles({
