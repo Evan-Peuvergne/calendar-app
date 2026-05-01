@@ -1,6 +1,7 @@
-import { defineConfig } from "@pandacss/dev"
+import { defineConfig, defineTokens } from "@pandacss/dev"
 import { globalCss } from "./src/theme/global"
 import { tokens, textStyles } from "./src/theme/tokens"
+import { sizes } from "./src/theme/constants"
 
 export default defineConfig({
   preflight: true,
@@ -8,7 +9,7 @@ export default defineConfig({
   exclude: [],
   theme: {
     extend: {
-      tokens,
+      tokens: defineTokens({ ...tokens, sizes }),
       textStyles,
     },
   },
