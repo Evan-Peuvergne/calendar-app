@@ -27,7 +27,7 @@ export const options = css({
 
 export const hour = css({
   display: "block",
-  height: "{sizes.calendarHourHeight}",
+  height: "{sizes.calendar.hourHeight}",
   position: "relative",
   borderTop: "1px solid",
   borderImage:
@@ -76,7 +76,7 @@ export const currentTime = css({
 export const hours = css({
   display: "block",
   position: "absolute",
-  top: "{sizes.calendarPadding}",
+  top: "{sizes.calendar.padding}",
   left: "0",
   width: "100%",
   zIndex: -1,
@@ -111,7 +111,7 @@ export const labels = css({
   justifyContent: "space-around",
   width: "100%",
   position: "fixed",
-  top: "calc({sizes.navHeight} + 8px)",
+  top: "calc({sizes.nav.height} + 8px)",
   left: "0",
   padding: "0 64px",
   zIndex: 100,
@@ -131,7 +131,7 @@ export const day = css({
 export const week = css({
   display: "flex",
   padding: "0 64px",
-  height: "calc({sizes.calendarPadding} * 2 + {sizes.calendarHourHeight} * 24)",
+  height: "calc({sizes.calendar.padding} * 2 + {sizes.calendar.hourHeight} * 24)",
   position: "relative",
 
   "& [data-day]": {
@@ -152,18 +152,18 @@ export const week = css({
 
   "&::before": {
     top: "0",
-    height: "{sizes.calendarPadding}",
+    height: "{sizes.calendar.padding}",
     background: "linear-gradient(to bottom, {colors.fill.background} 0%, transparent 88%)",
   },
 
   "&::after": {
     bottom: "0",
-    height: "{sizes.calendarPadding}",
+    height: "{sizes.calendar.padding}",
     background: "linear-gradient(to top, {colors.fill.background} 0%, transparent 88%)",
   },
 })
 
 export const container = css({
   minHeight: "100vh",
-  paddingTop: "calc({sizes.navHeight} + {sizes.calendarLabelsBarHeight})",
+  paddingTop: "calc({sizes.nav.height} + {sizes.calendar.labelsBarHeight})",
 })

@@ -12,7 +12,7 @@ export const container = css({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  height: "{sizes.navHeight}",
+  height: "{sizes.nav.height}",
   gap: "32px",
   position: "fixed",
   width: "100%",
