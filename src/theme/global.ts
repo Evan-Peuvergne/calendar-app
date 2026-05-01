@@ -1,7 +1,7 @@
 import { defineConfig } from "@pandacss/dev"
 
 const FONT_STACK =
-  '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
+  '"DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
 
 export const globalCss: NonNullable<
   ReturnType<typeof defineConfig>["globalCss"]
