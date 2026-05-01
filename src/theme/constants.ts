@@ -1,6 +1,6 @@
 export const sizes = {
-  navHeight: { value: "112px" },
-  calendarHourHeight: { value: "144px" },
-  calendarLabelsBarHeight: { value: "40px" },
-  calendarPadding: { value: "144px" },
+  navHeight: "112px",
+  calendarHourHeight: "144px",
+  calendarLabelsBarHeight: "40px",
+  calendarPadding: "144px",
 }
